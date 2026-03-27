@@ -1,0 +1,21 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/forms";
+@plugin "@tailwindcss/container-queries";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+
+
+@theme {
+  --color-primary: #137fec;
+  --color-background-light: #f6f7f8;
+  --color-background-dark: #101922;
+  --color-surface-light: #ffffff;
+  --color-surface-dark: #1c2630;
+  --color-text-light: #0d141b;
+  --color-text-dark: #e7edf3;
+  --color-border-light: #cfdbe7;
+  --color-border-dark: #2d3b4a;
+
+  --font-display: "Inter", "Noto Sans", sans-serif;
+}
