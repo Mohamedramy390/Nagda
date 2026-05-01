@@ -24,12 +24,12 @@ exports.Prisma = Prisma
 exports.$Enums = {}
 
 /**
- * Prisma Client JS version: 7.4.2
- * Query Engine version: 94a226be1cf2967af2541cca5529f0f7ba866919
+ * Prisma Client JS version: 7.8.0
+ * Query Engine version: 3c6e192761c0362d496ed980de936e2f3cebcd3a
  */
 Prisma.prismaVersion = {
-  client: "7.4.2",
-  engine: "94a226be1cf2967af2541cca5529f0f7ba866919"
+  client: "7.8.0",
+  engine: "3c6e192761c0362d496ed980de936e2f3cebcd3a"
 }
 
 Prisma.PrismaClientKnownRequestError = () => {
@@ -134,9 +134,12 @@ exports.Prisma.TicketScalarFieldEnum = {
   subject: 'subject',
   status: 'status',
   priority: 'priority',
+  category: 'category',
+  description: 'description',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
-  userId: 'userId'
+  requesterId: 'requesterId',
+  agentId: 'agentId'
 };
 
 exports.Prisma.MessageScalarFieldEnum = {
@@ -155,6 +158,11 @@ exports.Prisma.SortOrder = {
 exports.Prisma.QueryMode = {
   default: 'default',
   insensitive: 'insensitive'
+};
+
+exports.Prisma.NullsOrder = {
+  first: 'first',
+  last: 'last'
 };
 exports.TicketStatus = exports.$Enums.TicketStatus = {
   OPEN: 'OPEN',

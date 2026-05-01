@@ -7,6 +7,7 @@ import { MessageData } from '@/lib/types/message';
 export default function ConversationContainer({initialMessages} : {initialMessages: MessageData[]}) {
 
   const [messages, setMessages] = useState<MessageData[]>(initialMessages);
+
   return (
     <div className="flex flex-col h-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden shadow-sm">
       

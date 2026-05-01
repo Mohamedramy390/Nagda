@@ -8,8 +8,8 @@ export interface User {
   department?: string
   phone?: string
   location?: string
-  createdAt: string
-  lastLogin: string
+  createdAt?: string
+  lastLogin?: string
 }
 
 export interface AuthContextType {
@@ -19,5 +19,4 @@ export interface AuthContextType {
   login: (email: string, password: string) => Promise<void>
   logout: () => void
   updateUser: (updates: Partial<User>) => void
-  token: string | null
 }

@@ -3,10 +3,13 @@ import { TicketStatus, TicketPriority } from '../../../generated/client';
 
 export class CreateTicketDto {
   @IsString()
-  ticketNum: string;
+  subject: string;
 
   @IsString()
-  subject: string;
+  category: string;
+
+  @IsString()
+  description: string;
 
   @IsOptional()
   @IsEnum(TicketStatus)
@@ -17,5 +20,9 @@ export class CreateTicketDto {
   priority?: TicketPriority;
 
   @IsString()
-  userId: string;
+  requesterId: string;
+
+  @IsString()
+  @IsOptional()
+  agentId: string;
 }

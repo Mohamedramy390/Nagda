@@ -1,7 +1,9 @@
-import React from 'react';
+'use client';
 import Navlink from '../shared/sidebar/Navlink';
+import { useAuth } from '@/context/AuthContext';
 
 const RequesterSidebar = () => {
+  const { user } = useAuth();
   return (
     <aside className="flex w-64 flex-col border-r border-slate-200 bg-white dark:bg-[#111a22] dark:border-slate-800 transition-all duration-300">
       {/* Sidebar Header */}
@@ -35,8 +37,8 @@ const RequesterSidebar = () => {
             }}
           ></div>
           <div className="flex flex-col">
-            <p className="text-sm font-semibold text-[#0d141b] dark:text-white">Alex Morgan</p>
-            <p className="text-xs text-slate-500 dark:text-slate-400">IT Administrator</p>
+            <p className="text-sm font-semibold text-[#0d141b] dark:text-white">{user?.name}</p>
+            <p className="text-xs text-slate-500 dark:text-slate-400">{user?.role}</p>
           </div>
         </div>
       </div>

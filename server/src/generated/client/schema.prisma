@@ -5,6 +5,7 @@ generator client {
 
 datasource db {
   provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
 enum TicketStatus {
@@ -23,10 +24,15 @@ model User {
   id       String @id @default(uuid())
   name     String
   email    String @unique
-  password String // We need this now for our own Auth system
-  role     String @default("CUSTOMER") // CUSTOMER, AGENT, or ADMIN
+  password String
+  role     String @default("CUSTOMER")
 
-  tickets  Ticket[]
+  // 1. Tickets this user created (links to "RequesterRelation")
+  openedTickets Ticket[] @relation("RequesterRelation")
+
+  // 2. Tickets assigned to this user (links to "AgentRelation")
+  assignedTickets Ticket[] @relation("AgentRelation")
+
   messages Message[]
 }
 
@@ -41,8 +47,11 @@ model Ticket {
   messages  Message[]
 
   // Relation to the user who created it
-  userId String
-  user   User   @relation(fields: [userId], references: [id])
+  requesterId String
+  requester   User   @relation("RequesterRelation", fields: [requesterId], references: [id])
+
+  agentId String?
+  agent   User?   @relation("AgentRelation", fields: [agentId], references: [id])
 }
 
 model Message {

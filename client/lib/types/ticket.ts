@@ -16,8 +16,17 @@ export interface TicketData {
   status: 'OPEN' | 'IN_PROGRESS' | 'CLOSED';
   createdAt: string;
   priority: 'HIGH' | 'MEDIUM' | 'LOW';
-  requester: User;
-  assignee?: User; // Optional because a new ticket might not have an agent yet
+  requester: string;
+  assignee?: string; // Optional because a new ticket might not have an agent yet
+}
+
+export interface CreateTicketData {
+  subject: string;
+  category: string;
+  priority: string;
+  description: string;
+  requesterId: string;
+  attachments?: File[];
 }
 
 export interface TicketsTableProps {

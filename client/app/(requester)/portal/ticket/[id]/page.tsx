@@ -2,6 +2,8 @@ import TicketSidebar from "@/components/shared/ticket-details/sidebar/TicketSide
 import ChatContanier from "@/components/shared/ticket-details/chat/ChatContainer";
 import TicketHeader from "@/components/shared/ticket-details/TicketHeader";
 import { getMessages } from "@/lib/api/messages";
+import { getTicket } from "@/lib/api/tickets";
+import AuthContext from "@/context/AuthContext";
 
 
 
@@ -11,29 +13,30 @@ interface PageProps {
 
 const TicketDetailPage = async ({params} : PageProps) => {
   const { id } = await params;
-  const initialMessages = getMessages();
+
+
+  const ticketDetails = await getTicket(id);
+  console.log(ticketDetails);
+  
+  if(!ticketDetails) return 'Loading...';
 
   return (
      <div className="min-h-screen bg-slate-50 dark:bg-slate-950 pb-12">
       
-      {/* 1. Header (Full Width) */}
-      {/* We usually place this outside the grid so it spans the whole screen */}
-      <TicketHeader id={id} />
+      <TicketHeader ticketDetails={ticketDetails} />
 
-      <main className="max-w-7xl mx-auto p-6">
+      <main className="p-6 w-full mx-auto">
         
-        {/* 2. The Grid Layout */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
           
-          {/* Left Column (Conversation) - Takes 2/3 space */}
           <div className="lg:col-span-2 space-y-6">
             
-            <ChatContanier initialMessages={initialMessages} />
+            <ChatContanier initialMessages={ticketDetails.messages} />
 
           </div>
 
-          <div className="lg:col-span-1 sticky top-6">
-            <TicketSidebar id={id} />
+          <div className="lg:col-span-1 mx-auto sticky top-6">
+            <TicketSidebar ticketDetails={ticketDetails} />
           </div>
 
         </div>

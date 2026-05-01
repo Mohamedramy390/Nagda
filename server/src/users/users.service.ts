@@ -12,7 +12,8 @@ export class UsersService {
   }
 
   async createUser(data: Prisma.UserCreateInput) {
-    await this.prisma.user.create({ data });
+    const {password:_,...safeUser} =await this.prisma.user.create({ data });
+    return safeUser;
   }
 
   async findUserByEmail(email: string) {

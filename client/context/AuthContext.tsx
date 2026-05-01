@@ -1,7 +1,7 @@
 'use client'
 
 
-import { loginAction, logoutAction } from '@/lib/api/actions/auth'
+import { loginAction, logoutAction, verifySessionAction } from '@/lib/api/actions/auth'
 import { AuthContextType, User } from '@/lib/types/user'
 import { useRouter } from 'next/navigation'
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react'
@@ -15,18 +15,26 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined)
 // Provider component
 export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null)
-  const [token, setToken] = useState<string | null>(null)
   const [isLoading, setIsLoading] = useState(false)
   const router = useRouter()
 
-  // Initialize with mock data from localStorage or default to requester
+  useEffect(() => {
+    const verifySession = async () => {
+      const user = await verifySessionAction()
+      if (!user) {
+        logout()
+      }else{
+        setUser(user)
+      }
+    }
+    verifySession()
+  }, [])
 
   const login = async (email: string, password: string): Promise<void> => {
     setIsLoading(true)
     try{
-    const data = await loginAction(email, password)
-    setUser(data.user)
-    setToken(data.token)
+    const user = await loginAction(email, password)
+    setUser(user)
     router.push('/portal/dashboard')     
     } catch (error) {
       throw error
@@ -35,12 +43,13 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     }
   }
 
-  const logout = () => {
+  const logout = async () => {
     setUser(null)
-    setToken(null)
-    logoutAction()
+    await logoutAction()
     router.push('/login')
   }
+
+  
 
   const updateUser = (updates: Partial<User>) => {
      
@@ -49,12 +58,11 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
 
   const value: AuthContextType = {
     user,
-    isAuthenticated: !!user && !!token,
+    isAuthenticated: !!user,
     isLoading,
     login,
     logout,
     updateUser,
-    token,
   }
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>

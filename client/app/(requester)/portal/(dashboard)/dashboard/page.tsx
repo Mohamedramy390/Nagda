@@ -13,7 +13,7 @@ import Spinner from '@/components/shared/ui/Spinner'
 
 const DashboardPage =   () => {
 
-  const [data, setData] = useState<unknown>(null)
+  const [data, setData] = useState<{ kpis: unknown; recent: unknown[] } | null>(null)
   const { logout } = useAuth()
 
   useEffect(() => {
@@ -22,8 +22,8 @@ const DashboardPage =   () => {
         const data = await getDashboardOverview()
         setData(data)
       }catch(error){
-        console.log(error)
-        logout()
+        // Any error (including 401 Unauthorized) → force logout
+        void logout()
       }
     }
     fetchData()

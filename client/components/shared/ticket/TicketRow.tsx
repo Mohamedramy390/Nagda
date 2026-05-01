@@ -13,7 +13,7 @@ const TicketRow = ({ ticket }: { ticket: TicketData }) => {
   const { id, ticketNum ,subject, status, createdAt, priority } = ticket;
   return (
     <tr className="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
-      <td className="px-5 py-4 font-medium text-[#0d141b] dark:text-white">{ticketNum}</td>
+      <td className="px-5 py-4 font-medium text-[#0d141b] dark:text-white">#TIC-{ticketNum}</td>
       <td className="px-5 py-4 text-slate-600 dark:text-slate-300">{subject}</td>
       <td className="px-5 py-4">
         <TicketStatus status={status} />

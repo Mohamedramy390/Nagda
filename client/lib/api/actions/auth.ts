@@ -40,3 +40,40 @@ export async function checkAuthAction() {
   const cookieStore = await cookies()
   return cookieStore.has('token')
 }
+
+export async function verifyTokenAction() {
+  const cookieStore = await cookies()
+  const token = cookieStore.get('token')?.value
+  if (!token) {
+    return false
+  }
+  const response = await fetch('http://localhost:3200/auth/verify-token', {
+    method: 'GET',
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  })
+  return response.ok
+}
+
+export async function verifySessionAction() {
+  const cookieStore = await cookies()
+  const token = cookieStore.get('token')?.value
+  
+  if (!token) {
+    return false
+  }
+  const response = await fetch('http://localhost:3200/auth/me', {
+    method: 'GET',
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  })
+  if (!response.ok) {
+    const errorData = await response.json();
+    throw new Error(errorData.message || 'Login failed');
+  }
+  const data = await response.json()
+  console.log("1. Data from NestJS:", data)
+  return data.user
+}

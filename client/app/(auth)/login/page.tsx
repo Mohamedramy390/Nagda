@@ -11,6 +11,7 @@ const LoginPage = () => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
   const router = useRouter();
 
@@ -164,14 +165,16 @@ const LoginPage = () => {
                     id="password"
                     placeholder="••••••••"
                     required
-                    type="password"
+                    type={showPassword ? "text" : "password"}
+                    
                   />
                   <button
                     className="absolute inset-y-0 right-0 pr-3 flex items-center cursor-pointer text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 transition-colors"
                     type="button"
+                    onClick={() => setShowPassword(!showPassword)}
                   >
                     <span className="material-symbols-outlined text-[20px]">
-                      visibility
+                      {showPassword ? "visibility_off" : "visibility"}
                     </span>
                   </button>
                 </div>
