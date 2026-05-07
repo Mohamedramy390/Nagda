@@ -9,7 +9,6 @@ export class ChatService {
   constructor(private readonly prisma: PrismaService) {}
 
   async sendMessage(message: CreateMessageDto) {
-    this.logger.log(`Sending message: ${message}`);
     return await this.prisma.message.create({ data: message });
   }
 

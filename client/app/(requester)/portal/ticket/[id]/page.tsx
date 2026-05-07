@@ -1,9 +1,7 @@
 import TicketSidebar from "@/components/shared/ticket-details/sidebar/TicketSidebar";
 import ChatContanier from "@/components/shared/ticket-details/chat/ChatContainer";
 import TicketHeader from "@/components/shared/ticket-details/TicketHeader";
-import { getMessages } from "@/lib/api/messages";
 import { getTicket } from "@/lib/api/tickets";
-import AuthContext from "@/context/AuthContext";
 
 
 
@@ -16,7 +14,6 @@ const TicketDetailPage = async ({params} : PageProps) => {
 
 
   const ticketDetails = await getTicket(id);
-  console.log(ticketDetails);
   
   if(!ticketDetails) return 'Loading...';
 
@@ -31,7 +28,7 @@ const TicketDetailPage = async ({params} : PageProps) => {
           
           <div className="lg:col-span-2 space-y-6">
             
-            <ChatContanier initialMessages={ticketDetails.messages} />
+            <ChatContanier initialMessages={ticketDetails.messages} ticketId={id} />
 
           </div>
 

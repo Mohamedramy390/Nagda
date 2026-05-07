@@ -1,18 +1,44 @@
 'use client';
 
 import { useAuth } from '@/context/AuthContext';
-import { addMessage } from '@/lib/api/messages';
-import { MessageData } from '@/lib/types/message';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { io, Socket } from 'socket.io-client';
 
 
+const socket : Socket = io("http://localhost:3200"); 
 
-export default function ReplyEditor() {
-  const [message, setMessage] = useState<MessageData>(); 
+export default function ReplyEditor({ticketId, setMessages} : {ticketId: string, setMessages: any}) {
+  const [inputText, setInputText] = useState('');
   const {user} = useAuth()
+
+
+  useEffect(() => {
+    socket.emit('join_room', { ticketId });
+
+    socket.on("receive_message", (message) => {
+      setMessages((prev : any) => [...prev, message]);
+    })
+    return () => {
+      socket.off("receive_message");
+    }
+  }, [ticketId, setMessages])
   
-  const handleSend = () => {
+  
+  const handleSend = (e: any) => {
+    e.preventDefault();
     
+    if(!inputText) return;
+
+    const newMessage = {
+      content: inputText,
+      ticketId,
+      userId: user?.id,
+    }
+    socket.emit("send_message", newMessage);
+
+    setMessages((prev : any) => [...prev, newMessage]);
+    
+    setInputText("");
   }
   return (
     <div className="p-4 bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 sticky bottom-0 z-10">
@@ -36,8 +62,8 @@ export default function ReplyEditor() {
 
           {/* Text Area */}
           <textarea 
-          value={message?.content}
-          onChange={(e) => setMessage((prev) => ({ ...prev!, content: e.target.value }))}
+          value={inputText}
+          onChange={(e) => setInputText(e.target.value)}
             className="w-full bg-transparent border-none p-3 text-slate-800 dark:text-slate-100 placeholder-slate-400 focus:ring-0 resize-none outline-none min-h-[100px]" 
             placeholder="Type your reply here..."
           ></textarea>

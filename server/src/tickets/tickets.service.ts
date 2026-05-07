@@ -44,7 +44,7 @@ export class TicketsService {
     return await this.prisma.user.findUnique({ where: { id: agentId } });
   }
 
-  async update(id: string, updateTicketDto: UpdateTicketDto) {
+  async updateTicket(id: string, updateTicketDto: UpdateTicketDto) {
     return await this.prisma.ticket.update({
       where: { id },
       data: updateTicketDto,

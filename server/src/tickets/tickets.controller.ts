@@ -40,7 +40,7 @@ export class TicketsController {
   @Patch(':id')
   @UseGuards(JwtAuthGuard)
   update(@Param('id') id: string, @Body() updateTicketDto: UpdateTicketDto) {
-    return this.ticketsService.update(id, updateTicketDto);
+    return this.ticketsService.updateTicket(id, updateTicketDto);
   }
 
   @Delete(':id')
@@ -48,5 +48,6 @@ export class TicketsController {
   remove(@Param('id') id: string) {
     return this.ticketsService.remove(id);
   }
+
 
 }

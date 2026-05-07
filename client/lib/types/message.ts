@@ -1,9 +1,8 @@
 export interface MessageData {
   id: string;
-  sender: string;
   content: string;
   timestamp: string;
-  isInternal?: boolean;
+  userId: string;
   attachment?: {
     name: string;
     size: string;

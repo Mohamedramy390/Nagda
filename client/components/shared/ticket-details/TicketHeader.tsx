@@ -19,7 +19,6 @@ const getPriorityColor = (priority: string) => {
 
 export default async function TicketHeader({  ticketDetails : ticket } : any)     {
    
-
   return (
     <header className="bg-surface-light dark:bg-surface-dark border-b border-border-light dark:border-border-dark flex-none z-10">
       <div className="px-6 py-4 flex flex-col gap-4">
@@ -48,7 +47,7 @@ export default async function TicketHeader({  ticketDetails : ticket } : any)   
 
           {/* Right Side: Action Buttons */}
           <div className="flex items-center gap-3">     
-            <PrimaryBtn icon='edit' label='Edit Ticket' />
+            <PrimaryBtn path={`/portal/ticket/${ticket.id}/edit-ticket`} icon='edit' label='Edit Ticket' />
           </div>
 
         </div>

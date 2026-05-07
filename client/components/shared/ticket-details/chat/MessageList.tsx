@@ -5,8 +5,7 @@ import { MessageData } from '@/lib/types/message';
 
 
 export default function MessageList({messages} : {messages: MessageData[]}) {
-    
-
+  
   return (
     <div className="flex-1 overflow-y-auto p-6 h-[500px] space-y-6 custom-scrollbar bg-slate-50 dark:bg-slate-950" id="chat-stream">
       
@@ -20,9 +19,9 @@ export default function MessageList({messages} : {messages: MessageData[]}) {
       <SystemMessage text="Ticket created via Email Connector" />
 
       {/* Render messages */}
-      {messages.map((msg) => (
+      {messages.map((msg, idx) => (
         // @ts-ignore - simplified for example
-        <MessageBubble key={msg.id} message={msg} />
+        <MessageBubble key={idx} message={msg} />
       ))}
       
     </div>

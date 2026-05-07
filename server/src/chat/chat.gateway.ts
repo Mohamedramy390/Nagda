@@ -3,7 +3,12 @@ import { ChatService } from './chat.service';
 import { CreateMessageDto } from './dto/crerate-message.dto';
 import { Server, Socket } from 'socket.io';
 
-@WebSocketGateway()
+@WebSocketGateway({
+  cors: {
+    origin: "http://localhost:3000",
+    credentials: true,
+  },
+})
 export class ChatGateway {
   constructor(private readonly chatService: ChatService) {}
 
@@ -11,9 +16,9 @@ export class ChatGateway {
   server: Server;
 
   @SubscribeMessage("send_message")
-  async handleMessage(@MessageBody() message: CreateMessageDto): Promise<void> {
+  async handleMessage(@ConnectedSocket() client: Socket,@MessageBody() message: CreateMessageDto): Promise<void> {
     await this.chatService.sendMessage(message);
-    this.server.to(`room_${message.ticketId}`).emit("recive_message", message); 
+    client.broadcast.to(`room_${message.ticketId}`).emit("receive_message", message); 
   }
 
   @SubscribeMessage("join_room")
