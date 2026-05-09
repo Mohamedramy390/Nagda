@@ -19,12 +19,28 @@ enum TicketPriority {
   HIGH
 }
 
+enum UserRole {
+  CUSTOMER
+  AGENT
+  ADMIN
+  EMPLOYEE
+}
+
 model User {
   id       String    @id @default(uuid())
   name     String
   email    String    @unique
   password String
-  role     String    @default("CUSTOMER")
+  phone    String
+  avatarUrl String?
+  role     UserRole    @default(EMPLOYEE)
+  position String  @default("")
+  departmentId String?
+  department   Department?  @relation(fields: [departmentId], references: [id])
+
+  officeId String
+  office   Office  @relation(fields: [officeId], references: [id])
+
   
   // 1. Tickets this user created (links to "RequesterRelation")
   openedTickets   Ticket[] @relation("RequesterRelation")
@@ -35,6 +51,13 @@ model User {
   messages Message[]
 }
 
+model Office{
+  id String @id @default(uuid())
+  name String
+  timeZone String
+  users User[]
+}
+
 model Ticket {
   id        String         @id @default(uuid())
   ticketNum Int            @unique @default(autoincrement()) 
@@ -43,16 +66,34 @@ model Ticket {
   priority  TicketPriority @default(MEDIUM)
   category  String @default("General")
   description String @default("No description provided")
+  departmentId String
+  department   Department  @relation(fields: [departmentId], references: [id]) 
+
   createdAt DateTime       @default(now())
   updatedAt DateTime       @updatedAt
+  deletedAt DateTime?
+  resolvedAt DateTime?
+  closedAt DateTime?
   messages  Message[]
   
   // Relation to the user who created it
   requesterId    String
   requester      User           @relation("RequesterRelation", fields: [requesterId], references: [id])
 
+  slaPolicyId String?
+  slaPolicy   SlaPolicy? @relation(fields: [slaPolicyId], references: [id])
+  responseDueAt    DateTime   // The absolute "First Reply" deadline
+  resolutionDueAt  DateTime   // The absolute "Fix It" deadline
+
   agentId    String?
   agent      User?           @relation("AgentRelation", fields: [agentId], references: [id])
+}
+
+model Department {
+  id String @id @default(uuid())
+  name String
+  users User[]
+  tickets Ticket[]
 }
 
 model Message {
@@ -64,4 +105,15 @@ model Message {
   ticket      Ticket   @relation(fields: [ticketId], references: [id])
   userId      String
   user        User     @relation(fields: [userId], references: [id])
+}
+
+model SlaPolicy {
+  id              String       @id @default(uuid())
+  name            String       
+  priority        TicketPriority 
+  responseTimeMin Int          
+  resolutionTimeMin Int        
+
+  tickets           Ticket[]
+  is24x7          Boolean      @default(false) 
 }

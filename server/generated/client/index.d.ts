@@ -19,15 +19,30 @@ export type PrismaPromise<T> = $Public.PrismaPromise<T>
  */
 export type User = $Result.DefaultSelection<Prisma.$UserPayload>
 /**
+ * Model Office
+ * 
+ */
+export type Office = $Result.DefaultSelection<Prisma.$OfficePayload>
+/**
  * Model Ticket
  * 
  */
 export type Ticket = $Result.DefaultSelection<Prisma.$TicketPayload>
 /**
+ * Model Department
+ * 
+ */
+export type Department = $Result.DefaultSelection<Prisma.$DepartmentPayload>
+/**
  * Model Message
  * 
  */
 export type Message = $Result.DefaultSelection<Prisma.$MessagePayload>
+/**
+ * Model SlaPolicy
+ * 
+ */
+export type SlaPolicy = $Result.DefaultSelection<Prisma.$SlaPolicyPayload>
 
 /**
  * Enums
@@ -50,6 +65,16 @@ export const TicketPriority: {
 
 export type TicketPriority = (typeof TicketPriority)[keyof typeof TicketPriority]
 
+
+export const UserRole: {
+  CUSTOMER: 'CUSTOMER',
+  AGENT: 'AGENT',
+  ADMIN: 'ADMIN',
+  EMPLOYEE: 'EMPLOYEE'
+};
+
+export type UserRole = (typeof UserRole)[keyof typeof UserRole]
+
 }
 
 export type TicketStatus = $Enums.TicketStatus
@@ -59,6 +84,10 @@ export const TicketStatus: typeof $Enums.TicketStatus
 export type TicketPriority = $Enums.TicketPriority
 
 export const TicketPriority: typeof $Enums.TicketPriority
+
+export type UserRole = $Enums.UserRole
+
+export const UserRole: typeof $Enums.UserRole
 
 /**
  * ##  Prisma Client ʲˢ
@@ -192,6 +221,16 @@ export class PrismaClient<
   get user(): Prisma.UserDelegate<ExtArgs, ClientOptions>;
 
   /**
+   * `prisma.office`: Exposes CRUD operations for the **Office** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Offices
+    * const offices = await prisma.office.findMany()
+    * ```
+    */
+  get office(): Prisma.OfficeDelegate<ExtArgs, ClientOptions>;
+
+  /**
    * `prisma.ticket`: Exposes CRUD operations for the **Ticket** model.
     * Example usage:
     * ```ts
@@ -202,6 +241,16 @@ export class PrismaClient<
   get ticket(): Prisma.TicketDelegate<ExtArgs, ClientOptions>;
 
   /**
+   * `prisma.department`: Exposes CRUD operations for the **Department** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Departments
+    * const departments = await prisma.department.findMany()
+    * ```
+    */
+  get department(): Prisma.DepartmentDelegate<ExtArgs, ClientOptions>;
+
+  /**
    * `prisma.message`: Exposes CRUD operations for the **Message** model.
     * Example usage:
     * ```ts
@@ -210,6 +259,16 @@ export class PrismaClient<
     * ```
     */
   get message(): Prisma.MessageDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.slaPolicy`: Exposes CRUD operations for the **SlaPolicy** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more SlaPolicies
+    * const slaPolicies = await prisma.slaPolicy.findMany()
+    * ```
+    */
+  get slaPolicy(): Prisma.SlaPolicyDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -645,8 +704,11 @@ export namespace Prisma {
 
   export const ModelName: {
     User: 'User',
+    Office: 'Office',
     Ticket: 'Ticket',
-    Message: 'Message'
+    Department: 'Department',
+    Message: 'Message',
+    SlaPolicy: 'SlaPolicy'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -662,7 +724,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "ticket" | "message"
+      modelProps: "user" | "office" | "ticket" | "department" | "message" | "slaPolicy"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -740,6 +802,80 @@ export namespace Prisma {
           }
         }
       }
+      Office: {
+        payload: Prisma.$OfficePayload<ExtArgs>
+        fields: Prisma.OfficeFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.OfficeFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OfficePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.OfficeFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OfficePayload>
+          }
+          findFirst: {
+            args: Prisma.OfficeFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OfficePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.OfficeFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OfficePayload>
+          }
+          findMany: {
+            args: Prisma.OfficeFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OfficePayload>[]
+          }
+          create: {
+            args: Prisma.OfficeCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OfficePayload>
+          }
+          createMany: {
+            args: Prisma.OfficeCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.OfficeCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OfficePayload>[]
+          }
+          delete: {
+            args: Prisma.OfficeDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OfficePayload>
+          }
+          update: {
+            args: Prisma.OfficeUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OfficePayload>
+          }
+          deleteMany: {
+            args: Prisma.OfficeDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.OfficeUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.OfficeUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OfficePayload>[]
+          }
+          upsert: {
+            args: Prisma.OfficeUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OfficePayload>
+          }
+          aggregate: {
+            args: Prisma.OfficeAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateOffice>
+          }
+          groupBy: {
+            args: Prisma.OfficeGroupByArgs<ExtArgs>
+            result: $Utils.Optional<OfficeGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.OfficeCountArgs<ExtArgs>
+            result: $Utils.Optional<OfficeCountAggregateOutputType> | number
+          }
+        }
+      }
       Ticket: {
         payload: Prisma.$TicketPayload<ExtArgs>
         fields: Prisma.TicketFieldRefs
@@ -814,6 +950,80 @@ export namespace Prisma {
           }
         }
       }
+      Department: {
+        payload: Prisma.$DepartmentPayload<ExtArgs>
+        fields: Prisma.DepartmentFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.DepartmentFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DepartmentPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.DepartmentFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DepartmentPayload>
+          }
+          findFirst: {
+            args: Prisma.DepartmentFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DepartmentPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.DepartmentFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DepartmentPayload>
+          }
+          findMany: {
+            args: Prisma.DepartmentFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DepartmentPayload>[]
+          }
+          create: {
+            args: Prisma.DepartmentCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DepartmentPayload>
+          }
+          createMany: {
+            args: Prisma.DepartmentCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.DepartmentCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DepartmentPayload>[]
+          }
+          delete: {
+            args: Prisma.DepartmentDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DepartmentPayload>
+          }
+          update: {
+            args: Prisma.DepartmentUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DepartmentPayload>
+          }
+          deleteMany: {
+            args: Prisma.DepartmentDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.DepartmentUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.DepartmentUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DepartmentPayload>[]
+          }
+          upsert: {
+            args: Prisma.DepartmentUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DepartmentPayload>
+          }
+          aggregate: {
+            args: Prisma.DepartmentAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateDepartment>
+          }
+          groupBy: {
+            args: Prisma.DepartmentGroupByArgs<ExtArgs>
+            result: $Utils.Optional<DepartmentGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.DepartmentCountArgs<ExtArgs>
+            result: $Utils.Optional<DepartmentCountAggregateOutputType> | number
+          }
+        }
+      }
       Message: {
         payload: Prisma.$MessagePayload<ExtArgs>
         fields: Prisma.MessageFieldRefs
@@ -885,6 +1095,80 @@ export namespace Prisma {
           count: {
             args: Prisma.MessageCountArgs<ExtArgs>
             result: $Utils.Optional<MessageCountAggregateOutputType> | number
+          }
+        }
+      }
+      SlaPolicy: {
+        payload: Prisma.$SlaPolicyPayload<ExtArgs>
+        fields: Prisma.SlaPolicyFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.SlaPolicyFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SlaPolicyPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.SlaPolicyFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SlaPolicyPayload>
+          }
+          findFirst: {
+            args: Prisma.SlaPolicyFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SlaPolicyPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.SlaPolicyFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SlaPolicyPayload>
+          }
+          findMany: {
+            args: Prisma.SlaPolicyFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SlaPolicyPayload>[]
+          }
+          create: {
+            args: Prisma.SlaPolicyCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SlaPolicyPayload>
+          }
+          createMany: {
+            args: Prisma.SlaPolicyCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.SlaPolicyCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SlaPolicyPayload>[]
+          }
+          delete: {
+            args: Prisma.SlaPolicyDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SlaPolicyPayload>
+          }
+          update: {
+            args: Prisma.SlaPolicyUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SlaPolicyPayload>
+          }
+          deleteMany: {
+            args: Prisma.SlaPolicyDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.SlaPolicyUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.SlaPolicyUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SlaPolicyPayload>[]
+          }
+          upsert: {
+            args: Prisma.SlaPolicyUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SlaPolicyPayload>
+          }
+          aggregate: {
+            args: Prisma.SlaPolicyAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateSlaPolicy>
+          }
+          groupBy: {
+            args: Prisma.SlaPolicyGroupByArgs<ExtArgs>
+            result: $Utils.Optional<SlaPolicyGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.SlaPolicyCountArgs<ExtArgs>
+            result: $Utils.Optional<SlaPolicyCountAggregateOutputType> | number
           }
         }
       }
@@ -997,8 +1281,11 @@ export namespace Prisma {
   }
   export type GlobalOmitConfig = {
     user?: UserOmit
+    office?: OfficeOmit
     ticket?: TicketOmit
+    department?: DepartmentOmit
     message?: MessageOmit
+    slaPolicy?: SlaPolicyOmit
   }
 
   /* Types for Logging */
@@ -1124,6 +1411,37 @@ export namespace Prisma {
 
 
   /**
+   * Count Type OfficeCountOutputType
+   */
+
+  export type OfficeCountOutputType = {
+    users: number
+  }
+
+  export type OfficeCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    users?: boolean | OfficeCountOutputTypeCountUsersArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * OfficeCountOutputType without action
+   */
+  export type OfficeCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OfficeCountOutputType
+     */
+    select?: OfficeCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * OfficeCountOutputType without action
+   */
+  export type OfficeCountOutputTypeCountUsersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: UserWhereInput
+  }
+
+
+  /**
    * Count Type TicketCountOutputType
    */
 
@@ -1155,6 +1473,77 @@ export namespace Prisma {
 
 
   /**
+   * Count Type DepartmentCountOutputType
+   */
+
+  export type DepartmentCountOutputType = {
+    users: number
+    tickets: number
+  }
+
+  export type DepartmentCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    users?: boolean | DepartmentCountOutputTypeCountUsersArgs
+    tickets?: boolean | DepartmentCountOutputTypeCountTicketsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * DepartmentCountOutputType without action
+   */
+  export type DepartmentCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DepartmentCountOutputType
+     */
+    select?: DepartmentCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * DepartmentCountOutputType without action
+   */
+  export type DepartmentCountOutputTypeCountUsersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: UserWhereInput
+  }
+
+  /**
+   * DepartmentCountOutputType without action
+   */
+  export type DepartmentCountOutputTypeCountTicketsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: TicketWhereInput
+  }
+
+
+  /**
+   * Count Type SlaPolicyCountOutputType
+   */
+
+  export type SlaPolicyCountOutputType = {
+    tickets: number
+  }
+
+  export type SlaPolicyCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    tickets?: boolean | SlaPolicyCountOutputTypeCountTicketsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * SlaPolicyCountOutputType without action
+   */
+  export type SlaPolicyCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SlaPolicyCountOutputType
+     */
+    select?: SlaPolicyCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * SlaPolicyCountOutputType without action
+   */
+  export type SlaPolicyCountOutputTypeCountTicketsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: TicketWhereInput
+  }
+
+
+  /**
    * Models
    */
 
@@ -1173,7 +1562,12 @@ export namespace Prisma {
     name: string | null
     email: string | null
     password: string | null
-    role: string | null
+    phone: string | null
+    avatarUrl: string | null
+    role: $Enums.UserRole | null
+    position: string | null
+    departmentId: string | null
+    officeId: string | null
   }
 
   export type UserMaxAggregateOutputType = {
@@ -1181,7 +1575,12 @@ export namespace Prisma {
     name: string | null
     email: string | null
     password: string | null
-    role: string | null
+    phone: string | null
+    avatarUrl: string | null
+    role: $Enums.UserRole | null
+    position: string | null
+    departmentId: string | null
+    officeId: string | null
   }
 
   export type UserCountAggregateOutputType = {
@@ -1189,7 +1588,12 @@ export namespace Prisma {
     name: number
     email: number
     password: number
+    phone: number
+    avatarUrl: number
     role: number
+    position: number
+    departmentId: number
+    officeId: number
     _all: number
   }
 
@@ -1199,7 +1603,12 @@ export namespace Prisma {
     name?: true
     email?: true
     password?: true
+    phone?: true
+    avatarUrl?: true
     role?: true
+    position?: true
+    departmentId?: true
+    officeId?: true
   }
 
   export type UserMaxAggregateInputType = {
@@ -1207,7 +1616,12 @@ export namespace Prisma {
     name?: true
     email?: true
     password?: true
+    phone?: true
+    avatarUrl?: true
     role?: true
+    position?: true
+    departmentId?: true
+    officeId?: true
   }
 
   export type UserCountAggregateInputType = {
@@ -1215,7 +1629,12 @@ export namespace Prisma {
     name?: true
     email?: true
     password?: true
+    phone?: true
+    avatarUrl?: true
     role?: true
+    position?: true
+    departmentId?: true
+    officeId?: true
     _all?: true
   }
 
@@ -1296,7 +1715,12 @@ export namespace Prisma {
     name: string
     email: string
     password: string
-    role: string
+    phone: string
+    avatarUrl: string | null
+    role: $Enums.UserRole
+    position: string
+    departmentId: string | null
+    officeId: string | null
     _count: UserCountAggregateOutputType | null
     _min: UserMinAggregateOutputType | null
     _max: UserMaxAggregateOutputType | null
@@ -1321,7 +1745,14 @@ export namespace Prisma {
     name?: boolean
     email?: boolean
     password?: boolean
+    phone?: boolean
+    avatarUrl?: boolean
     role?: boolean
+    position?: boolean
+    departmentId?: boolean
+    officeId?: boolean
+    department?: boolean | User$departmentArgs<ExtArgs>
+    office?: boolean | User$officeArgs<ExtArgs>
     openedTickets?: boolean | User$openedTicketsArgs<ExtArgs>
     assignedTickets?: boolean | User$assignedTicketsArgs<ExtArgs>
     messages?: boolean | User$messagesArgs<ExtArgs>
@@ -1333,7 +1764,14 @@ export namespace Prisma {
     name?: boolean
     email?: boolean
     password?: boolean
+    phone?: boolean
+    avatarUrl?: boolean
     role?: boolean
+    position?: boolean
+    departmentId?: boolean
+    officeId?: boolean
+    department?: boolean | User$departmentArgs<ExtArgs>
+    office?: boolean | User$officeArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -1341,7 +1779,14 @@ export namespace Prisma {
     name?: boolean
     email?: boolean
     password?: boolean
+    phone?: boolean
+    avatarUrl?: boolean
     role?: boolean
+    position?: boolean
+    departmentId?: boolean
+    officeId?: boolean
+    department?: boolean | User$departmentArgs<ExtArgs>
+    office?: boolean | User$officeArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectScalar = {
@@ -1349,22 +1794,37 @@ export namespace Prisma {
     name?: boolean
     email?: boolean
     password?: boolean
+    phone?: boolean
+    avatarUrl?: boolean
     role?: boolean
+    position?: boolean
+    departmentId?: boolean
+    officeId?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "password" | "role", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "password" | "phone" | "avatarUrl" | "role" | "position" | "departmentId" | "officeId", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    department?: boolean | User$departmentArgs<ExtArgs>
+    office?: boolean | User$officeArgs<ExtArgs>
     openedTickets?: boolean | User$openedTicketsArgs<ExtArgs>
     assignedTickets?: boolean | User$assignedTicketsArgs<ExtArgs>
     messages?: boolean | User$messagesArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
-  export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
-  export type UserIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    department?: boolean | User$departmentArgs<ExtArgs>
+    office?: boolean | User$officeArgs<ExtArgs>
+  }
+  export type UserIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    department?: boolean | User$departmentArgs<ExtArgs>
+    office?: boolean | User$officeArgs<ExtArgs>
+  }
 
   export type $UserPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "User"
     objects: {
+      department: Prisma.$DepartmentPayload<ExtArgs> | null
+      office: Prisma.$OfficePayload<ExtArgs> | null
       openedTickets: Prisma.$TicketPayload<ExtArgs>[]
       assignedTickets: Prisma.$TicketPayload<ExtArgs>[]
       messages: Prisma.$MessagePayload<ExtArgs>[]
@@ -1374,7 +1834,12 @@ export namespace Prisma {
       name: string
       email: string
       password: string
-      role: string
+      phone: string
+      avatarUrl: string | null
+      role: $Enums.UserRole
+      position: string
+      departmentId: string | null
+      officeId: string | null
     }, ExtArgs["result"]["user"]>
     composites: {}
   }
@@ -1769,6 +2234,8 @@ export namespace Prisma {
    */
   export interface Prisma__UserClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    department<T extends User$departmentArgs<ExtArgs> = {}>(args?: Subset<T, User$departmentArgs<ExtArgs>>): Prisma__DepartmentClient<$Result.GetResult<Prisma.$DepartmentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    office<T extends User$officeArgs<ExtArgs> = {}>(args?: Subset<T, User$officeArgs<ExtArgs>>): Prisma__OfficeClient<$Result.GetResult<Prisma.$OfficePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     openedTickets<T extends User$openedTicketsArgs<ExtArgs> = {}>(args?: Subset<T, User$openedTicketsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TicketPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     assignedTickets<T extends User$assignedTicketsArgs<ExtArgs> = {}>(args?: Subset<T, User$assignedTicketsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TicketPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     messages<T extends User$messagesArgs<ExtArgs> = {}>(args?: Subset<T, User$messagesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MessagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -1805,7 +2272,12 @@ export namespace Prisma {
     readonly name: FieldRef<"User", 'String'>
     readonly email: FieldRef<"User", 'String'>
     readonly password: FieldRef<"User", 'String'>
-    readonly role: FieldRef<"User", 'String'>
+    readonly phone: FieldRef<"User", 'String'>
+    readonly avatarUrl: FieldRef<"User", 'String'>
+    readonly role: FieldRef<"User", 'UserRole'>
+    readonly position: FieldRef<"User", 'String'>
+    readonly departmentId: FieldRef<"User", 'String'>
+    readonly officeId: FieldRef<"User", 'String'>
   }
     
 
@@ -2060,6 +2532,10 @@ export namespace Prisma {
      */
     data: UserCreateManyInput | UserCreateManyInput[]
     skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserIncludeCreateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -2130,6 +2606,10 @@ export namespace Prisma {
      * Limit how many Users to update.
      */
     limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserIncludeUpdateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -2196,6 +2676,44 @@ export namespace Prisma {
      * Limit how many Users to delete.
      */
     limit?: number
+  }
+
+  /**
+   * User.department
+   */
+  export type User$departmentArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Department
+     */
+    select?: DepartmentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Department
+     */
+    omit?: DepartmentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DepartmentInclude<ExtArgs> | null
+    where?: DepartmentWhereInput
+  }
+
+  /**
+   * User.office
+   */
+  export type User$officeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Office
+     */
+    select?: OfficeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Office
+     */
+    omit?: OfficeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OfficeInclude<ExtArgs> | null
+    where?: OfficeWhereInput
   }
 
   /**
@@ -2290,6 +2808,1055 @@ export namespace Prisma {
 
 
   /**
+   * Model Office
+   */
+
+  export type AggregateOffice = {
+    _count: OfficeCountAggregateOutputType | null
+    _min: OfficeMinAggregateOutputType | null
+    _max: OfficeMaxAggregateOutputType | null
+  }
+
+  export type OfficeMinAggregateOutputType = {
+    id: string | null
+    name: string | null
+    timeZone: string | null
+  }
+
+  export type OfficeMaxAggregateOutputType = {
+    id: string | null
+    name: string | null
+    timeZone: string | null
+  }
+
+  export type OfficeCountAggregateOutputType = {
+    id: number
+    name: number
+    timeZone: number
+    _all: number
+  }
+
+
+  export type OfficeMinAggregateInputType = {
+    id?: true
+    name?: true
+    timeZone?: true
+  }
+
+  export type OfficeMaxAggregateInputType = {
+    id?: true
+    name?: true
+    timeZone?: true
+  }
+
+  export type OfficeCountAggregateInputType = {
+    id?: true
+    name?: true
+    timeZone?: true
+    _all?: true
+  }
+
+  export type OfficeAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Office to aggregate.
+     */
+    where?: OfficeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Offices to fetch.
+     */
+    orderBy?: OfficeOrderByWithRelationInput | OfficeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: OfficeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Offices from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Offices.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Offices
+    **/
+    _count?: true | OfficeCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: OfficeMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: OfficeMaxAggregateInputType
+  }
+
+  export type GetOfficeAggregateType<T extends OfficeAggregateArgs> = {
+        [P in keyof T & keyof AggregateOffice]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateOffice[P]>
+      : GetScalarType<T[P], AggregateOffice[P]>
+  }
+
+
+
+
+  export type OfficeGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: OfficeWhereInput
+    orderBy?: OfficeOrderByWithAggregationInput | OfficeOrderByWithAggregationInput[]
+    by: OfficeScalarFieldEnum[] | OfficeScalarFieldEnum
+    having?: OfficeScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: OfficeCountAggregateInputType | true
+    _min?: OfficeMinAggregateInputType
+    _max?: OfficeMaxAggregateInputType
+  }
+
+  export type OfficeGroupByOutputType = {
+    id: string
+    name: string
+    timeZone: string
+    _count: OfficeCountAggregateOutputType | null
+    _min: OfficeMinAggregateOutputType | null
+    _max: OfficeMaxAggregateOutputType | null
+  }
+
+  type GetOfficeGroupByPayload<T extends OfficeGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<OfficeGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof OfficeGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], OfficeGroupByOutputType[P]>
+            : GetScalarType<T[P], OfficeGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type OfficeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    timeZone?: boolean
+    users?: boolean | Office$usersArgs<ExtArgs>
+    _count?: boolean | OfficeCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["office"]>
+
+  export type OfficeSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    timeZone?: boolean
+  }, ExtArgs["result"]["office"]>
+
+  export type OfficeSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    timeZone?: boolean
+  }, ExtArgs["result"]["office"]>
+
+  export type OfficeSelectScalar = {
+    id?: boolean
+    name?: boolean
+    timeZone?: boolean
+  }
+
+  export type OfficeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "timeZone", ExtArgs["result"]["office"]>
+  export type OfficeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    users?: boolean | Office$usersArgs<ExtArgs>
+    _count?: boolean | OfficeCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type OfficeIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type OfficeIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+
+  export type $OfficePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Office"
+    objects: {
+      users: Prisma.$UserPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      name: string
+      timeZone: string
+    }, ExtArgs["result"]["office"]>
+    composites: {}
+  }
+
+  type OfficeGetPayload<S extends boolean | null | undefined | OfficeDefaultArgs> = $Result.GetResult<Prisma.$OfficePayload, S>
+
+  type OfficeCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<OfficeFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: OfficeCountAggregateInputType | true
+    }
+
+  export interface OfficeDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Office'], meta: { name: 'Office' } }
+    /**
+     * Find zero or one Office that matches the filter.
+     * @param {OfficeFindUniqueArgs} args - Arguments to find a Office
+     * @example
+     * // Get one Office
+     * const office = await prisma.office.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends OfficeFindUniqueArgs>(args: SelectSubset<T, OfficeFindUniqueArgs<ExtArgs>>): Prisma__OfficeClient<$Result.GetResult<Prisma.$OfficePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Office that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {OfficeFindUniqueOrThrowArgs} args - Arguments to find a Office
+     * @example
+     * // Get one Office
+     * const office = await prisma.office.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends OfficeFindUniqueOrThrowArgs>(args: SelectSubset<T, OfficeFindUniqueOrThrowArgs<ExtArgs>>): Prisma__OfficeClient<$Result.GetResult<Prisma.$OfficePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Office that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OfficeFindFirstArgs} args - Arguments to find a Office
+     * @example
+     * // Get one Office
+     * const office = await prisma.office.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends OfficeFindFirstArgs>(args?: SelectSubset<T, OfficeFindFirstArgs<ExtArgs>>): Prisma__OfficeClient<$Result.GetResult<Prisma.$OfficePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Office that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OfficeFindFirstOrThrowArgs} args - Arguments to find a Office
+     * @example
+     * // Get one Office
+     * const office = await prisma.office.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends OfficeFindFirstOrThrowArgs>(args?: SelectSubset<T, OfficeFindFirstOrThrowArgs<ExtArgs>>): Prisma__OfficeClient<$Result.GetResult<Prisma.$OfficePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Offices that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OfficeFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Offices
+     * const offices = await prisma.office.findMany()
+     * 
+     * // Get first 10 Offices
+     * const offices = await prisma.office.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const officeWithIdOnly = await prisma.office.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends OfficeFindManyArgs>(args?: SelectSubset<T, OfficeFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OfficePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Office.
+     * @param {OfficeCreateArgs} args - Arguments to create a Office.
+     * @example
+     * // Create one Office
+     * const Office = await prisma.office.create({
+     *   data: {
+     *     // ... data to create a Office
+     *   }
+     * })
+     * 
+     */
+    create<T extends OfficeCreateArgs>(args: SelectSubset<T, OfficeCreateArgs<ExtArgs>>): Prisma__OfficeClient<$Result.GetResult<Prisma.$OfficePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Offices.
+     * @param {OfficeCreateManyArgs} args - Arguments to create many Offices.
+     * @example
+     * // Create many Offices
+     * const office = await prisma.office.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends OfficeCreateManyArgs>(args?: SelectSubset<T, OfficeCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Offices and returns the data saved in the database.
+     * @param {OfficeCreateManyAndReturnArgs} args - Arguments to create many Offices.
+     * @example
+     * // Create many Offices
+     * const office = await prisma.office.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Offices and only return the `id`
+     * const officeWithIdOnly = await prisma.office.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends OfficeCreateManyAndReturnArgs>(args?: SelectSubset<T, OfficeCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OfficePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Office.
+     * @param {OfficeDeleteArgs} args - Arguments to delete one Office.
+     * @example
+     * // Delete one Office
+     * const Office = await prisma.office.delete({
+     *   where: {
+     *     // ... filter to delete one Office
+     *   }
+     * })
+     * 
+     */
+    delete<T extends OfficeDeleteArgs>(args: SelectSubset<T, OfficeDeleteArgs<ExtArgs>>): Prisma__OfficeClient<$Result.GetResult<Prisma.$OfficePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Office.
+     * @param {OfficeUpdateArgs} args - Arguments to update one Office.
+     * @example
+     * // Update one Office
+     * const office = await prisma.office.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends OfficeUpdateArgs>(args: SelectSubset<T, OfficeUpdateArgs<ExtArgs>>): Prisma__OfficeClient<$Result.GetResult<Prisma.$OfficePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Offices.
+     * @param {OfficeDeleteManyArgs} args - Arguments to filter Offices to delete.
+     * @example
+     * // Delete a few Offices
+     * const { count } = await prisma.office.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends OfficeDeleteManyArgs>(args?: SelectSubset<T, OfficeDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Offices.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OfficeUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Offices
+     * const office = await prisma.office.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends OfficeUpdateManyArgs>(args: SelectSubset<T, OfficeUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Offices and returns the data updated in the database.
+     * @param {OfficeUpdateManyAndReturnArgs} args - Arguments to update many Offices.
+     * @example
+     * // Update many Offices
+     * const office = await prisma.office.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Offices and only return the `id`
+     * const officeWithIdOnly = await prisma.office.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends OfficeUpdateManyAndReturnArgs>(args: SelectSubset<T, OfficeUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OfficePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Office.
+     * @param {OfficeUpsertArgs} args - Arguments to update or create a Office.
+     * @example
+     * // Update or create a Office
+     * const office = await prisma.office.upsert({
+     *   create: {
+     *     // ... data to create a Office
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Office we want to update
+     *   }
+     * })
+     */
+    upsert<T extends OfficeUpsertArgs>(args: SelectSubset<T, OfficeUpsertArgs<ExtArgs>>): Prisma__OfficeClient<$Result.GetResult<Prisma.$OfficePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Offices.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OfficeCountArgs} args - Arguments to filter Offices to count.
+     * @example
+     * // Count the number of Offices
+     * const count = await prisma.office.count({
+     *   where: {
+     *     // ... the filter for the Offices we want to count
+     *   }
+     * })
+    **/
+    count<T extends OfficeCountArgs>(
+      args?: Subset<T, OfficeCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], OfficeCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Office.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OfficeAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends OfficeAggregateArgs>(args: Subset<T, OfficeAggregateArgs>): Prisma.PrismaPromise<GetOfficeAggregateType<T>>
+
+    /**
+     * Group by Office.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OfficeGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends OfficeGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: OfficeGroupByArgs['orderBy'] }
+        : { orderBy?: OfficeGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, OfficeGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetOfficeGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Office model
+   */
+  readonly fields: OfficeFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Office.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__OfficeClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    users<T extends Office$usersArgs<ExtArgs> = {}>(args?: Subset<T, Office$usersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Office model
+   */
+  interface OfficeFieldRefs {
+    readonly id: FieldRef<"Office", 'String'>
+    readonly name: FieldRef<"Office", 'String'>
+    readonly timeZone: FieldRef<"Office", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Office findUnique
+   */
+  export type OfficeFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Office
+     */
+    select?: OfficeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Office
+     */
+    omit?: OfficeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OfficeInclude<ExtArgs> | null
+    /**
+     * Filter, which Office to fetch.
+     */
+    where: OfficeWhereUniqueInput
+  }
+
+  /**
+   * Office findUniqueOrThrow
+   */
+  export type OfficeFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Office
+     */
+    select?: OfficeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Office
+     */
+    omit?: OfficeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OfficeInclude<ExtArgs> | null
+    /**
+     * Filter, which Office to fetch.
+     */
+    where: OfficeWhereUniqueInput
+  }
+
+  /**
+   * Office findFirst
+   */
+  export type OfficeFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Office
+     */
+    select?: OfficeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Office
+     */
+    omit?: OfficeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OfficeInclude<ExtArgs> | null
+    /**
+     * Filter, which Office to fetch.
+     */
+    where?: OfficeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Offices to fetch.
+     */
+    orderBy?: OfficeOrderByWithRelationInput | OfficeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Offices.
+     */
+    cursor?: OfficeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Offices from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Offices.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Offices.
+     */
+    distinct?: OfficeScalarFieldEnum | OfficeScalarFieldEnum[]
+  }
+
+  /**
+   * Office findFirstOrThrow
+   */
+  export type OfficeFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Office
+     */
+    select?: OfficeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Office
+     */
+    omit?: OfficeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OfficeInclude<ExtArgs> | null
+    /**
+     * Filter, which Office to fetch.
+     */
+    where?: OfficeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Offices to fetch.
+     */
+    orderBy?: OfficeOrderByWithRelationInput | OfficeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Offices.
+     */
+    cursor?: OfficeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Offices from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Offices.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Offices.
+     */
+    distinct?: OfficeScalarFieldEnum | OfficeScalarFieldEnum[]
+  }
+
+  /**
+   * Office findMany
+   */
+  export type OfficeFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Office
+     */
+    select?: OfficeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Office
+     */
+    omit?: OfficeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OfficeInclude<ExtArgs> | null
+    /**
+     * Filter, which Offices to fetch.
+     */
+    where?: OfficeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Offices to fetch.
+     */
+    orderBy?: OfficeOrderByWithRelationInput | OfficeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Offices.
+     */
+    cursor?: OfficeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Offices from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Offices.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Offices.
+     */
+    distinct?: OfficeScalarFieldEnum | OfficeScalarFieldEnum[]
+  }
+
+  /**
+   * Office create
+   */
+  export type OfficeCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Office
+     */
+    select?: OfficeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Office
+     */
+    omit?: OfficeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OfficeInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Office.
+     */
+    data: XOR<OfficeCreateInput, OfficeUncheckedCreateInput>
+  }
+
+  /**
+   * Office createMany
+   */
+  export type OfficeCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Offices.
+     */
+    data: OfficeCreateManyInput | OfficeCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Office createManyAndReturn
+   */
+  export type OfficeCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Office
+     */
+    select?: OfficeSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Office
+     */
+    omit?: OfficeOmit<ExtArgs> | null
+    /**
+     * The data used to create many Offices.
+     */
+    data: OfficeCreateManyInput | OfficeCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Office update
+   */
+  export type OfficeUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Office
+     */
+    select?: OfficeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Office
+     */
+    omit?: OfficeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OfficeInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Office.
+     */
+    data: XOR<OfficeUpdateInput, OfficeUncheckedUpdateInput>
+    /**
+     * Choose, which Office to update.
+     */
+    where: OfficeWhereUniqueInput
+  }
+
+  /**
+   * Office updateMany
+   */
+  export type OfficeUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Offices.
+     */
+    data: XOR<OfficeUpdateManyMutationInput, OfficeUncheckedUpdateManyInput>
+    /**
+     * Filter which Offices to update
+     */
+    where?: OfficeWhereInput
+    /**
+     * Limit how many Offices to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Office updateManyAndReturn
+   */
+  export type OfficeUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Office
+     */
+    select?: OfficeSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Office
+     */
+    omit?: OfficeOmit<ExtArgs> | null
+    /**
+     * The data used to update Offices.
+     */
+    data: XOR<OfficeUpdateManyMutationInput, OfficeUncheckedUpdateManyInput>
+    /**
+     * Filter which Offices to update
+     */
+    where?: OfficeWhereInput
+    /**
+     * Limit how many Offices to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Office upsert
+   */
+  export type OfficeUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Office
+     */
+    select?: OfficeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Office
+     */
+    omit?: OfficeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OfficeInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Office to update in case it exists.
+     */
+    where: OfficeWhereUniqueInput
+    /**
+     * In case the Office found by the `where` argument doesn't exist, create a new Office with this data.
+     */
+    create: XOR<OfficeCreateInput, OfficeUncheckedCreateInput>
+    /**
+     * In case the Office was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<OfficeUpdateInput, OfficeUncheckedUpdateInput>
+  }
+
+  /**
+   * Office delete
+   */
+  export type OfficeDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Office
+     */
+    select?: OfficeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Office
+     */
+    omit?: OfficeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OfficeInclude<ExtArgs> | null
+    /**
+     * Filter which Office to delete.
+     */
+    where: OfficeWhereUniqueInput
+  }
+
+  /**
+   * Office deleteMany
+   */
+  export type OfficeDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Offices to delete
+     */
+    where?: OfficeWhereInput
+    /**
+     * Limit how many Offices to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Office.users
+   */
+  export type Office$usersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
+    orderBy?: UserOrderByWithRelationInput | UserOrderByWithRelationInput[]
+    cursor?: UserWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: UserScalarFieldEnum | UserScalarFieldEnum[]
+  }
+
+  /**
+   * Office without action
+   */
+  export type OfficeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Office
+     */
+    select?: OfficeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Office
+     */
+    omit?: OfficeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OfficeInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Model Ticket
    */
 
@@ -2317,9 +3884,16 @@ export namespace Prisma {
     priority: $Enums.TicketPriority | null
     category: string | null
     description: string | null
+    departmentId: string | null
     createdAt: Date | null
     updatedAt: Date | null
+    deletedAt: Date | null
+    resolvedAt: Date | null
+    closedAt: Date | null
     requesterId: string | null
+    slaPolicyId: string | null
+    responseDueAt: Date | null
+    resolutionDueAt: Date | null
     agentId: string | null
   }
 
@@ -2331,9 +3905,16 @@ export namespace Prisma {
     priority: $Enums.TicketPriority | null
     category: string | null
     description: string | null
+    departmentId: string | null
     createdAt: Date | null
     updatedAt: Date | null
+    deletedAt: Date | null
+    resolvedAt: Date | null
+    closedAt: Date | null
     requesterId: string | null
+    slaPolicyId: string | null
+    responseDueAt: Date | null
+    resolutionDueAt: Date | null
     agentId: string | null
   }
 
@@ -2345,9 +3926,16 @@ export namespace Prisma {
     priority: number
     category: number
     description: number
+    departmentId: number
     createdAt: number
     updatedAt: number
+    deletedAt: number
+    resolvedAt: number
+    closedAt: number
     requesterId: number
+    slaPolicyId: number
+    responseDueAt: number
+    resolutionDueAt: number
     agentId: number
     _all: number
   }
@@ -2369,9 +3957,16 @@ export namespace Prisma {
     priority?: true
     category?: true
     description?: true
+    departmentId?: true
     createdAt?: true
     updatedAt?: true
+    deletedAt?: true
+    resolvedAt?: true
+    closedAt?: true
     requesterId?: true
+    slaPolicyId?: true
+    responseDueAt?: true
+    resolutionDueAt?: true
     agentId?: true
   }
 
@@ -2383,9 +3978,16 @@ export namespace Prisma {
     priority?: true
     category?: true
     description?: true
+    departmentId?: true
     createdAt?: true
     updatedAt?: true
+    deletedAt?: true
+    resolvedAt?: true
+    closedAt?: true
     requesterId?: true
+    slaPolicyId?: true
+    responseDueAt?: true
+    resolutionDueAt?: true
     agentId?: true
   }
 
@@ -2397,9 +3999,16 @@ export namespace Prisma {
     priority?: true
     category?: true
     description?: true
+    departmentId?: true
     createdAt?: true
     updatedAt?: true
+    deletedAt?: true
+    resolvedAt?: true
+    closedAt?: true
     requesterId?: true
+    slaPolicyId?: true
+    responseDueAt?: true
+    resolutionDueAt?: true
     agentId?: true
     _all?: true
   }
@@ -2498,9 +4107,16 @@ export namespace Prisma {
     priority: $Enums.TicketPriority
     category: string
     description: string
+    departmentId: string
     createdAt: Date
     updatedAt: Date
+    deletedAt: Date | null
+    resolvedAt: Date | null
+    closedAt: Date | null
     requesterId: string
+    slaPolicyId: string | null
+    responseDueAt: Date | null
+    resolutionDueAt: Date | null
     agentId: string | null
     _count: TicketCountAggregateOutputType | null
     _avg: TicketAvgAggregateOutputType | null
@@ -2531,12 +4147,21 @@ export namespace Prisma {
     priority?: boolean
     category?: boolean
     description?: boolean
+    departmentId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    deletedAt?: boolean
+    resolvedAt?: boolean
+    closedAt?: boolean
     requesterId?: boolean
+    slaPolicyId?: boolean
+    responseDueAt?: boolean
+    resolutionDueAt?: boolean
     agentId?: boolean
+    department?: boolean | DepartmentDefaultArgs<ExtArgs>
     messages?: boolean | Ticket$messagesArgs<ExtArgs>
     requester?: boolean | UserDefaultArgs<ExtArgs>
+    slaPolicy?: boolean | Ticket$slaPolicyArgs<ExtArgs>
     agent?: boolean | Ticket$agentArgs<ExtArgs>
     _count?: boolean | TicketCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["ticket"]>
@@ -2549,11 +4174,20 @@ export namespace Prisma {
     priority?: boolean
     category?: boolean
     description?: boolean
+    departmentId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    deletedAt?: boolean
+    resolvedAt?: boolean
+    closedAt?: boolean
     requesterId?: boolean
+    slaPolicyId?: boolean
+    responseDueAt?: boolean
+    resolutionDueAt?: boolean
     agentId?: boolean
+    department?: boolean | DepartmentDefaultArgs<ExtArgs>
     requester?: boolean | UserDefaultArgs<ExtArgs>
+    slaPolicy?: boolean | Ticket$slaPolicyArgs<ExtArgs>
     agent?: boolean | Ticket$agentArgs<ExtArgs>
   }, ExtArgs["result"]["ticket"]>
 
@@ -2565,11 +4199,20 @@ export namespace Prisma {
     priority?: boolean
     category?: boolean
     description?: boolean
+    departmentId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    deletedAt?: boolean
+    resolvedAt?: boolean
+    closedAt?: boolean
     requesterId?: boolean
+    slaPolicyId?: boolean
+    responseDueAt?: boolean
+    resolutionDueAt?: boolean
     agentId?: boolean
+    department?: boolean | DepartmentDefaultArgs<ExtArgs>
     requester?: boolean | UserDefaultArgs<ExtArgs>
+    slaPolicy?: boolean | Ticket$slaPolicyArgs<ExtArgs>
     agent?: boolean | Ticket$agentArgs<ExtArgs>
   }, ExtArgs["result"]["ticket"]>
 
@@ -2581,33 +4224,48 @@ export namespace Prisma {
     priority?: boolean
     category?: boolean
     description?: boolean
+    departmentId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    deletedAt?: boolean
+    resolvedAt?: boolean
+    closedAt?: boolean
     requesterId?: boolean
+    slaPolicyId?: boolean
+    responseDueAt?: boolean
+    resolutionDueAt?: boolean
     agentId?: boolean
   }
 
-  export type TicketOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "ticketNum" | "subject" | "status" | "priority" | "category" | "description" | "createdAt" | "updatedAt" | "requesterId" | "agentId", ExtArgs["result"]["ticket"]>
+  export type TicketOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "ticketNum" | "subject" | "status" | "priority" | "category" | "description" | "departmentId" | "createdAt" | "updatedAt" | "deletedAt" | "resolvedAt" | "closedAt" | "requesterId" | "slaPolicyId" | "responseDueAt" | "resolutionDueAt" | "agentId", ExtArgs["result"]["ticket"]>
   export type TicketInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    department?: boolean | DepartmentDefaultArgs<ExtArgs>
     messages?: boolean | Ticket$messagesArgs<ExtArgs>
     requester?: boolean | UserDefaultArgs<ExtArgs>
+    slaPolicy?: boolean | Ticket$slaPolicyArgs<ExtArgs>
     agent?: boolean | Ticket$agentArgs<ExtArgs>
     _count?: boolean | TicketCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type TicketIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    department?: boolean | DepartmentDefaultArgs<ExtArgs>
     requester?: boolean | UserDefaultArgs<ExtArgs>
+    slaPolicy?: boolean | Ticket$slaPolicyArgs<ExtArgs>
     agent?: boolean | Ticket$agentArgs<ExtArgs>
   }
   export type TicketIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    department?: boolean | DepartmentDefaultArgs<ExtArgs>
     requester?: boolean | UserDefaultArgs<ExtArgs>
+    slaPolicy?: boolean | Ticket$slaPolicyArgs<ExtArgs>
     agent?: boolean | Ticket$agentArgs<ExtArgs>
   }
 
   export type $TicketPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Ticket"
     objects: {
+      department: Prisma.$DepartmentPayload<ExtArgs>
       messages: Prisma.$MessagePayload<ExtArgs>[]
       requester: Prisma.$UserPayload<ExtArgs>
+      slaPolicy: Prisma.$SlaPolicyPayload<ExtArgs> | null
       agent: Prisma.$UserPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
@@ -2618,9 +4276,16 @@ export namespace Prisma {
       priority: $Enums.TicketPriority
       category: string
       description: string
+      departmentId: string
       createdAt: Date
       updatedAt: Date
+      deletedAt: Date | null
+      resolvedAt: Date | null
+      closedAt: Date | null
       requesterId: string
+      slaPolicyId: string | null
+      responseDueAt: Date | null
+      resolutionDueAt: Date | null
       agentId: string | null
     }, ExtArgs["result"]["ticket"]>
     composites: {}
@@ -3016,8 +4681,10 @@ export namespace Prisma {
    */
   export interface Prisma__TicketClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    department<T extends DepartmentDefaultArgs<ExtArgs> = {}>(args?: Subset<T, DepartmentDefaultArgs<ExtArgs>>): Prisma__DepartmentClient<$Result.GetResult<Prisma.$DepartmentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     messages<T extends Ticket$messagesArgs<ExtArgs> = {}>(args?: Subset<T, Ticket$messagesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MessagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     requester<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    slaPolicy<T extends Ticket$slaPolicyArgs<ExtArgs> = {}>(args?: Subset<T, Ticket$slaPolicyArgs<ExtArgs>>): Prisma__SlaPolicyClient<$Result.GetResult<Prisma.$SlaPolicyPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     agent<T extends Ticket$agentArgs<ExtArgs> = {}>(args?: Subset<T, Ticket$agentArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -3055,9 +4722,16 @@ export namespace Prisma {
     readonly priority: FieldRef<"Ticket", 'TicketPriority'>
     readonly category: FieldRef<"Ticket", 'String'>
     readonly description: FieldRef<"Ticket", 'String'>
+    readonly departmentId: FieldRef<"Ticket", 'String'>
     readonly createdAt: FieldRef<"Ticket", 'DateTime'>
     readonly updatedAt: FieldRef<"Ticket", 'DateTime'>
+    readonly deletedAt: FieldRef<"Ticket", 'DateTime'>
+    readonly resolvedAt: FieldRef<"Ticket", 'DateTime'>
+    readonly closedAt: FieldRef<"Ticket", 'DateTime'>
     readonly requesterId: FieldRef<"Ticket", 'String'>
+    readonly slaPolicyId: FieldRef<"Ticket", 'String'>
+    readonly responseDueAt: FieldRef<"Ticket", 'DateTime'>
+    readonly resolutionDueAt: FieldRef<"Ticket", 'DateTime'>
     readonly agentId: FieldRef<"Ticket", 'String'>
   }
     
@@ -3484,6 +5158,25 @@ export namespace Prisma {
   }
 
   /**
+   * Ticket.slaPolicy
+   */
+  export type Ticket$slaPolicyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SlaPolicy
+     */
+    select?: SlaPolicySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SlaPolicy
+     */
+    omit?: SlaPolicyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SlaPolicyInclude<ExtArgs> | null
+    where?: SlaPolicyWhereInput
+  }
+
+  /**
    * Ticket.agent
    */
   export type Ticket$agentArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3518,6 +5211,1070 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: TicketInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Department
+   */
+
+  export type AggregateDepartment = {
+    _count: DepartmentCountAggregateOutputType | null
+    _min: DepartmentMinAggregateOutputType | null
+    _max: DepartmentMaxAggregateOutputType | null
+  }
+
+  export type DepartmentMinAggregateOutputType = {
+    id: string | null
+    name: string | null
+  }
+
+  export type DepartmentMaxAggregateOutputType = {
+    id: string | null
+    name: string | null
+  }
+
+  export type DepartmentCountAggregateOutputType = {
+    id: number
+    name: number
+    _all: number
+  }
+
+
+  export type DepartmentMinAggregateInputType = {
+    id?: true
+    name?: true
+  }
+
+  export type DepartmentMaxAggregateInputType = {
+    id?: true
+    name?: true
+  }
+
+  export type DepartmentCountAggregateInputType = {
+    id?: true
+    name?: true
+    _all?: true
+  }
+
+  export type DepartmentAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Department to aggregate.
+     */
+    where?: DepartmentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Departments to fetch.
+     */
+    orderBy?: DepartmentOrderByWithRelationInput | DepartmentOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: DepartmentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Departments from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Departments.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Departments
+    **/
+    _count?: true | DepartmentCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: DepartmentMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: DepartmentMaxAggregateInputType
+  }
+
+  export type GetDepartmentAggregateType<T extends DepartmentAggregateArgs> = {
+        [P in keyof T & keyof AggregateDepartment]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateDepartment[P]>
+      : GetScalarType<T[P], AggregateDepartment[P]>
+  }
+
+
+
+
+  export type DepartmentGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: DepartmentWhereInput
+    orderBy?: DepartmentOrderByWithAggregationInput | DepartmentOrderByWithAggregationInput[]
+    by: DepartmentScalarFieldEnum[] | DepartmentScalarFieldEnum
+    having?: DepartmentScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: DepartmentCountAggregateInputType | true
+    _min?: DepartmentMinAggregateInputType
+    _max?: DepartmentMaxAggregateInputType
+  }
+
+  export type DepartmentGroupByOutputType = {
+    id: string
+    name: string
+    _count: DepartmentCountAggregateOutputType | null
+    _min: DepartmentMinAggregateOutputType | null
+    _max: DepartmentMaxAggregateOutputType | null
+  }
+
+  type GetDepartmentGroupByPayload<T extends DepartmentGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<DepartmentGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof DepartmentGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], DepartmentGroupByOutputType[P]>
+            : GetScalarType<T[P], DepartmentGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type DepartmentSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    users?: boolean | Department$usersArgs<ExtArgs>
+    tickets?: boolean | Department$ticketsArgs<ExtArgs>
+    _count?: boolean | DepartmentCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["department"]>
+
+  export type DepartmentSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+  }, ExtArgs["result"]["department"]>
+
+  export type DepartmentSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+  }, ExtArgs["result"]["department"]>
+
+  export type DepartmentSelectScalar = {
+    id?: boolean
+    name?: boolean
+  }
+
+  export type DepartmentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name", ExtArgs["result"]["department"]>
+  export type DepartmentInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    users?: boolean | Department$usersArgs<ExtArgs>
+    tickets?: boolean | Department$ticketsArgs<ExtArgs>
+    _count?: boolean | DepartmentCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type DepartmentIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type DepartmentIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+
+  export type $DepartmentPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Department"
+    objects: {
+      users: Prisma.$UserPayload<ExtArgs>[]
+      tickets: Prisma.$TicketPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      name: string
+    }, ExtArgs["result"]["department"]>
+    composites: {}
+  }
+
+  type DepartmentGetPayload<S extends boolean | null | undefined | DepartmentDefaultArgs> = $Result.GetResult<Prisma.$DepartmentPayload, S>
+
+  type DepartmentCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<DepartmentFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: DepartmentCountAggregateInputType | true
+    }
+
+  export interface DepartmentDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Department'], meta: { name: 'Department' } }
+    /**
+     * Find zero or one Department that matches the filter.
+     * @param {DepartmentFindUniqueArgs} args - Arguments to find a Department
+     * @example
+     * // Get one Department
+     * const department = await prisma.department.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends DepartmentFindUniqueArgs>(args: SelectSubset<T, DepartmentFindUniqueArgs<ExtArgs>>): Prisma__DepartmentClient<$Result.GetResult<Prisma.$DepartmentPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Department that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {DepartmentFindUniqueOrThrowArgs} args - Arguments to find a Department
+     * @example
+     * // Get one Department
+     * const department = await prisma.department.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends DepartmentFindUniqueOrThrowArgs>(args: SelectSubset<T, DepartmentFindUniqueOrThrowArgs<ExtArgs>>): Prisma__DepartmentClient<$Result.GetResult<Prisma.$DepartmentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Department that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DepartmentFindFirstArgs} args - Arguments to find a Department
+     * @example
+     * // Get one Department
+     * const department = await prisma.department.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends DepartmentFindFirstArgs>(args?: SelectSubset<T, DepartmentFindFirstArgs<ExtArgs>>): Prisma__DepartmentClient<$Result.GetResult<Prisma.$DepartmentPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Department that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DepartmentFindFirstOrThrowArgs} args - Arguments to find a Department
+     * @example
+     * // Get one Department
+     * const department = await prisma.department.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends DepartmentFindFirstOrThrowArgs>(args?: SelectSubset<T, DepartmentFindFirstOrThrowArgs<ExtArgs>>): Prisma__DepartmentClient<$Result.GetResult<Prisma.$DepartmentPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Departments that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DepartmentFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Departments
+     * const departments = await prisma.department.findMany()
+     * 
+     * // Get first 10 Departments
+     * const departments = await prisma.department.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const departmentWithIdOnly = await prisma.department.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends DepartmentFindManyArgs>(args?: SelectSubset<T, DepartmentFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DepartmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Department.
+     * @param {DepartmentCreateArgs} args - Arguments to create a Department.
+     * @example
+     * // Create one Department
+     * const Department = await prisma.department.create({
+     *   data: {
+     *     // ... data to create a Department
+     *   }
+     * })
+     * 
+     */
+    create<T extends DepartmentCreateArgs>(args: SelectSubset<T, DepartmentCreateArgs<ExtArgs>>): Prisma__DepartmentClient<$Result.GetResult<Prisma.$DepartmentPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Departments.
+     * @param {DepartmentCreateManyArgs} args - Arguments to create many Departments.
+     * @example
+     * // Create many Departments
+     * const department = await prisma.department.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends DepartmentCreateManyArgs>(args?: SelectSubset<T, DepartmentCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Departments and returns the data saved in the database.
+     * @param {DepartmentCreateManyAndReturnArgs} args - Arguments to create many Departments.
+     * @example
+     * // Create many Departments
+     * const department = await prisma.department.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Departments and only return the `id`
+     * const departmentWithIdOnly = await prisma.department.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends DepartmentCreateManyAndReturnArgs>(args?: SelectSubset<T, DepartmentCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DepartmentPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Department.
+     * @param {DepartmentDeleteArgs} args - Arguments to delete one Department.
+     * @example
+     * // Delete one Department
+     * const Department = await prisma.department.delete({
+     *   where: {
+     *     // ... filter to delete one Department
+     *   }
+     * })
+     * 
+     */
+    delete<T extends DepartmentDeleteArgs>(args: SelectSubset<T, DepartmentDeleteArgs<ExtArgs>>): Prisma__DepartmentClient<$Result.GetResult<Prisma.$DepartmentPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Department.
+     * @param {DepartmentUpdateArgs} args - Arguments to update one Department.
+     * @example
+     * // Update one Department
+     * const department = await prisma.department.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends DepartmentUpdateArgs>(args: SelectSubset<T, DepartmentUpdateArgs<ExtArgs>>): Prisma__DepartmentClient<$Result.GetResult<Prisma.$DepartmentPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Departments.
+     * @param {DepartmentDeleteManyArgs} args - Arguments to filter Departments to delete.
+     * @example
+     * // Delete a few Departments
+     * const { count } = await prisma.department.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends DepartmentDeleteManyArgs>(args?: SelectSubset<T, DepartmentDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Departments.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DepartmentUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Departments
+     * const department = await prisma.department.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends DepartmentUpdateManyArgs>(args: SelectSubset<T, DepartmentUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Departments and returns the data updated in the database.
+     * @param {DepartmentUpdateManyAndReturnArgs} args - Arguments to update many Departments.
+     * @example
+     * // Update many Departments
+     * const department = await prisma.department.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Departments and only return the `id`
+     * const departmentWithIdOnly = await prisma.department.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends DepartmentUpdateManyAndReturnArgs>(args: SelectSubset<T, DepartmentUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DepartmentPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Department.
+     * @param {DepartmentUpsertArgs} args - Arguments to update or create a Department.
+     * @example
+     * // Update or create a Department
+     * const department = await prisma.department.upsert({
+     *   create: {
+     *     // ... data to create a Department
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Department we want to update
+     *   }
+     * })
+     */
+    upsert<T extends DepartmentUpsertArgs>(args: SelectSubset<T, DepartmentUpsertArgs<ExtArgs>>): Prisma__DepartmentClient<$Result.GetResult<Prisma.$DepartmentPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Departments.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DepartmentCountArgs} args - Arguments to filter Departments to count.
+     * @example
+     * // Count the number of Departments
+     * const count = await prisma.department.count({
+     *   where: {
+     *     // ... the filter for the Departments we want to count
+     *   }
+     * })
+    **/
+    count<T extends DepartmentCountArgs>(
+      args?: Subset<T, DepartmentCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], DepartmentCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Department.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DepartmentAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends DepartmentAggregateArgs>(args: Subset<T, DepartmentAggregateArgs>): Prisma.PrismaPromise<GetDepartmentAggregateType<T>>
+
+    /**
+     * Group by Department.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DepartmentGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends DepartmentGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: DepartmentGroupByArgs['orderBy'] }
+        : { orderBy?: DepartmentGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, DepartmentGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetDepartmentGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Department model
+   */
+  readonly fields: DepartmentFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Department.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__DepartmentClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    users<T extends Department$usersArgs<ExtArgs> = {}>(args?: Subset<T, Department$usersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    tickets<T extends Department$ticketsArgs<ExtArgs> = {}>(args?: Subset<T, Department$ticketsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TicketPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Department model
+   */
+  interface DepartmentFieldRefs {
+    readonly id: FieldRef<"Department", 'String'>
+    readonly name: FieldRef<"Department", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Department findUnique
+   */
+  export type DepartmentFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Department
+     */
+    select?: DepartmentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Department
+     */
+    omit?: DepartmentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DepartmentInclude<ExtArgs> | null
+    /**
+     * Filter, which Department to fetch.
+     */
+    where: DepartmentWhereUniqueInput
+  }
+
+  /**
+   * Department findUniqueOrThrow
+   */
+  export type DepartmentFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Department
+     */
+    select?: DepartmentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Department
+     */
+    omit?: DepartmentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DepartmentInclude<ExtArgs> | null
+    /**
+     * Filter, which Department to fetch.
+     */
+    where: DepartmentWhereUniqueInput
+  }
+
+  /**
+   * Department findFirst
+   */
+  export type DepartmentFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Department
+     */
+    select?: DepartmentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Department
+     */
+    omit?: DepartmentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DepartmentInclude<ExtArgs> | null
+    /**
+     * Filter, which Department to fetch.
+     */
+    where?: DepartmentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Departments to fetch.
+     */
+    orderBy?: DepartmentOrderByWithRelationInput | DepartmentOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Departments.
+     */
+    cursor?: DepartmentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Departments from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Departments.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Departments.
+     */
+    distinct?: DepartmentScalarFieldEnum | DepartmentScalarFieldEnum[]
+  }
+
+  /**
+   * Department findFirstOrThrow
+   */
+  export type DepartmentFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Department
+     */
+    select?: DepartmentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Department
+     */
+    omit?: DepartmentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DepartmentInclude<ExtArgs> | null
+    /**
+     * Filter, which Department to fetch.
+     */
+    where?: DepartmentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Departments to fetch.
+     */
+    orderBy?: DepartmentOrderByWithRelationInput | DepartmentOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Departments.
+     */
+    cursor?: DepartmentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Departments from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Departments.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Departments.
+     */
+    distinct?: DepartmentScalarFieldEnum | DepartmentScalarFieldEnum[]
+  }
+
+  /**
+   * Department findMany
+   */
+  export type DepartmentFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Department
+     */
+    select?: DepartmentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Department
+     */
+    omit?: DepartmentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DepartmentInclude<ExtArgs> | null
+    /**
+     * Filter, which Departments to fetch.
+     */
+    where?: DepartmentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Departments to fetch.
+     */
+    orderBy?: DepartmentOrderByWithRelationInput | DepartmentOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Departments.
+     */
+    cursor?: DepartmentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Departments from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Departments.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Departments.
+     */
+    distinct?: DepartmentScalarFieldEnum | DepartmentScalarFieldEnum[]
+  }
+
+  /**
+   * Department create
+   */
+  export type DepartmentCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Department
+     */
+    select?: DepartmentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Department
+     */
+    omit?: DepartmentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DepartmentInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Department.
+     */
+    data: XOR<DepartmentCreateInput, DepartmentUncheckedCreateInput>
+  }
+
+  /**
+   * Department createMany
+   */
+  export type DepartmentCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Departments.
+     */
+    data: DepartmentCreateManyInput | DepartmentCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Department createManyAndReturn
+   */
+  export type DepartmentCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Department
+     */
+    select?: DepartmentSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Department
+     */
+    omit?: DepartmentOmit<ExtArgs> | null
+    /**
+     * The data used to create many Departments.
+     */
+    data: DepartmentCreateManyInput | DepartmentCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Department update
+   */
+  export type DepartmentUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Department
+     */
+    select?: DepartmentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Department
+     */
+    omit?: DepartmentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DepartmentInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Department.
+     */
+    data: XOR<DepartmentUpdateInput, DepartmentUncheckedUpdateInput>
+    /**
+     * Choose, which Department to update.
+     */
+    where: DepartmentWhereUniqueInput
+  }
+
+  /**
+   * Department updateMany
+   */
+  export type DepartmentUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Departments.
+     */
+    data: XOR<DepartmentUpdateManyMutationInput, DepartmentUncheckedUpdateManyInput>
+    /**
+     * Filter which Departments to update
+     */
+    where?: DepartmentWhereInput
+    /**
+     * Limit how many Departments to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Department updateManyAndReturn
+   */
+  export type DepartmentUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Department
+     */
+    select?: DepartmentSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Department
+     */
+    omit?: DepartmentOmit<ExtArgs> | null
+    /**
+     * The data used to update Departments.
+     */
+    data: XOR<DepartmentUpdateManyMutationInput, DepartmentUncheckedUpdateManyInput>
+    /**
+     * Filter which Departments to update
+     */
+    where?: DepartmentWhereInput
+    /**
+     * Limit how many Departments to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Department upsert
+   */
+  export type DepartmentUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Department
+     */
+    select?: DepartmentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Department
+     */
+    omit?: DepartmentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DepartmentInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Department to update in case it exists.
+     */
+    where: DepartmentWhereUniqueInput
+    /**
+     * In case the Department found by the `where` argument doesn't exist, create a new Department with this data.
+     */
+    create: XOR<DepartmentCreateInput, DepartmentUncheckedCreateInput>
+    /**
+     * In case the Department was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<DepartmentUpdateInput, DepartmentUncheckedUpdateInput>
+  }
+
+  /**
+   * Department delete
+   */
+  export type DepartmentDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Department
+     */
+    select?: DepartmentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Department
+     */
+    omit?: DepartmentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DepartmentInclude<ExtArgs> | null
+    /**
+     * Filter which Department to delete.
+     */
+    where: DepartmentWhereUniqueInput
+  }
+
+  /**
+   * Department deleteMany
+   */
+  export type DepartmentDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Departments to delete
+     */
+    where?: DepartmentWhereInput
+    /**
+     * Limit how many Departments to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Department.users
+   */
+  export type Department$usersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
+    orderBy?: UserOrderByWithRelationInput | UserOrderByWithRelationInput[]
+    cursor?: UserWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: UserScalarFieldEnum | UserScalarFieldEnum[]
+  }
+
+  /**
+   * Department.tickets
+   */
+  export type Department$ticketsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Ticket
+     */
+    select?: TicketSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Ticket
+     */
+    omit?: TicketOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TicketInclude<ExtArgs> | null
+    where?: TicketWhereInput
+    orderBy?: TicketOrderByWithRelationInput | TicketOrderByWithRelationInput[]
+    cursor?: TicketWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: TicketScalarFieldEnum | TicketScalarFieldEnum[]
+  }
+
+  /**
+   * Department without action
+   */
+  export type DepartmentDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Department
+     */
+    select?: DepartmentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Department
+     */
+    omit?: DepartmentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DepartmentInclude<ExtArgs> | null
   }
 
 
@@ -4593,6 +7350,1132 @@ export namespace Prisma {
 
 
   /**
+   * Model SlaPolicy
+   */
+
+  export type AggregateSlaPolicy = {
+    _count: SlaPolicyCountAggregateOutputType | null
+    _avg: SlaPolicyAvgAggregateOutputType | null
+    _sum: SlaPolicySumAggregateOutputType | null
+    _min: SlaPolicyMinAggregateOutputType | null
+    _max: SlaPolicyMaxAggregateOutputType | null
+  }
+
+  export type SlaPolicyAvgAggregateOutputType = {
+    responseTimeMin: number | null
+    resolutionTimeMin: number | null
+  }
+
+  export type SlaPolicySumAggregateOutputType = {
+    responseTimeMin: number | null
+    resolutionTimeMin: number | null
+  }
+
+  export type SlaPolicyMinAggregateOutputType = {
+    id: string | null
+    name: string | null
+    priority: $Enums.TicketPriority | null
+    responseTimeMin: number | null
+    resolutionTimeMin: number | null
+    is24x7: boolean | null
+  }
+
+  export type SlaPolicyMaxAggregateOutputType = {
+    id: string | null
+    name: string | null
+    priority: $Enums.TicketPriority | null
+    responseTimeMin: number | null
+    resolutionTimeMin: number | null
+    is24x7: boolean | null
+  }
+
+  export type SlaPolicyCountAggregateOutputType = {
+    id: number
+    name: number
+    priority: number
+    responseTimeMin: number
+    resolutionTimeMin: number
+    is24x7: number
+    _all: number
+  }
+
+
+  export type SlaPolicyAvgAggregateInputType = {
+    responseTimeMin?: true
+    resolutionTimeMin?: true
+  }
+
+  export type SlaPolicySumAggregateInputType = {
+    responseTimeMin?: true
+    resolutionTimeMin?: true
+  }
+
+  export type SlaPolicyMinAggregateInputType = {
+    id?: true
+    name?: true
+    priority?: true
+    responseTimeMin?: true
+    resolutionTimeMin?: true
+    is24x7?: true
+  }
+
+  export type SlaPolicyMaxAggregateInputType = {
+    id?: true
+    name?: true
+    priority?: true
+    responseTimeMin?: true
+    resolutionTimeMin?: true
+    is24x7?: true
+  }
+
+  export type SlaPolicyCountAggregateInputType = {
+    id?: true
+    name?: true
+    priority?: true
+    responseTimeMin?: true
+    resolutionTimeMin?: true
+    is24x7?: true
+    _all?: true
+  }
+
+  export type SlaPolicyAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which SlaPolicy to aggregate.
+     */
+    where?: SlaPolicyWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SlaPolicies to fetch.
+     */
+    orderBy?: SlaPolicyOrderByWithRelationInput | SlaPolicyOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: SlaPolicyWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SlaPolicies from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SlaPolicies.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned SlaPolicies
+    **/
+    _count?: true | SlaPolicyCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: SlaPolicyAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: SlaPolicySumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: SlaPolicyMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: SlaPolicyMaxAggregateInputType
+  }
+
+  export type GetSlaPolicyAggregateType<T extends SlaPolicyAggregateArgs> = {
+        [P in keyof T & keyof AggregateSlaPolicy]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateSlaPolicy[P]>
+      : GetScalarType<T[P], AggregateSlaPolicy[P]>
+  }
+
+
+
+
+  export type SlaPolicyGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SlaPolicyWhereInput
+    orderBy?: SlaPolicyOrderByWithAggregationInput | SlaPolicyOrderByWithAggregationInput[]
+    by: SlaPolicyScalarFieldEnum[] | SlaPolicyScalarFieldEnum
+    having?: SlaPolicyScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: SlaPolicyCountAggregateInputType | true
+    _avg?: SlaPolicyAvgAggregateInputType
+    _sum?: SlaPolicySumAggregateInputType
+    _min?: SlaPolicyMinAggregateInputType
+    _max?: SlaPolicyMaxAggregateInputType
+  }
+
+  export type SlaPolicyGroupByOutputType = {
+    id: string
+    name: string
+    priority: $Enums.TicketPriority
+    responseTimeMin: number
+    resolutionTimeMin: number
+    is24x7: boolean
+    _count: SlaPolicyCountAggregateOutputType | null
+    _avg: SlaPolicyAvgAggregateOutputType | null
+    _sum: SlaPolicySumAggregateOutputType | null
+    _min: SlaPolicyMinAggregateOutputType | null
+    _max: SlaPolicyMaxAggregateOutputType | null
+  }
+
+  type GetSlaPolicyGroupByPayload<T extends SlaPolicyGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<SlaPolicyGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof SlaPolicyGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], SlaPolicyGroupByOutputType[P]>
+            : GetScalarType<T[P], SlaPolicyGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type SlaPolicySelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    priority?: boolean
+    responseTimeMin?: boolean
+    resolutionTimeMin?: boolean
+    is24x7?: boolean
+    tickets?: boolean | SlaPolicy$ticketsArgs<ExtArgs>
+    _count?: boolean | SlaPolicyCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["slaPolicy"]>
+
+  export type SlaPolicySelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    priority?: boolean
+    responseTimeMin?: boolean
+    resolutionTimeMin?: boolean
+    is24x7?: boolean
+  }, ExtArgs["result"]["slaPolicy"]>
+
+  export type SlaPolicySelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    priority?: boolean
+    responseTimeMin?: boolean
+    resolutionTimeMin?: boolean
+    is24x7?: boolean
+  }, ExtArgs["result"]["slaPolicy"]>
+
+  export type SlaPolicySelectScalar = {
+    id?: boolean
+    name?: boolean
+    priority?: boolean
+    responseTimeMin?: boolean
+    resolutionTimeMin?: boolean
+    is24x7?: boolean
+  }
+
+  export type SlaPolicyOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "priority" | "responseTimeMin" | "resolutionTimeMin" | "is24x7", ExtArgs["result"]["slaPolicy"]>
+  export type SlaPolicyInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    tickets?: boolean | SlaPolicy$ticketsArgs<ExtArgs>
+    _count?: boolean | SlaPolicyCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type SlaPolicyIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type SlaPolicyIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+
+  export type $SlaPolicyPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "SlaPolicy"
+    objects: {
+      tickets: Prisma.$TicketPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      name: string
+      priority: $Enums.TicketPriority
+      responseTimeMin: number
+      resolutionTimeMin: number
+      is24x7: boolean
+    }, ExtArgs["result"]["slaPolicy"]>
+    composites: {}
+  }
+
+  type SlaPolicyGetPayload<S extends boolean | null | undefined | SlaPolicyDefaultArgs> = $Result.GetResult<Prisma.$SlaPolicyPayload, S>
+
+  type SlaPolicyCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<SlaPolicyFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: SlaPolicyCountAggregateInputType | true
+    }
+
+  export interface SlaPolicyDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['SlaPolicy'], meta: { name: 'SlaPolicy' } }
+    /**
+     * Find zero or one SlaPolicy that matches the filter.
+     * @param {SlaPolicyFindUniqueArgs} args - Arguments to find a SlaPolicy
+     * @example
+     * // Get one SlaPolicy
+     * const slaPolicy = await prisma.slaPolicy.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends SlaPolicyFindUniqueArgs>(args: SelectSubset<T, SlaPolicyFindUniqueArgs<ExtArgs>>): Prisma__SlaPolicyClient<$Result.GetResult<Prisma.$SlaPolicyPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one SlaPolicy that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {SlaPolicyFindUniqueOrThrowArgs} args - Arguments to find a SlaPolicy
+     * @example
+     * // Get one SlaPolicy
+     * const slaPolicy = await prisma.slaPolicy.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends SlaPolicyFindUniqueOrThrowArgs>(args: SelectSubset<T, SlaPolicyFindUniqueOrThrowArgs<ExtArgs>>): Prisma__SlaPolicyClient<$Result.GetResult<Prisma.$SlaPolicyPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first SlaPolicy that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SlaPolicyFindFirstArgs} args - Arguments to find a SlaPolicy
+     * @example
+     * // Get one SlaPolicy
+     * const slaPolicy = await prisma.slaPolicy.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends SlaPolicyFindFirstArgs>(args?: SelectSubset<T, SlaPolicyFindFirstArgs<ExtArgs>>): Prisma__SlaPolicyClient<$Result.GetResult<Prisma.$SlaPolicyPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first SlaPolicy that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SlaPolicyFindFirstOrThrowArgs} args - Arguments to find a SlaPolicy
+     * @example
+     * // Get one SlaPolicy
+     * const slaPolicy = await prisma.slaPolicy.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends SlaPolicyFindFirstOrThrowArgs>(args?: SelectSubset<T, SlaPolicyFindFirstOrThrowArgs<ExtArgs>>): Prisma__SlaPolicyClient<$Result.GetResult<Prisma.$SlaPolicyPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more SlaPolicies that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SlaPolicyFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all SlaPolicies
+     * const slaPolicies = await prisma.slaPolicy.findMany()
+     * 
+     * // Get first 10 SlaPolicies
+     * const slaPolicies = await prisma.slaPolicy.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const slaPolicyWithIdOnly = await prisma.slaPolicy.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends SlaPolicyFindManyArgs>(args?: SelectSubset<T, SlaPolicyFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SlaPolicyPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a SlaPolicy.
+     * @param {SlaPolicyCreateArgs} args - Arguments to create a SlaPolicy.
+     * @example
+     * // Create one SlaPolicy
+     * const SlaPolicy = await prisma.slaPolicy.create({
+     *   data: {
+     *     // ... data to create a SlaPolicy
+     *   }
+     * })
+     * 
+     */
+    create<T extends SlaPolicyCreateArgs>(args: SelectSubset<T, SlaPolicyCreateArgs<ExtArgs>>): Prisma__SlaPolicyClient<$Result.GetResult<Prisma.$SlaPolicyPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many SlaPolicies.
+     * @param {SlaPolicyCreateManyArgs} args - Arguments to create many SlaPolicies.
+     * @example
+     * // Create many SlaPolicies
+     * const slaPolicy = await prisma.slaPolicy.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends SlaPolicyCreateManyArgs>(args?: SelectSubset<T, SlaPolicyCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many SlaPolicies and returns the data saved in the database.
+     * @param {SlaPolicyCreateManyAndReturnArgs} args - Arguments to create many SlaPolicies.
+     * @example
+     * // Create many SlaPolicies
+     * const slaPolicy = await prisma.slaPolicy.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many SlaPolicies and only return the `id`
+     * const slaPolicyWithIdOnly = await prisma.slaPolicy.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends SlaPolicyCreateManyAndReturnArgs>(args?: SelectSubset<T, SlaPolicyCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SlaPolicyPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a SlaPolicy.
+     * @param {SlaPolicyDeleteArgs} args - Arguments to delete one SlaPolicy.
+     * @example
+     * // Delete one SlaPolicy
+     * const SlaPolicy = await prisma.slaPolicy.delete({
+     *   where: {
+     *     // ... filter to delete one SlaPolicy
+     *   }
+     * })
+     * 
+     */
+    delete<T extends SlaPolicyDeleteArgs>(args: SelectSubset<T, SlaPolicyDeleteArgs<ExtArgs>>): Prisma__SlaPolicyClient<$Result.GetResult<Prisma.$SlaPolicyPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one SlaPolicy.
+     * @param {SlaPolicyUpdateArgs} args - Arguments to update one SlaPolicy.
+     * @example
+     * // Update one SlaPolicy
+     * const slaPolicy = await prisma.slaPolicy.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends SlaPolicyUpdateArgs>(args: SelectSubset<T, SlaPolicyUpdateArgs<ExtArgs>>): Prisma__SlaPolicyClient<$Result.GetResult<Prisma.$SlaPolicyPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more SlaPolicies.
+     * @param {SlaPolicyDeleteManyArgs} args - Arguments to filter SlaPolicies to delete.
+     * @example
+     * // Delete a few SlaPolicies
+     * const { count } = await prisma.slaPolicy.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends SlaPolicyDeleteManyArgs>(args?: SelectSubset<T, SlaPolicyDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more SlaPolicies.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SlaPolicyUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many SlaPolicies
+     * const slaPolicy = await prisma.slaPolicy.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends SlaPolicyUpdateManyArgs>(args: SelectSubset<T, SlaPolicyUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more SlaPolicies and returns the data updated in the database.
+     * @param {SlaPolicyUpdateManyAndReturnArgs} args - Arguments to update many SlaPolicies.
+     * @example
+     * // Update many SlaPolicies
+     * const slaPolicy = await prisma.slaPolicy.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more SlaPolicies and only return the `id`
+     * const slaPolicyWithIdOnly = await prisma.slaPolicy.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends SlaPolicyUpdateManyAndReturnArgs>(args: SelectSubset<T, SlaPolicyUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SlaPolicyPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one SlaPolicy.
+     * @param {SlaPolicyUpsertArgs} args - Arguments to update or create a SlaPolicy.
+     * @example
+     * // Update or create a SlaPolicy
+     * const slaPolicy = await prisma.slaPolicy.upsert({
+     *   create: {
+     *     // ... data to create a SlaPolicy
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the SlaPolicy we want to update
+     *   }
+     * })
+     */
+    upsert<T extends SlaPolicyUpsertArgs>(args: SelectSubset<T, SlaPolicyUpsertArgs<ExtArgs>>): Prisma__SlaPolicyClient<$Result.GetResult<Prisma.$SlaPolicyPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of SlaPolicies.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SlaPolicyCountArgs} args - Arguments to filter SlaPolicies to count.
+     * @example
+     * // Count the number of SlaPolicies
+     * const count = await prisma.slaPolicy.count({
+     *   where: {
+     *     // ... the filter for the SlaPolicies we want to count
+     *   }
+     * })
+    **/
+    count<T extends SlaPolicyCountArgs>(
+      args?: Subset<T, SlaPolicyCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], SlaPolicyCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a SlaPolicy.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SlaPolicyAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends SlaPolicyAggregateArgs>(args: Subset<T, SlaPolicyAggregateArgs>): Prisma.PrismaPromise<GetSlaPolicyAggregateType<T>>
+
+    /**
+     * Group by SlaPolicy.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SlaPolicyGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends SlaPolicyGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: SlaPolicyGroupByArgs['orderBy'] }
+        : { orderBy?: SlaPolicyGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, SlaPolicyGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetSlaPolicyGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the SlaPolicy model
+   */
+  readonly fields: SlaPolicyFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for SlaPolicy.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__SlaPolicyClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    tickets<T extends SlaPolicy$ticketsArgs<ExtArgs> = {}>(args?: Subset<T, SlaPolicy$ticketsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TicketPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the SlaPolicy model
+   */
+  interface SlaPolicyFieldRefs {
+    readonly id: FieldRef<"SlaPolicy", 'String'>
+    readonly name: FieldRef<"SlaPolicy", 'String'>
+    readonly priority: FieldRef<"SlaPolicy", 'TicketPriority'>
+    readonly responseTimeMin: FieldRef<"SlaPolicy", 'Int'>
+    readonly resolutionTimeMin: FieldRef<"SlaPolicy", 'Int'>
+    readonly is24x7: FieldRef<"SlaPolicy", 'Boolean'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * SlaPolicy findUnique
+   */
+  export type SlaPolicyFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SlaPolicy
+     */
+    select?: SlaPolicySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SlaPolicy
+     */
+    omit?: SlaPolicyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SlaPolicyInclude<ExtArgs> | null
+    /**
+     * Filter, which SlaPolicy to fetch.
+     */
+    where: SlaPolicyWhereUniqueInput
+  }
+
+  /**
+   * SlaPolicy findUniqueOrThrow
+   */
+  export type SlaPolicyFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SlaPolicy
+     */
+    select?: SlaPolicySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SlaPolicy
+     */
+    omit?: SlaPolicyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SlaPolicyInclude<ExtArgs> | null
+    /**
+     * Filter, which SlaPolicy to fetch.
+     */
+    where: SlaPolicyWhereUniqueInput
+  }
+
+  /**
+   * SlaPolicy findFirst
+   */
+  export type SlaPolicyFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SlaPolicy
+     */
+    select?: SlaPolicySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SlaPolicy
+     */
+    omit?: SlaPolicyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SlaPolicyInclude<ExtArgs> | null
+    /**
+     * Filter, which SlaPolicy to fetch.
+     */
+    where?: SlaPolicyWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SlaPolicies to fetch.
+     */
+    orderBy?: SlaPolicyOrderByWithRelationInput | SlaPolicyOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for SlaPolicies.
+     */
+    cursor?: SlaPolicyWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SlaPolicies from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SlaPolicies.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of SlaPolicies.
+     */
+    distinct?: SlaPolicyScalarFieldEnum | SlaPolicyScalarFieldEnum[]
+  }
+
+  /**
+   * SlaPolicy findFirstOrThrow
+   */
+  export type SlaPolicyFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SlaPolicy
+     */
+    select?: SlaPolicySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SlaPolicy
+     */
+    omit?: SlaPolicyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SlaPolicyInclude<ExtArgs> | null
+    /**
+     * Filter, which SlaPolicy to fetch.
+     */
+    where?: SlaPolicyWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SlaPolicies to fetch.
+     */
+    orderBy?: SlaPolicyOrderByWithRelationInput | SlaPolicyOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for SlaPolicies.
+     */
+    cursor?: SlaPolicyWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SlaPolicies from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SlaPolicies.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of SlaPolicies.
+     */
+    distinct?: SlaPolicyScalarFieldEnum | SlaPolicyScalarFieldEnum[]
+  }
+
+  /**
+   * SlaPolicy findMany
+   */
+  export type SlaPolicyFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SlaPolicy
+     */
+    select?: SlaPolicySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SlaPolicy
+     */
+    omit?: SlaPolicyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SlaPolicyInclude<ExtArgs> | null
+    /**
+     * Filter, which SlaPolicies to fetch.
+     */
+    where?: SlaPolicyWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SlaPolicies to fetch.
+     */
+    orderBy?: SlaPolicyOrderByWithRelationInput | SlaPolicyOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing SlaPolicies.
+     */
+    cursor?: SlaPolicyWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SlaPolicies from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SlaPolicies.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of SlaPolicies.
+     */
+    distinct?: SlaPolicyScalarFieldEnum | SlaPolicyScalarFieldEnum[]
+  }
+
+  /**
+   * SlaPolicy create
+   */
+  export type SlaPolicyCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SlaPolicy
+     */
+    select?: SlaPolicySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SlaPolicy
+     */
+    omit?: SlaPolicyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SlaPolicyInclude<ExtArgs> | null
+    /**
+     * The data needed to create a SlaPolicy.
+     */
+    data: XOR<SlaPolicyCreateInput, SlaPolicyUncheckedCreateInput>
+  }
+
+  /**
+   * SlaPolicy createMany
+   */
+  export type SlaPolicyCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many SlaPolicies.
+     */
+    data: SlaPolicyCreateManyInput | SlaPolicyCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * SlaPolicy createManyAndReturn
+   */
+  export type SlaPolicyCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SlaPolicy
+     */
+    select?: SlaPolicySelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the SlaPolicy
+     */
+    omit?: SlaPolicyOmit<ExtArgs> | null
+    /**
+     * The data used to create many SlaPolicies.
+     */
+    data: SlaPolicyCreateManyInput | SlaPolicyCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * SlaPolicy update
+   */
+  export type SlaPolicyUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SlaPolicy
+     */
+    select?: SlaPolicySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SlaPolicy
+     */
+    omit?: SlaPolicyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SlaPolicyInclude<ExtArgs> | null
+    /**
+     * The data needed to update a SlaPolicy.
+     */
+    data: XOR<SlaPolicyUpdateInput, SlaPolicyUncheckedUpdateInput>
+    /**
+     * Choose, which SlaPolicy to update.
+     */
+    where: SlaPolicyWhereUniqueInput
+  }
+
+  /**
+   * SlaPolicy updateMany
+   */
+  export type SlaPolicyUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update SlaPolicies.
+     */
+    data: XOR<SlaPolicyUpdateManyMutationInput, SlaPolicyUncheckedUpdateManyInput>
+    /**
+     * Filter which SlaPolicies to update
+     */
+    where?: SlaPolicyWhereInput
+    /**
+     * Limit how many SlaPolicies to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * SlaPolicy updateManyAndReturn
+   */
+  export type SlaPolicyUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SlaPolicy
+     */
+    select?: SlaPolicySelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the SlaPolicy
+     */
+    omit?: SlaPolicyOmit<ExtArgs> | null
+    /**
+     * The data used to update SlaPolicies.
+     */
+    data: XOR<SlaPolicyUpdateManyMutationInput, SlaPolicyUncheckedUpdateManyInput>
+    /**
+     * Filter which SlaPolicies to update
+     */
+    where?: SlaPolicyWhereInput
+    /**
+     * Limit how many SlaPolicies to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * SlaPolicy upsert
+   */
+  export type SlaPolicyUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SlaPolicy
+     */
+    select?: SlaPolicySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SlaPolicy
+     */
+    omit?: SlaPolicyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SlaPolicyInclude<ExtArgs> | null
+    /**
+     * The filter to search for the SlaPolicy to update in case it exists.
+     */
+    where: SlaPolicyWhereUniqueInput
+    /**
+     * In case the SlaPolicy found by the `where` argument doesn't exist, create a new SlaPolicy with this data.
+     */
+    create: XOR<SlaPolicyCreateInput, SlaPolicyUncheckedCreateInput>
+    /**
+     * In case the SlaPolicy was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<SlaPolicyUpdateInput, SlaPolicyUncheckedUpdateInput>
+  }
+
+  /**
+   * SlaPolicy delete
+   */
+  export type SlaPolicyDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SlaPolicy
+     */
+    select?: SlaPolicySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SlaPolicy
+     */
+    omit?: SlaPolicyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SlaPolicyInclude<ExtArgs> | null
+    /**
+     * Filter which SlaPolicy to delete.
+     */
+    where: SlaPolicyWhereUniqueInput
+  }
+
+  /**
+   * SlaPolicy deleteMany
+   */
+  export type SlaPolicyDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which SlaPolicies to delete
+     */
+    where?: SlaPolicyWhereInput
+    /**
+     * Limit how many SlaPolicies to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * SlaPolicy.tickets
+   */
+  export type SlaPolicy$ticketsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Ticket
+     */
+    select?: TicketSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Ticket
+     */
+    omit?: TicketOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TicketInclude<ExtArgs> | null
+    where?: TicketWhereInput
+    orderBy?: TicketOrderByWithRelationInput | TicketOrderByWithRelationInput[]
+    cursor?: TicketWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: TicketScalarFieldEnum | TicketScalarFieldEnum[]
+  }
+
+  /**
+   * SlaPolicy without action
+   */
+  export type SlaPolicyDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SlaPolicy
+     */
+    select?: SlaPolicySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SlaPolicy
+     */
+    omit?: SlaPolicyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SlaPolicyInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -4611,10 +8494,24 @@ export namespace Prisma {
     name: 'name',
     email: 'email',
     password: 'password',
-    role: 'role'
+    phone: 'phone',
+    avatarUrl: 'avatarUrl',
+    role: 'role',
+    position: 'position',
+    departmentId: 'departmentId',
+    officeId: 'officeId'
   };
 
   export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
+
+
+  export const OfficeScalarFieldEnum: {
+    id: 'id',
+    name: 'name',
+    timeZone: 'timeZone'
+  };
+
+  export type OfficeScalarFieldEnum = (typeof OfficeScalarFieldEnum)[keyof typeof OfficeScalarFieldEnum]
 
 
   export const TicketScalarFieldEnum: {
@@ -4625,13 +8522,28 @@ export namespace Prisma {
     priority: 'priority',
     category: 'category',
     description: 'description',
+    departmentId: 'departmentId',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
+    deletedAt: 'deletedAt',
+    resolvedAt: 'resolvedAt',
+    closedAt: 'closedAt',
     requesterId: 'requesterId',
+    slaPolicyId: 'slaPolicyId',
+    responseDueAt: 'responseDueAt',
+    resolutionDueAt: 'resolutionDueAt',
     agentId: 'agentId'
   };
 
   export type TicketScalarFieldEnum = (typeof TicketScalarFieldEnum)[keyof typeof TicketScalarFieldEnum]
+
+
+  export const DepartmentScalarFieldEnum: {
+    id: 'id',
+    name: 'name'
+  };
+
+  export type DepartmentScalarFieldEnum = (typeof DepartmentScalarFieldEnum)[keyof typeof DepartmentScalarFieldEnum]
 
 
   export const MessageScalarFieldEnum: {
@@ -4643,6 +8555,18 @@ export namespace Prisma {
   };
 
   export type MessageScalarFieldEnum = (typeof MessageScalarFieldEnum)[keyof typeof MessageScalarFieldEnum]
+
+
+  export const SlaPolicyScalarFieldEnum: {
+    id: 'id',
+    name: 'name',
+    priority: 'priority',
+    responseTimeMin: 'responseTimeMin',
+    resolutionTimeMin: 'resolutionTimeMin',
+    is24x7: 'is24x7'
+  };
+
+  export type SlaPolicyScalarFieldEnum = (typeof SlaPolicyScalarFieldEnum)[keyof typeof SlaPolicyScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -4685,6 +8609,20 @@ export namespace Prisma {
    * Reference to a field of type 'String[]'
    */
   export type ListStringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'String[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'UserRole'
+   */
+  export type EnumUserRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'UserRole'>
+    
+
+
+  /**
+   * Reference to a field of type 'UserRole[]'
+   */
+  export type ListEnumUserRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'UserRole[]'>
     
 
 
@@ -4745,6 +8683,13 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'Boolean'
+   */
+  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
+    
+
+
+  /**
    * Reference to a field of type 'Float'
    */
   export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
@@ -4769,7 +8714,14 @@ export namespace Prisma {
     name?: StringFilter<"User"> | string
     email?: StringFilter<"User"> | string
     password?: StringFilter<"User"> | string
-    role?: StringFilter<"User"> | string
+    phone?: StringFilter<"User"> | string
+    avatarUrl?: StringNullableFilter<"User"> | string | null
+    role?: EnumUserRoleFilter<"User"> | $Enums.UserRole
+    position?: StringFilter<"User"> | string
+    departmentId?: StringNullableFilter<"User"> | string | null
+    officeId?: StringNullableFilter<"User"> | string | null
+    department?: XOR<DepartmentNullableScalarRelationFilter, DepartmentWhereInput> | null
+    office?: XOR<OfficeNullableScalarRelationFilter, OfficeWhereInput> | null
     openedTickets?: TicketListRelationFilter
     assignedTickets?: TicketListRelationFilter
     messages?: MessageListRelationFilter
@@ -4780,7 +8732,14 @@ export namespace Prisma {
     name?: SortOrder
     email?: SortOrder
     password?: SortOrder
+    phone?: SortOrder
+    avatarUrl?: SortOrderInput | SortOrder
     role?: SortOrder
+    position?: SortOrder
+    departmentId?: SortOrderInput | SortOrder
+    officeId?: SortOrderInput | SortOrder
+    department?: DepartmentOrderByWithRelationInput
+    office?: OfficeOrderByWithRelationInput
     openedTickets?: TicketOrderByRelationAggregateInput
     assignedTickets?: TicketOrderByRelationAggregateInput
     messages?: MessageOrderByRelationAggregateInput
@@ -4794,7 +8753,14 @@ export namespace Prisma {
     NOT?: UserWhereInput | UserWhereInput[]
     name?: StringFilter<"User"> | string
     password?: StringFilter<"User"> | string
-    role?: StringFilter<"User"> | string
+    phone?: StringFilter<"User"> | string
+    avatarUrl?: StringNullableFilter<"User"> | string | null
+    role?: EnumUserRoleFilter<"User"> | $Enums.UserRole
+    position?: StringFilter<"User"> | string
+    departmentId?: StringNullableFilter<"User"> | string | null
+    officeId?: StringNullableFilter<"User"> | string | null
+    department?: XOR<DepartmentNullableScalarRelationFilter, DepartmentWhereInput> | null
+    office?: XOR<OfficeNullableScalarRelationFilter, OfficeWhereInput> | null
     openedTickets?: TicketListRelationFilter
     assignedTickets?: TicketListRelationFilter
     messages?: MessageListRelationFilter
@@ -4805,7 +8771,12 @@ export namespace Prisma {
     name?: SortOrder
     email?: SortOrder
     password?: SortOrder
+    phone?: SortOrder
+    avatarUrl?: SortOrderInput | SortOrder
     role?: SortOrder
+    position?: SortOrder
+    departmentId?: SortOrderInput | SortOrder
+    officeId?: SortOrderInput | SortOrder
     _count?: UserCountOrderByAggregateInput
     _max?: UserMaxOrderByAggregateInput
     _min?: UserMinOrderByAggregateInput
@@ -4819,7 +8790,57 @@ export namespace Prisma {
     name?: StringWithAggregatesFilter<"User"> | string
     email?: StringWithAggregatesFilter<"User"> | string
     password?: StringWithAggregatesFilter<"User"> | string
-    role?: StringWithAggregatesFilter<"User"> | string
+    phone?: StringWithAggregatesFilter<"User"> | string
+    avatarUrl?: StringNullableWithAggregatesFilter<"User"> | string | null
+    role?: EnumUserRoleWithAggregatesFilter<"User"> | $Enums.UserRole
+    position?: StringWithAggregatesFilter<"User"> | string
+    departmentId?: StringNullableWithAggregatesFilter<"User"> | string | null
+    officeId?: StringNullableWithAggregatesFilter<"User"> | string | null
+  }
+
+  export type OfficeWhereInput = {
+    AND?: OfficeWhereInput | OfficeWhereInput[]
+    OR?: OfficeWhereInput[]
+    NOT?: OfficeWhereInput | OfficeWhereInput[]
+    id?: StringFilter<"Office"> | string
+    name?: StringFilter<"Office"> | string
+    timeZone?: StringFilter<"Office"> | string
+    users?: UserListRelationFilter
+  }
+
+  export type OfficeOrderByWithRelationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    timeZone?: SortOrder
+    users?: UserOrderByRelationAggregateInput
+  }
+
+  export type OfficeWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: OfficeWhereInput | OfficeWhereInput[]
+    OR?: OfficeWhereInput[]
+    NOT?: OfficeWhereInput | OfficeWhereInput[]
+    name?: StringFilter<"Office"> | string
+    timeZone?: StringFilter<"Office"> | string
+    users?: UserListRelationFilter
+  }, "id">
+
+  export type OfficeOrderByWithAggregationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    timeZone?: SortOrder
+    _count?: OfficeCountOrderByAggregateInput
+    _max?: OfficeMaxOrderByAggregateInput
+    _min?: OfficeMinOrderByAggregateInput
+  }
+
+  export type OfficeScalarWhereWithAggregatesInput = {
+    AND?: OfficeScalarWhereWithAggregatesInput | OfficeScalarWhereWithAggregatesInput[]
+    OR?: OfficeScalarWhereWithAggregatesInput[]
+    NOT?: OfficeScalarWhereWithAggregatesInput | OfficeScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Office"> | string
+    name?: StringWithAggregatesFilter<"Office"> | string
+    timeZone?: StringWithAggregatesFilter<"Office"> | string
   }
 
   export type TicketWhereInput = {
@@ -4833,12 +8854,21 @@ export namespace Prisma {
     priority?: EnumTicketPriorityFilter<"Ticket"> | $Enums.TicketPriority
     category?: StringFilter<"Ticket"> | string
     description?: StringFilter<"Ticket"> | string
+    departmentId?: StringFilter<"Ticket"> | string
     createdAt?: DateTimeFilter<"Ticket"> | Date | string
     updatedAt?: DateTimeFilter<"Ticket"> | Date | string
+    deletedAt?: DateTimeNullableFilter<"Ticket"> | Date | string | null
+    resolvedAt?: DateTimeNullableFilter<"Ticket"> | Date | string | null
+    closedAt?: DateTimeNullableFilter<"Ticket"> | Date | string | null
     requesterId?: StringFilter<"Ticket"> | string
+    slaPolicyId?: StringNullableFilter<"Ticket"> | string | null
+    responseDueAt?: DateTimeNullableFilter<"Ticket"> | Date | string | null
+    resolutionDueAt?: DateTimeNullableFilter<"Ticket"> | Date | string | null
     agentId?: StringNullableFilter<"Ticket"> | string | null
+    department?: XOR<DepartmentScalarRelationFilter, DepartmentWhereInput>
     messages?: MessageListRelationFilter
     requester?: XOR<UserScalarRelationFilter, UserWhereInput>
+    slaPolicy?: XOR<SlaPolicyNullableScalarRelationFilter, SlaPolicyWhereInput> | null
     agent?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
   }
 
@@ -4850,12 +8880,21 @@ export namespace Prisma {
     priority?: SortOrder
     category?: SortOrder
     description?: SortOrder
+    departmentId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    deletedAt?: SortOrderInput | SortOrder
+    resolvedAt?: SortOrderInput | SortOrder
+    closedAt?: SortOrderInput | SortOrder
     requesterId?: SortOrder
+    slaPolicyId?: SortOrderInput | SortOrder
+    responseDueAt?: SortOrderInput | SortOrder
+    resolutionDueAt?: SortOrderInput | SortOrder
     agentId?: SortOrderInput | SortOrder
+    department?: DepartmentOrderByWithRelationInput
     messages?: MessageOrderByRelationAggregateInput
     requester?: UserOrderByWithRelationInput
+    slaPolicy?: SlaPolicyOrderByWithRelationInput
     agent?: UserOrderByWithRelationInput
   }
 
@@ -4870,12 +8909,21 @@ export namespace Prisma {
     priority?: EnumTicketPriorityFilter<"Ticket"> | $Enums.TicketPriority
     category?: StringFilter<"Ticket"> | string
     description?: StringFilter<"Ticket"> | string
+    departmentId?: StringFilter<"Ticket"> | string
     createdAt?: DateTimeFilter<"Ticket"> | Date | string
     updatedAt?: DateTimeFilter<"Ticket"> | Date | string
+    deletedAt?: DateTimeNullableFilter<"Ticket"> | Date | string | null
+    resolvedAt?: DateTimeNullableFilter<"Ticket"> | Date | string | null
+    closedAt?: DateTimeNullableFilter<"Ticket"> | Date | string | null
     requesterId?: StringFilter<"Ticket"> | string
+    slaPolicyId?: StringNullableFilter<"Ticket"> | string | null
+    responseDueAt?: DateTimeNullableFilter<"Ticket"> | Date | string | null
+    resolutionDueAt?: DateTimeNullableFilter<"Ticket"> | Date | string | null
     agentId?: StringNullableFilter<"Ticket"> | string | null
+    department?: XOR<DepartmentScalarRelationFilter, DepartmentWhereInput>
     messages?: MessageListRelationFilter
     requester?: XOR<UserScalarRelationFilter, UserWhereInput>
+    slaPolicy?: XOR<SlaPolicyNullableScalarRelationFilter, SlaPolicyWhereInput> | null
     agent?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
   }, "id" | "ticketNum">
 
@@ -4887,9 +8935,16 @@ export namespace Prisma {
     priority?: SortOrder
     category?: SortOrder
     description?: SortOrder
+    departmentId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    deletedAt?: SortOrderInput | SortOrder
+    resolvedAt?: SortOrderInput | SortOrder
+    closedAt?: SortOrderInput | SortOrder
     requesterId?: SortOrder
+    slaPolicyId?: SortOrderInput | SortOrder
+    responseDueAt?: SortOrderInput | SortOrder
+    resolutionDueAt?: SortOrderInput | SortOrder
     agentId?: SortOrderInput | SortOrder
     _count?: TicketCountOrderByAggregateInput
     _avg?: TicketAvgOrderByAggregateInput
@@ -4909,10 +8964,60 @@ export namespace Prisma {
     priority?: EnumTicketPriorityWithAggregatesFilter<"Ticket"> | $Enums.TicketPriority
     category?: StringWithAggregatesFilter<"Ticket"> | string
     description?: StringWithAggregatesFilter<"Ticket"> | string
+    departmentId?: StringWithAggregatesFilter<"Ticket"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Ticket"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Ticket"> | Date | string
+    deletedAt?: DateTimeNullableWithAggregatesFilter<"Ticket"> | Date | string | null
+    resolvedAt?: DateTimeNullableWithAggregatesFilter<"Ticket"> | Date | string | null
+    closedAt?: DateTimeNullableWithAggregatesFilter<"Ticket"> | Date | string | null
     requesterId?: StringWithAggregatesFilter<"Ticket"> | string
+    slaPolicyId?: StringNullableWithAggregatesFilter<"Ticket"> | string | null
+    responseDueAt?: DateTimeNullableWithAggregatesFilter<"Ticket"> | Date | string | null
+    resolutionDueAt?: DateTimeNullableWithAggregatesFilter<"Ticket"> | Date | string | null
     agentId?: StringNullableWithAggregatesFilter<"Ticket"> | string | null
+  }
+
+  export type DepartmentWhereInput = {
+    AND?: DepartmentWhereInput | DepartmentWhereInput[]
+    OR?: DepartmentWhereInput[]
+    NOT?: DepartmentWhereInput | DepartmentWhereInput[]
+    id?: StringFilter<"Department"> | string
+    name?: StringFilter<"Department"> | string
+    users?: UserListRelationFilter
+    tickets?: TicketListRelationFilter
+  }
+
+  export type DepartmentOrderByWithRelationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    users?: UserOrderByRelationAggregateInput
+    tickets?: TicketOrderByRelationAggregateInput
+  }
+
+  export type DepartmentWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: DepartmentWhereInput | DepartmentWhereInput[]
+    OR?: DepartmentWhereInput[]
+    NOT?: DepartmentWhereInput | DepartmentWhereInput[]
+    name?: StringFilter<"Department"> | string
+    users?: UserListRelationFilter
+    tickets?: TicketListRelationFilter
+  }, "id">
+
+  export type DepartmentOrderByWithAggregationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    _count?: DepartmentCountOrderByAggregateInput
+    _max?: DepartmentMaxOrderByAggregateInput
+    _min?: DepartmentMinOrderByAggregateInput
+  }
+
+  export type DepartmentScalarWhereWithAggregatesInput = {
+    AND?: DepartmentScalarWhereWithAggregatesInput | DepartmentScalarWhereWithAggregatesInput[]
+    OR?: DepartmentScalarWhereWithAggregatesInput[]
+    NOT?: DepartmentScalarWhereWithAggregatesInput | DepartmentScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Department"> | string
+    name?: StringWithAggregatesFilter<"Department"> | string
   }
 
   export type MessageWhereInput = {
@@ -4973,12 +9078,79 @@ export namespace Prisma {
     userId?: StringWithAggregatesFilter<"Message"> | string
   }
 
+  export type SlaPolicyWhereInput = {
+    AND?: SlaPolicyWhereInput | SlaPolicyWhereInput[]
+    OR?: SlaPolicyWhereInput[]
+    NOT?: SlaPolicyWhereInput | SlaPolicyWhereInput[]
+    id?: StringFilter<"SlaPolicy"> | string
+    name?: StringFilter<"SlaPolicy"> | string
+    priority?: EnumTicketPriorityFilter<"SlaPolicy"> | $Enums.TicketPriority
+    responseTimeMin?: IntFilter<"SlaPolicy"> | number
+    resolutionTimeMin?: IntFilter<"SlaPolicy"> | number
+    is24x7?: BoolFilter<"SlaPolicy"> | boolean
+    tickets?: TicketListRelationFilter
+  }
+
+  export type SlaPolicyOrderByWithRelationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    priority?: SortOrder
+    responseTimeMin?: SortOrder
+    resolutionTimeMin?: SortOrder
+    is24x7?: SortOrder
+    tickets?: TicketOrderByRelationAggregateInput
+  }
+
+  export type SlaPolicyWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: SlaPolicyWhereInput | SlaPolicyWhereInput[]
+    OR?: SlaPolicyWhereInput[]
+    NOT?: SlaPolicyWhereInput | SlaPolicyWhereInput[]
+    name?: StringFilter<"SlaPolicy"> | string
+    priority?: EnumTicketPriorityFilter<"SlaPolicy"> | $Enums.TicketPriority
+    responseTimeMin?: IntFilter<"SlaPolicy"> | number
+    resolutionTimeMin?: IntFilter<"SlaPolicy"> | number
+    is24x7?: BoolFilter<"SlaPolicy"> | boolean
+    tickets?: TicketListRelationFilter
+  }, "id">
+
+  export type SlaPolicyOrderByWithAggregationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    priority?: SortOrder
+    responseTimeMin?: SortOrder
+    resolutionTimeMin?: SortOrder
+    is24x7?: SortOrder
+    _count?: SlaPolicyCountOrderByAggregateInput
+    _avg?: SlaPolicyAvgOrderByAggregateInput
+    _max?: SlaPolicyMaxOrderByAggregateInput
+    _min?: SlaPolicyMinOrderByAggregateInput
+    _sum?: SlaPolicySumOrderByAggregateInput
+  }
+
+  export type SlaPolicyScalarWhereWithAggregatesInput = {
+    AND?: SlaPolicyScalarWhereWithAggregatesInput | SlaPolicyScalarWhereWithAggregatesInput[]
+    OR?: SlaPolicyScalarWhereWithAggregatesInput[]
+    NOT?: SlaPolicyScalarWhereWithAggregatesInput | SlaPolicyScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"SlaPolicy"> | string
+    name?: StringWithAggregatesFilter<"SlaPolicy"> | string
+    priority?: EnumTicketPriorityWithAggregatesFilter<"SlaPolicy"> | $Enums.TicketPriority
+    responseTimeMin?: IntWithAggregatesFilter<"SlaPolicy"> | number
+    resolutionTimeMin?: IntWithAggregatesFilter<"SlaPolicy"> | number
+    is24x7?: BoolWithAggregatesFilter<"SlaPolicy"> | boolean
+  }
+
   export type UserCreateInput = {
     id?: string
     name: string
     email: string
     password: string
-    role?: string
+    phone: string
+    avatarUrl?: string | null
+    role?: $Enums.UserRole
+    position?: string
+    department?: DepartmentCreateNestedOneWithoutUsersInput
+    office?: OfficeCreateNestedOneWithoutUsersInput
     openedTickets?: TicketCreateNestedManyWithoutRequesterInput
     assignedTickets?: TicketCreateNestedManyWithoutAgentInput
     messages?: MessageCreateNestedManyWithoutUserInput
@@ -4989,7 +9161,12 @@ export namespace Prisma {
     name: string
     email: string
     password: string
-    role?: string
+    phone: string
+    avatarUrl?: string | null
+    role?: $Enums.UserRole
+    position?: string
+    departmentId?: string | null
+    officeId?: string | null
     openedTickets?: TicketUncheckedCreateNestedManyWithoutRequesterInput
     assignedTickets?: TicketUncheckedCreateNestedManyWithoutAgentInput
     messages?: MessageUncheckedCreateNestedManyWithoutUserInput
@@ -5000,7 +9177,12 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
-    role?: StringFieldUpdateOperationsInput | string
+    phone?: StringFieldUpdateOperationsInput | string
+    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    position?: StringFieldUpdateOperationsInput | string
+    department?: DepartmentUpdateOneWithoutUsersNestedInput
+    office?: OfficeUpdateOneWithoutUsersNestedInput
     openedTickets?: TicketUpdateManyWithoutRequesterNestedInput
     assignedTickets?: TicketUpdateManyWithoutAgentNestedInput
     messages?: MessageUpdateManyWithoutUserNestedInput
@@ -5011,7 +9193,12 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
-    role?: StringFieldUpdateOperationsInput | string
+    phone?: StringFieldUpdateOperationsInput | string
+    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    position?: StringFieldUpdateOperationsInput | string
+    departmentId?: NullableStringFieldUpdateOperationsInput | string | null
+    officeId?: NullableStringFieldUpdateOperationsInput | string | null
     openedTickets?: TicketUncheckedUpdateManyWithoutRequesterNestedInput
     assignedTickets?: TicketUncheckedUpdateManyWithoutAgentNestedInput
     messages?: MessageUncheckedUpdateManyWithoutUserNestedInput
@@ -5022,7 +9209,12 @@ export namespace Prisma {
     name: string
     email: string
     password: string
-    role?: string
+    phone: string
+    avatarUrl?: string | null
+    role?: $Enums.UserRole
+    position?: string
+    departmentId?: string | null
+    officeId?: string | null
   }
 
   export type UserUpdateManyMutationInput = {
@@ -5030,7 +9222,10 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
-    role?: StringFieldUpdateOperationsInput | string
+    phone?: StringFieldUpdateOperationsInput | string
+    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    position?: StringFieldUpdateOperationsInput | string
   }
 
   export type UserUncheckedUpdateManyInput = {
@@ -5038,7 +9233,58 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
-    role?: StringFieldUpdateOperationsInput | string
+    phone?: StringFieldUpdateOperationsInput | string
+    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    position?: StringFieldUpdateOperationsInput | string
+    departmentId?: NullableStringFieldUpdateOperationsInput | string | null
+    officeId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type OfficeCreateInput = {
+    id?: string
+    name: string
+    timeZone: string
+    users?: UserCreateNestedManyWithoutOfficeInput
+  }
+
+  export type OfficeUncheckedCreateInput = {
+    id?: string
+    name: string
+    timeZone: string
+    users?: UserUncheckedCreateNestedManyWithoutOfficeInput
+  }
+
+  export type OfficeUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    timeZone?: StringFieldUpdateOperationsInput | string
+    users?: UserUpdateManyWithoutOfficeNestedInput
+  }
+
+  export type OfficeUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    timeZone?: StringFieldUpdateOperationsInput | string
+    users?: UserUncheckedUpdateManyWithoutOfficeNestedInput
+  }
+
+  export type OfficeCreateManyInput = {
+    id?: string
+    name: string
+    timeZone: string
+  }
+
+  export type OfficeUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    timeZone?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type OfficeUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    timeZone?: StringFieldUpdateOperationsInput | string
   }
 
   export type TicketCreateInput = {
@@ -5051,8 +9297,15 @@ export namespace Prisma {
     description?: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
+    resolvedAt?: Date | string | null
+    closedAt?: Date | string | null
+    responseDueAt?: Date | string | null
+    resolutionDueAt?: Date | string | null
+    department: DepartmentCreateNestedOneWithoutTicketsInput
     messages?: MessageCreateNestedManyWithoutTicketInput
     requester: UserCreateNestedOneWithoutOpenedTicketsInput
+    slaPolicy?: SlaPolicyCreateNestedOneWithoutTicketsInput
     agent?: UserCreateNestedOneWithoutAssignedTicketsInput
   }
 
@@ -5064,9 +9317,16 @@ export namespace Prisma {
     priority?: $Enums.TicketPriority
     category?: string
     description?: string
+    departmentId: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
+    resolvedAt?: Date | string | null
+    closedAt?: Date | string | null
     requesterId: string
+    slaPolicyId?: string | null
+    responseDueAt?: Date | string | null
+    resolutionDueAt?: Date | string | null
     agentId?: string | null
     messages?: MessageUncheckedCreateNestedManyWithoutTicketInput
   }
@@ -5080,8 +9340,15 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    resolvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    responseDueAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    resolutionDueAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    department?: DepartmentUpdateOneRequiredWithoutTicketsNestedInput
     messages?: MessageUpdateManyWithoutTicketNestedInput
     requester?: UserUpdateOneRequiredWithoutOpenedTicketsNestedInput
+    slaPolicy?: SlaPolicyUpdateOneWithoutTicketsNestedInput
     agent?: UserUpdateOneWithoutAssignedTicketsNestedInput
   }
 
@@ -5093,9 +9360,16 @@ export namespace Prisma {
     priority?: EnumTicketPriorityFieldUpdateOperationsInput | $Enums.TicketPriority
     category?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
+    departmentId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    resolvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     requesterId?: StringFieldUpdateOperationsInput | string
+    slaPolicyId?: NullableStringFieldUpdateOperationsInput | string | null
+    responseDueAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    resolutionDueAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     agentId?: NullableStringFieldUpdateOperationsInput | string | null
     messages?: MessageUncheckedUpdateManyWithoutTicketNestedInput
   }
@@ -5108,9 +9382,16 @@ export namespace Prisma {
     priority?: $Enums.TicketPriority
     category?: string
     description?: string
+    departmentId: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
+    resolvedAt?: Date | string | null
+    closedAt?: Date | string | null
     requesterId: string
+    slaPolicyId?: string | null
+    responseDueAt?: Date | string | null
+    resolutionDueAt?: Date | string | null
     agentId?: string | null
   }
 
@@ -5123,6 +9404,11 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    resolvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    responseDueAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    resolutionDueAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type TicketUncheckedUpdateManyInput = {
@@ -5133,10 +9419,60 @@ export namespace Prisma {
     priority?: EnumTicketPriorityFieldUpdateOperationsInput | $Enums.TicketPriority
     category?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
+    departmentId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    resolvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     requesterId?: StringFieldUpdateOperationsInput | string
+    slaPolicyId?: NullableStringFieldUpdateOperationsInput | string | null
+    responseDueAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    resolutionDueAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     agentId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type DepartmentCreateInput = {
+    id?: string
+    name: string
+    users?: UserCreateNestedManyWithoutDepartmentInput
+    tickets?: TicketCreateNestedManyWithoutDepartmentInput
+  }
+
+  export type DepartmentUncheckedCreateInput = {
+    id?: string
+    name: string
+    users?: UserUncheckedCreateNestedManyWithoutDepartmentInput
+    tickets?: TicketUncheckedCreateNestedManyWithoutDepartmentInput
+  }
+
+  export type DepartmentUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    users?: UserUpdateManyWithoutDepartmentNestedInput
+    tickets?: TicketUpdateManyWithoutDepartmentNestedInput
+  }
+
+  export type DepartmentUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    users?: UserUncheckedUpdateManyWithoutDepartmentNestedInput
+    tickets?: TicketUncheckedUpdateManyWithoutDepartmentNestedInput
+  }
+
+  export type DepartmentCreateManyInput = {
+    id?: string
+    name: string
+  }
+
+  export type DepartmentUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type DepartmentUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
   }
 
   export type MessageCreateInput = {
@@ -5193,6 +9529,73 @@ export namespace Prisma {
     userId?: StringFieldUpdateOperationsInput | string
   }
 
+  export type SlaPolicyCreateInput = {
+    id?: string
+    name: string
+    priority: $Enums.TicketPriority
+    responseTimeMin: number
+    resolutionTimeMin: number
+    is24x7?: boolean
+    tickets?: TicketCreateNestedManyWithoutSlaPolicyInput
+  }
+
+  export type SlaPolicyUncheckedCreateInput = {
+    id?: string
+    name: string
+    priority: $Enums.TicketPriority
+    responseTimeMin: number
+    resolutionTimeMin: number
+    is24x7?: boolean
+    tickets?: TicketUncheckedCreateNestedManyWithoutSlaPolicyInput
+  }
+
+  export type SlaPolicyUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    priority?: EnumTicketPriorityFieldUpdateOperationsInput | $Enums.TicketPriority
+    responseTimeMin?: IntFieldUpdateOperationsInput | number
+    resolutionTimeMin?: IntFieldUpdateOperationsInput | number
+    is24x7?: BoolFieldUpdateOperationsInput | boolean
+    tickets?: TicketUpdateManyWithoutSlaPolicyNestedInput
+  }
+
+  export type SlaPolicyUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    priority?: EnumTicketPriorityFieldUpdateOperationsInput | $Enums.TicketPriority
+    responseTimeMin?: IntFieldUpdateOperationsInput | number
+    resolutionTimeMin?: IntFieldUpdateOperationsInput | number
+    is24x7?: BoolFieldUpdateOperationsInput | boolean
+    tickets?: TicketUncheckedUpdateManyWithoutSlaPolicyNestedInput
+  }
+
+  export type SlaPolicyCreateManyInput = {
+    id?: string
+    name: string
+    priority: $Enums.TicketPriority
+    responseTimeMin: number
+    resolutionTimeMin: number
+    is24x7?: boolean
+  }
+
+  export type SlaPolicyUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    priority?: EnumTicketPriorityFieldUpdateOperationsInput | $Enums.TicketPriority
+    responseTimeMin?: IntFieldUpdateOperationsInput | number
+    resolutionTimeMin?: IntFieldUpdateOperationsInput | number
+    is24x7?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type SlaPolicyUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    priority?: EnumTicketPriorityFieldUpdateOperationsInput | $Enums.TicketPriority
+    responseTimeMin?: IntFieldUpdateOperationsInput | number
+    resolutionTimeMin?: IntFieldUpdateOperationsInput | number
+    is24x7?: BoolFieldUpdateOperationsInput | boolean
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -5208,6 +9611,38 @@ export namespace Prisma {
     not?: NestedStringFilter<$PrismaModel> | string
   }
 
+  export type StringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
+  export type EnumUserRoleFilter<$PrismaModel = never> = {
+    equals?: $Enums.UserRole | EnumUserRoleFieldRefInput<$PrismaModel>
+    in?: $Enums.UserRole[] | ListEnumUserRoleFieldRefInput<$PrismaModel>
+    notIn?: $Enums.UserRole[] | ListEnumUserRoleFieldRefInput<$PrismaModel>
+    not?: NestedEnumUserRoleFilter<$PrismaModel> | $Enums.UserRole
+  }
+
+  export type DepartmentNullableScalarRelationFilter = {
+    is?: DepartmentWhereInput | null
+    isNot?: DepartmentWhereInput | null
+  }
+
+  export type OfficeNullableScalarRelationFilter = {
+    is?: OfficeWhereInput | null
+    isNot?: OfficeWhereInput | null
+  }
+
   export type TicketListRelationFilter = {
     every?: TicketWhereInput
     some?: TicketWhereInput
@@ -5218,6 +9653,11 @@ export namespace Prisma {
     every?: MessageWhereInput
     some?: MessageWhereInput
     none?: MessageWhereInput
+  }
+
+  export type SortOrderInput = {
+    sort: SortOrder
+    nulls?: NullsOrder
   }
 
   export type TicketOrderByRelationAggregateInput = {
@@ -5233,7 +9673,12 @@ export namespace Prisma {
     name?: SortOrder
     email?: SortOrder
     password?: SortOrder
+    phone?: SortOrder
+    avatarUrl?: SortOrder
     role?: SortOrder
+    position?: SortOrder
+    departmentId?: SortOrder
+    officeId?: SortOrder
   }
 
   export type UserMaxOrderByAggregateInput = {
@@ -5241,7 +9686,12 @@ export namespace Prisma {
     name?: SortOrder
     email?: SortOrder
     password?: SortOrder
+    phone?: SortOrder
+    avatarUrl?: SortOrder
     role?: SortOrder
+    position?: SortOrder
+    departmentId?: SortOrder
+    officeId?: SortOrder
   }
 
   export type UserMinOrderByAggregateInput = {
@@ -5249,7 +9699,12 @@ export namespace Prisma {
     name?: SortOrder
     email?: SortOrder
     password?: SortOrder
+    phone?: SortOrder
+    avatarUrl?: SortOrder
     role?: SortOrder
+    position?: SortOrder
+    departmentId?: SortOrder
+    officeId?: SortOrder
   }
 
   export type StringWithAggregatesFilter<$PrismaModel = never> = {
@@ -5268,6 +9723,62 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedStringFilter<$PrismaModel>
     _max?: NestedStringFilter<$PrismaModel>
+  }
+
+  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
+  export type EnumUserRoleWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.UserRole | EnumUserRoleFieldRefInput<$PrismaModel>
+    in?: $Enums.UserRole[] | ListEnumUserRoleFieldRefInput<$PrismaModel>
+    notIn?: $Enums.UserRole[] | ListEnumUserRoleFieldRefInput<$PrismaModel>
+    not?: NestedEnumUserRoleWithAggregatesFilter<$PrismaModel> | $Enums.UserRole
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumUserRoleFilter<$PrismaModel>
+    _max?: NestedEnumUserRoleFilter<$PrismaModel>
+  }
+
+  export type UserListRelationFilter = {
+    every?: UserWhereInput
+    some?: UserWhereInput
+    none?: UserWhereInput
+  }
+
+  export type UserOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type OfficeCountOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    timeZone?: SortOrder
+  }
+
+  export type OfficeMaxOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    timeZone?: SortOrder
+  }
+
+  export type OfficeMinOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    timeZone?: SortOrder
   }
 
   export type IntFilter<$PrismaModel = never> = {
@@ -5306,19 +9817,20 @@ export namespace Prisma {
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
-  export type StringNullableFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    mode?: QueryMode
-    not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  export type DateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  }
+
+  export type DepartmentScalarRelationFilter = {
+    is?: DepartmentWhereInput
+    isNot?: DepartmentWhereInput
   }
 
   export type UserScalarRelationFilter = {
@@ -5326,14 +9838,14 @@ export namespace Prisma {
     isNot?: UserWhereInput
   }
 
+  export type SlaPolicyNullableScalarRelationFilter = {
+    is?: SlaPolicyWhereInput | null
+    isNot?: SlaPolicyWhereInput | null
+  }
+
   export type UserNullableScalarRelationFilter = {
     is?: UserWhereInput | null
     isNot?: UserWhereInput | null
-  }
-
-  export type SortOrderInput = {
-    sort: SortOrder
-    nulls?: NullsOrder
   }
 
   export type TicketCountOrderByAggregateInput = {
@@ -5344,9 +9856,16 @@ export namespace Prisma {
     priority?: SortOrder
     category?: SortOrder
     description?: SortOrder
+    departmentId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    deletedAt?: SortOrder
+    resolvedAt?: SortOrder
+    closedAt?: SortOrder
     requesterId?: SortOrder
+    slaPolicyId?: SortOrder
+    responseDueAt?: SortOrder
+    resolutionDueAt?: SortOrder
     agentId?: SortOrder
   }
 
@@ -5362,9 +9881,16 @@ export namespace Prisma {
     priority?: SortOrder
     category?: SortOrder
     description?: SortOrder
+    departmentId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    deletedAt?: SortOrder
+    resolvedAt?: SortOrder
+    closedAt?: SortOrder
     requesterId?: SortOrder
+    slaPolicyId?: SortOrder
+    responseDueAt?: SortOrder
+    resolutionDueAt?: SortOrder
     agentId?: SortOrder
   }
 
@@ -5376,9 +9902,16 @@ export namespace Prisma {
     priority?: SortOrder
     category?: SortOrder
     description?: SortOrder
+    departmentId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    deletedAt?: SortOrder
+    resolvedAt?: SortOrder
+    closedAt?: SortOrder
     requesterId?: SortOrder
+    slaPolicyId?: SortOrder
+    responseDueAt?: SortOrder
+    resolutionDueAt?: SortOrder
     agentId?: SortOrder
   }
 
@@ -5436,22 +9969,33 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
-  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    mode?: QueryMode
-    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+  export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
     _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedStringNullableFilter<$PrismaModel>
-    _max?: NestedStringNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+
+  export type DepartmentCountOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+  }
+
+  export type DepartmentMaxOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+  }
+
+  export type DepartmentMinOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
   }
 
   export type TicketScalarRelationFilter = {
@@ -5481,6 +10025,68 @@ export namespace Prisma {
     createdAt?: SortOrder
     ticketId?: SortOrder
     userId?: SortOrder
+  }
+
+  export type BoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
+  export type SlaPolicyCountOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    priority?: SortOrder
+    responseTimeMin?: SortOrder
+    resolutionTimeMin?: SortOrder
+    is24x7?: SortOrder
+  }
+
+  export type SlaPolicyAvgOrderByAggregateInput = {
+    responseTimeMin?: SortOrder
+    resolutionTimeMin?: SortOrder
+  }
+
+  export type SlaPolicyMaxOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    priority?: SortOrder
+    responseTimeMin?: SortOrder
+    resolutionTimeMin?: SortOrder
+    is24x7?: SortOrder
+  }
+
+  export type SlaPolicyMinOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    priority?: SortOrder
+    responseTimeMin?: SortOrder
+    resolutionTimeMin?: SortOrder
+    is24x7?: SortOrder
+  }
+
+  export type SlaPolicySumOrderByAggregateInput = {
+    responseTimeMin?: SortOrder
+    resolutionTimeMin?: SortOrder
+  }
+
+  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
+  }
+
+  export type DepartmentCreateNestedOneWithoutUsersInput = {
+    create?: XOR<DepartmentCreateWithoutUsersInput, DepartmentUncheckedCreateWithoutUsersInput>
+    connectOrCreate?: DepartmentCreateOrConnectWithoutUsersInput
+    connect?: DepartmentWhereUniqueInput
+  }
+
+  export type OfficeCreateNestedOneWithoutUsersInput = {
+    create?: XOR<OfficeCreateWithoutUsersInput, OfficeUncheckedCreateWithoutUsersInput>
+    connectOrCreate?: OfficeCreateOrConnectWithoutUsersInput
+    connect?: OfficeWhereUniqueInput
   }
 
   export type TicketCreateNestedManyWithoutRequesterInput = {
@@ -5527,6 +10133,34 @@ export namespace Prisma {
 
   export type StringFieldUpdateOperationsInput = {
     set?: string
+  }
+
+  export type NullableStringFieldUpdateOperationsInput = {
+    set?: string | null
+  }
+
+  export type EnumUserRoleFieldUpdateOperationsInput = {
+    set?: $Enums.UserRole
+  }
+
+  export type DepartmentUpdateOneWithoutUsersNestedInput = {
+    create?: XOR<DepartmentCreateWithoutUsersInput, DepartmentUncheckedCreateWithoutUsersInput>
+    connectOrCreate?: DepartmentCreateOrConnectWithoutUsersInput
+    upsert?: DepartmentUpsertWithoutUsersInput
+    disconnect?: DepartmentWhereInput | boolean
+    delete?: DepartmentWhereInput | boolean
+    connect?: DepartmentWhereUniqueInput
+    update?: XOR<XOR<DepartmentUpdateToOneWithWhereWithoutUsersInput, DepartmentUpdateWithoutUsersInput>, DepartmentUncheckedUpdateWithoutUsersInput>
+  }
+
+  export type OfficeUpdateOneWithoutUsersNestedInput = {
+    create?: XOR<OfficeCreateWithoutUsersInput, OfficeUncheckedCreateWithoutUsersInput>
+    connectOrCreate?: OfficeCreateOrConnectWithoutUsersInput
+    upsert?: OfficeUpsertWithoutUsersInput
+    disconnect?: OfficeWhereInput | boolean
+    delete?: OfficeWhereInput | boolean
+    connect?: OfficeWhereUniqueInput
+    update?: XOR<XOR<OfficeUpdateToOneWithWhereWithoutUsersInput, OfficeUpdateWithoutUsersInput>, OfficeUncheckedUpdateWithoutUsersInput>
   }
 
   export type TicketUpdateManyWithoutRequesterNestedInput = {
@@ -5613,6 +10247,54 @@ export namespace Prisma {
     deleteMany?: MessageScalarWhereInput | MessageScalarWhereInput[]
   }
 
+  export type UserCreateNestedManyWithoutOfficeInput = {
+    create?: XOR<UserCreateWithoutOfficeInput, UserUncheckedCreateWithoutOfficeInput> | UserCreateWithoutOfficeInput[] | UserUncheckedCreateWithoutOfficeInput[]
+    connectOrCreate?: UserCreateOrConnectWithoutOfficeInput | UserCreateOrConnectWithoutOfficeInput[]
+    createMany?: UserCreateManyOfficeInputEnvelope
+    connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+  }
+
+  export type UserUncheckedCreateNestedManyWithoutOfficeInput = {
+    create?: XOR<UserCreateWithoutOfficeInput, UserUncheckedCreateWithoutOfficeInput> | UserCreateWithoutOfficeInput[] | UserUncheckedCreateWithoutOfficeInput[]
+    connectOrCreate?: UserCreateOrConnectWithoutOfficeInput | UserCreateOrConnectWithoutOfficeInput[]
+    createMany?: UserCreateManyOfficeInputEnvelope
+    connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+  }
+
+  export type UserUpdateManyWithoutOfficeNestedInput = {
+    create?: XOR<UserCreateWithoutOfficeInput, UserUncheckedCreateWithoutOfficeInput> | UserCreateWithoutOfficeInput[] | UserUncheckedCreateWithoutOfficeInput[]
+    connectOrCreate?: UserCreateOrConnectWithoutOfficeInput | UserCreateOrConnectWithoutOfficeInput[]
+    upsert?: UserUpsertWithWhereUniqueWithoutOfficeInput | UserUpsertWithWhereUniqueWithoutOfficeInput[]
+    createMany?: UserCreateManyOfficeInputEnvelope
+    set?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    disconnect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    delete?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    update?: UserUpdateWithWhereUniqueWithoutOfficeInput | UserUpdateWithWhereUniqueWithoutOfficeInput[]
+    updateMany?: UserUpdateManyWithWhereWithoutOfficeInput | UserUpdateManyWithWhereWithoutOfficeInput[]
+    deleteMany?: UserScalarWhereInput | UserScalarWhereInput[]
+  }
+
+  export type UserUncheckedUpdateManyWithoutOfficeNestedInput = {
+    create?: XOR<UserCreateWithoutOfficeInput, UserUncheckedCreateWithoutOfficeInput> | UserCreateWithoutOfficeInput[] | UserUncheckedCreateWithoutOfficeInput[]
+    connectOrCreate?: UserCreateOrConnectWithoutOfficeInput | UserCreateOrConnectWithoutOfficeInput[]
+    upsert?: UserUpsertWithWhereUniqueWithoutOfficeInput | UserUpsertWithWhereUniqueWithoutOfficeInput[]
+    createMany?: UserCreateManyOfficeInputEnvelope
+    set?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    disconnect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    delete?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    update?: UserUpdateWithWhereUniqueWithoutOfficeInput | UserUpdateWithWhereUniqueWithoutOfficeInput[]
+    updateMany?: UserUpdateManyWithWhereWithoutOfficeInput | UserUpdateManyWithWhereWithoutOfficeInput[]
+    deleteMany?: UserScalarWhereInput | UserScalarWhereInput[]
+  }
+
+  export type DepartmentCreateNestedOneWithoutTicketsInput = {
+    create?: XOR<DepartmentCreateWithoutTicketsInput, DepartmentUncheckedCreateWithoutTicketsInput>
+    connectOrCreate?: DepartmentCreateOrConnectWithoutTicketsInput
+    connect?: DepartmentWhereUniqueInput
+  }
+
   export type MessageCreateNestedManyWithoutTicketInput = {
     create?: XOR<MessageCreateWithoutTicketInput, MessageUncheckedCreateWithoutTicketInput> | MessageCreateWithoutTicketInput[] | MessageUncheckedCreateWithoutTicketInput[]
     connectOrCreate?: MessageCreateOrConnectWithoutTicketInput | MessageCreateOrConnectWithoutTicketInput[]
@@ -5624,6 +10306,12 @@ export namespace Prisma {
     create?: XOR<UserCreateWithoutOpenedTicketsInput, UserUncheckedCreateWithoutOpenedTicketsInput>
     connectOrCreate?: UserCreateOrConnectWithoutOpenedTicketsInput
     connect?: UserWhereUniqueInput
+  }
+
+  export type SlaPolicyCreateNestedOneWithoutTicketsInput = {
+    create?: XOR<SlaPolicyCreateWithoutTicketsInput, SlaPolicyUncheckedCreateWithoutTicketsInput>
+    connectOrCreate?: SlaPolicyCreateOrConnectWithoutTicketsInput
+    connect?: SlaPolicyWhereUniqueInput
   }
 
   export type UserCreateNestedOneWithoutAssignedTicketsInput = {
@@ -5651,6 +10339,18 @@ export namespace Prisma {
     set?: Date | string
   }
 
+  export type NullableDateTimeFieldUpdateOperationsInput = {
+    set?: Date | string | null
+  }
+
+  export type DepartmentUpdateOneRequiredWithoutTicketsNestedInput = {
+    create?: XOR<DepartmentCreateWithoutTicketsInput, DepartmentUncheckedCreateWithoutTicketsInput>
+    connectOrCreate?: DepartmentCreateOrConnectWithoutTicketsInput
+    upsert?: DepartmentUpsertWithoutTicketsInput
+    connect?: DepartmentWhereUniqueInput
+    update?: XOR<XOR<DepartmentUpdateToOneWithWhereWithoutTicketsInput, DepartmentUpdateWithoutTicketsInput>, DepartmentUncheckedUpdateWithoutTicketsInput>
+  }
+
   export type MessageUpdateManyWithoutTicketNestedInput = {
     create?: XOR<MessageCreateWithoutTicketInput, MessageUncheckedCreateWithoutTicketInput> | MessageCreateWithoutTicketInput[] | MessageUncheckedCreateWithoutTicketInput[]
     connectOrCreate?: MessageCreateOrConnectWithoutTicketInput | MessageCreateOrConnectWithoutTicketInput[]
@@ -5673,6 +10373,16 @@ export namespace Prisma {
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutOpenedTicketsInput, UserUpdateWithoutOpenedTicketsInput>, UserUncheckedUpdateWithoutOpenedTicketsInput>
   }
 
+  export type SlaPolicyUpdateOneWithoutTicketsNestedInput = {
+    create?: XOR<SlaPolicyCreateWithoutTicketsInput, SlaPolicyUncheckedCreateWithoutTicketsInput>
+    connectOrCreate?: SlaPolicyCreateOrConnectWithoutTicketsInput
+    upsert?: SlaPolicyUpsertWithoutTicketsInput
+    disconnect?: SlaPolicyWhereInput | boolean
+    delete?: SlaPolicyWhereInput | boolean
+    connect?: SlaPolicyWhereUniqueInput
+    update?: XOR<XOR<SlaPolicyUpdateToOneWithWhereWithoutTicketsInput, SlaPolicyUpdateWithoutTicketsInput>, SlaPolicyUncheckedUpdateWithoutTicketsInput>
+  }
+
   export type UserUpdateOneWithoutAssignedTicketsNestedInput = {
     create?: XOR<UserCreateWithoutAssignedTicketsInput, UserUncheckedCreateWithoutAssignedTicketsInput>
     connectOrCreate?: UserCreateOrConnectWithoutAssignedTicketsInput
@@ -5691,10 +10401,6 @@ export namespace Prisma {
     divide?: number
   }
 
-  export type NullableStringFieldUpdateOperationsInput = {
-    set?: string | null
-  }
-
   export type MessageUncheckedUpdateManyWithoutTicketNestedInput = {
     create?: XOR<MessageCreateWithoutTicketInput, MessageUncheckedCreateWithoutTicketInput> | MessageCreateWithoutTicketInput[] | MessageUncheckedCreateWithoutTicketInput[]
     connectOrCreate?: MessageCreateOrConnectWithoutTicketInput | MessageCreateOrConnectWithoutTicketInput[]
@@ -5707,6 +10413,90 @@ export namespace Prisma {
     update?: MessageUpdateWithWhereUniqueWithoutTicketInput | MessageUpdateWithWhereUniqueWithoutTicketInput[]
     updateMany?: MessageUpdateManyWithWhereWithoutTicketInput | MessageUpdateManyWithWhereWithoutTicketInput[]
     deleteMany?: MessageScalarWhereInput | MessageScalarWhereInput[]
+  }
+
+  export type UserCreateNestedManyWithoutDepartmentInput = {
+    create?: XOR<UserCreateWithoutDepartmentInput, UserUncheckedCreateWithoutDepartmentInput> | UserCreateWithoutDepartmentInput[] | UserUncheckedCreateWithoutDepartmentInput[]
+    connectOrCreate?: UserCreateOrConnectWithoutDepartmentInput | UserCreateOrConnectWithoutDepartmentInput[]
+    createMany?: UserCreateManyDepartmentInputEnvelope
+    connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+  }
+
+  export type TicketCreateNestedManyWithoutDepartmentInput = {
+    create?: XOR<TicketCreateWithoutDepartmentInput, TicketUncheckedCreateWithoutDepartmentInput> | TicketCreateWithoutDepartmentInput[] | TicketUncheckedCreateWithoutDepartmentInput[]
+    connectOrCreate?: TicketCreateOrConnectWithoutDepartmentInput | TicketCreateOrConnectWithoutDepartmentInput[]
+    createMany?: TicketCreateManyDepartmentInputEnvelope
+    connect?: TicketWhereUniqueInput | TicketWhereUniqueInput[]
+  }
+
+  export type UserUncheckedCreateNestedManyWithoutDepartmentInput = {
+    create?: XOR<UserCreateWithoutDepartmentInput, UserUncheckedCreateWithoutDepartmentInput> | UserCreateWithoutDepartmentInput[] | UserUncheckedCreateWithoutDepartmentInput[]
+    connectOrCreate?: UserCreateOrConnectWithoutDepartmentInput | UserCreateOrConnectWithoutDepartmentInput[]
+    createMany?: UserCreateManyDepartmentInputEnvelope
+    connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+  }
+
+  export type TicketUncheckedCreateNestedManyWithoutDepartmentInput = {
+    create?: XOR<TicketCreateWithoutDepartmentInput, TicketUncheckedCreateWithoutDepartmentInput> | TicketCreateWithoutDepartmentInput[] | TicketUncheckedCreateWithoutDepartmentInput[]
+    connectOrCreate?: TicketCreateOrConnectWithoutDepartmentInput | TicketCreateOrConnectWithoutDepartmentInput[]
+    createMany?: TicketCreateManyDepartmentInputEnvelope
+    connect?: TicketWhereUniqueInput | TicketWhereUniqueInput[]
+  }
+
+  export type UserUpdateManyWithoutDepartmentNestedInput = {
+    create?: XOR<UserCreateWithoutDepartmentInput, UserUncheckedCreateWithoutDepartmentInput> | UserCreateWithoutDepartmentInput[] | UserUncheckedCreateWithoutDepartmentInput[]
+    connectOrCreate?: UserCreateOrConnectWithoutDepartmentInput | UserCreateOrConnectWithoutDepartmentInput[]
+    upsert?: UserUpsertWithWhereUniqueWithoutDepartmentInput | UserUpsertWithWhereUniqueWithoutDepartmentInput[]
+    createMany?: UserCreateManyDepartmentInputEnvelope
+    set?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    disconnect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    delete?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    update?: UserUpdateWithWhereUniqueWithoutDepartmentInput | UserUpdateWithWhereUniqueWithoutDepartmentInput[]
+    updateMany?: UserUpdateManyWithWhereWithoutDepartmentInput | UserUpdateManyWithWhereWithoutDepartmentInput[]
+    deleteMany?: UserScalarWhereInput | UserScalarWhereInput[]
+  }
+
+  export type TicketUpdateManyWithoutDepartmentNestedInput = {
+    create?: XOR<TicketCreateWithoutDepartmentInput, TicketUncheckedCreateWithoutDepartmentInput> | TicketCreateWithoutDepartmentInput[] | TicketUncheckedCreateWithoutDepartmentInput[]
+    connectOrCreate?: TicketCreateOrConnectWithoutDepartmentInput | TicketCreateOrConnectWithoutDepartmentInput[]
+    upsert?: TicketUpsertWithWhereUniqueWithoutDepartmentInput | TicketUpsertWithWhereUniqueWithoutDepartmentInput[]
+    createMany?: TicketCreateManyDepartmentInputEnvelope
+    set?: TicketWhereUniqueInput | TicketWhereUniqueInput[]
+    disconnect?: TicketWhereUniqueInput | TicketWhereUniqueInput[]
+    delete?: TicketWhereUniqueInput | TicketWhereUniqueInput[]
+    connect?: TicketWhereUniqueInput | TicketWhereUniqueInput[]
+    update?: TicketUpdateWithWhereUniqueWithoutDepartmentInput | TicketUpdateWithWhereUniqueWithoutDepartmentInput[]
+    updateMany?: TicketUpdateManyWithWhereWithoutDepartmentInput | TicketUpdateManyWithWhereWithoutDepartmentInput[]
+    deleteMany?: TicketScalarWhereInput | TicketScalarWhereInput[]
+  }
+
+  export type UserUncheckedUpdateManyWithoutDepartmentNestedInput = {
+    create?: XOR<UserCreateWithoutDepartmentInput, UserUncheckedCreateWithoutDepartmentInput> | UserCreateWithoutDepartmentInput[] | UserUncheckedCreateWithoutDepartmentInput[]
+    connectOrCreate?: UserCreateOrConnectWithoutDepartmentInput | UserCreateOrConnectWithoutDepartmentInput[]
+    upsert?: UserUpsertWithWhereUniqueWithoutDepartmentInput | UserUpsertWithWhereUniqueWithoutDepartmentInput[]
+    createMany?: UserCreateManyDepartmentInputEnvelope
+    set?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    disconnect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    delete?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    update?: UserUpdateWithWhereUniqueWithoutDepartmentInput | UserUpdateWithWhereUniqueWithoutDepartmentInput[]
+    updateMany?: UserUpdateManyWithWhereWithoutDepartmentInput | UserUpdateManyWithWhereWithoutDepartmentInput[]
+    deleteMany?: UserScalarWhereInput | UserScalarWhereInput[]
+  }
+
+  export type TicketUncheckedUpdateManyWithoutDepartmentNestedInput = {
+    create?: XOR<TicketCreateWithoutDepartmentInput, TicketUncheckedCreateWithoutDepartmentInput> | TicketCreateWithoutDepartmentInput[] | TicketUncheckedCreateWithoutDepartmentInput[]
+    connectOrCreate?: TicketCreateOrConnectWithoutDepartmentInput | TicketCreateOrConnectWithoutDepartmentInput[]
+    upsert?: TicketUpsertWithWhereUniqueWithoutDepartmentInput | TicketUpsertWithWhereUniqueWithoutDepartmentInput[]
+    createMany?: TicketCreateManyDepartmentInputEnvelope
+    set?: TicketWhereUniqueInput | TicketWhereUniqueInput[]
+    disconnect?: TicketWhereUniqueInput | TicketWhereUniqueInput[]
+    delete?: TicketWhereUniqueInput | TicketWhereUniqueInput[]
+    connect?: TicketWhereUniqueInput | TicketWhereUniqueInput[]
+    update?: TicketUpdateWithWhereUniqueWithoutDepartmentInput | TicketUpdateWithWhereUniqueWithoutDepartmentInput[]
+    updateMany?: TicketUpdateManyWithWhereWithoutDepartmentInput | TicketUpdateManyWithWhereWithoutDepartmentInput[]
+    deleteMany?: TicketScalarWhereInput | TicketScalarWhereInput[]
   }
 
   export type TicketCreateNestedOneWithoutMessagesInput = {
@@ -5737,6 +10527,52 @@ export namespace Prisma {
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutMessagesInput, UserUpdateWithoutMessagesInput>, UserUncheckedUpdateWithoutMessagesInput>
   }
 
+  export type TicketCreateNestedManyWithoutSlaPolicyInput = {
+    create?: XOR<TicketCreateWithoutSlaPolicyInput, TicketUncheckedCreateWithoutSlaPolicyInput> | TicketCreateWithoutSlaPolicyInput[] | TicketUncheckedCreateWithoutSlaPolicyInput[]
+    connectOrCreate?: TicketCreateOrConnectWithoutSlaPolicyInput | TicketCreateOrConnectWithoutSlaPolicyInput[]
+    createMany?: TicketCreateManySlaPolicyInputEnvelope
+    connect?: TicketWhereUniqueInput | TicketWhereUniqueInput[]
+  }
+
+  export type TicketUncheckedCreateNestedManyWithoutSlaPolicyInput = {
+    create?: XOR<TicketCreateWithoutSlaPolicyInput, TicketUncheckedCreateWithoutSlaPolicyInput> | TicketCreateWithoutSlaPolicyInput[] | TicketUncheckedCreateWithoutSlaPolicyInput[]
+    connectOrCreate?: TicketCreateOrConnectWithoutSlaPolicyInput | TicketCreateOrConnectWithoutSlaPolicyInput[]
+    createMany?: TicketCreateManySlaPolicyInputEnvelope
+    connect?: TicketWhereUniqueInput | TicketWhereUniqueInput[]
+  }
+
+  export type BoolFieldUpdateOperationsInput = {
+    set?: boolean
+  }
+
+  export type TicketUpdateManyWithoutSlaPolicyNestedInput = {
+    create?: XOR<TicketCreateWithoutSlaPolicyInput, TicketUncheckedCreateWithoutSlaPolicyInput> | TicketCreateWithoutSlaPolicyInput[] | TicketUncheckedCreateWithoutSlaPolicyInput[]
+    connectOrCreate?: TicketCreateOrConnectWithoutSlaPolicyInput | TicketCreateOrConnectWithoutSlaPolicyInput[]
+    upsert?: TicketUpsertWithWhereUniqueWithoutSlaPolicyInput | TicketUpsertWithWhereUniqueWithoutSlaPolicyInput[]
+    createMany?: TicketCreateManySlaPolicyInputEnvelope
+    set?: TicketWhereUniqueInput | TicketWhereUniqueInput[]
+    disconnect?: TicketWhereUniqueInput | TicketWhereUniqueInput[]
+    delete?: TicketWhereUniqueInput | TicketWhereUniqueInput[]
+    connect?: TicketWhereUniqueInput | TicketWhereUniqueInput[]
+    update?: TicketUpdateWithWhereUniqueWithoutSlaPolicyInput | TicketUpdateWithWhereUniqueWithoutSlaPolicyInput[]
+    updateMany?: TicketUpdateManyWithWhereWithoutSlaPolicyInput | TicketUpdateManyWithWhereWithoutSlaPolicyInput[]
+    deleteMany?: TicketScalarWhereInput | TicketScalarWhereInput[]
+  }
+
+  export type TicketUncheckedUpdateManyWithoutSlaPolicyNestedInput = {
+    create?: XOR<TicketCreateWithoutSlaPolicyInput, TicketUncheckedCreateWithoutSlaPolicyInput> | TicketCreateWithoutSlaPolicyInput[] | TicketUncheckedCreateWithoutSlaPolicyInput[]
+    connectOrCreate?: TicketCreateOrConnectWithoutSlaPolicyInput | TicketCreateOrConnectWithoutSlaPolicyInput[]
+    upsert?: TicketUpsertWithWhereUniqueWithoutSlaPolicyInput | TicketUpsertWithWhereUniqueWithoutSlaPolicyInput[]
+    createMany?: TicketCreateManySlaPolicyInputEnvelope
+    set?: TicketWhereUniqueInput | TicketWhereUniqueInput[]
+    disconnect?: TicketWhereUniqueInput | TicketWhereUniqueInput[]
+    delete?: TicketWhereUniqueInput | TicketWhereUniqueInput[]
+    connect?: TicketWhereUniqueInput | TicketWhereUniqueInput[]
+    update?: TicketUpdateWithWhereUniqueWithoutSlaPolicyInput | TicketUpdateWithWhereUniqueWithoutSlaPolicyInput[]
+    updateMany?: TicketUpdateManyWithWhereWithoutSlaPolicyInput | TicketUpdateManyWithWhereWithoutSlaPolicyInput[]
+    deleteMany?: TicketScalarWhereInput | TicketScalarWhereInput[]
+  }
+
   export type NestedStringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -5749,6 +10585,27 @@ export namespace Prisma {
     startsWith?: string | StringFieldRefInput<$PrismaModel>
     endsWith?: string | StringFieldRefInput<$PrismaModel>
     not?: NestedStringFilter<$PrismaModel> | string
+  }
+
+  export type NestedStringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
+  export type NestedEnumUserRoleFilter<$PrismaModel = never> = {
+    equals?: $Enums.UserRole | EnumUserRoleFieldRefInput<$PrismaModel>
+    in?: $Enums.UserRole[] | ListEnumUserRoleFieldRefInput<$PrismaModel>
+    notIn?: $Enums.UserRole[] | ListEnumUserRoleFieldRefInput<$PrismaModel>
+    not?: NestedEnumUserRoleFilter<$PrismaModel> | $Enums.UserRole
   }
 
   export type NestedStringWithAggregatesFilter<$PrismaModel = never> = {
@@ -5779,6 +10636,44 @@ export namespace Prisma {
     not?: NestedIntFilter<$PrismaModel> | number
   }
 
+  export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
+  export type NestedIntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type NestedEnumUserRoleWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.UserRole | EnumUserRoleFieldRefInput<$PrismaModel>
+    in?: $Enums.UserRole[] | ListEnumUserRoleFieldRefInput<$PrismaModel>
+    notIn?: $Enums.UserRole[] | ListEnumUserRoleFieldRefInput<$PrismaModel>
+    not?: NestedEnumUserRoleWithAggregatesFilter<$PrismaModel> | $Enums.UserRole
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumUserRoleFilter<$PrismaModel>
+    _max?: NestedEnumUserRoleFilter<$PrismaModel>
+  }
+
   export type NestedEnumTicketStatusFilter<$PrismaModel = never> = {
     equals?: $Enums.TicketStatus | EnumTicketStatusFieldRefInput<$PrismaModel>
     in?: $Enums.TicketStatus[] | ListEnumTicketStatusFieldRefInput<$PrismaModel>
@@ -5804,18 +10699,15 @@ export namespace Prisma {
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
-  export type NestedStringNullableFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
   }
 
   export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
@@ -5879,32 +10771,65 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
-  export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+  export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
     _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedStringNullableFilter<$PrismaModel>
-    _max?: NestedStringNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
-  export type NestedIntNullableFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  export type NestedBoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
+  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
+  }
+
+  export type DepartmentCreateWithoutUsersInput = {
+    id?: string
+    name: string
+    tickets?: TicketCreateNestedManyWithoutDepartmentInput
+  }
+
+  export type DepartmentUncheckedCreateWithoutUsersInput = {
+    id?: string
+    name: string
+    tickets?: TicketUncheckedCreateNestedManyWithoutDepartmentInput
+  }
+
+  export type DepartmentCreateOrConnectWithoutUsersInput = {
+    where: DepartmentWhereUniqueInput
+    create: XOR<DepartmentCreateWithoutUsersInput, DepartmentUncheckedCreateWithoutUsersInput>
+  }
+
+  export type OfficeCreateWithoutUsersInput = {
+    id?: string
+    name: string
+    timeZone: string
+  }
+
+  export type OfficeUncheckedCreateWithoutUsersInput = {
+    id?: string
+    name: string
+    timeZone: string
+  }
+
+  export type OfficeCreateOrConnectWithoutUsersInput = {
+    where: OfficeWhereUniqueInput
+    create: XOR<OfficeCreateWithoutUsersInput, OfficeUncheckedCreateWithoutUsersInput>
   }
 
   export type TicketCreateWithoutRequesterInput = {
@@ -5917,7 +10842,14 @@ export namespace Prisma {
     description?: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
+    resolvedAt?: Date | string | null
+    closedAt?: Date | string | null
+    responseDueAt?: Date | string | null
+    resolutionDueAt?: Date | string | null
+    department: DepartmentCreateNestedOneWithoutTicketsInput
     messages?: MessageCreateNestedManyWithoutTicketInput
+    slaPolicy?: SlaPolicyCreateNestedOneWithoutTicketsInput
     agent?: UserCreateNestedOneWithoutAssignedTicketsInput
   }
 
@@ -5929,8 +10861,15 @@ export namespace Prisma {
     priority?: $Enums.TicketPriority
     category?: string
     description?: string
+    departmentId: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
+    resolvedAt?: Date | string | null
+    closedAt?: Date | string | null
+    slaPolicyId?: string | null
+    responseDueAt?: Date | string | null
+    resolutionDueAt?: Date | string | null
     agentId?: string | null
     messages?: MessageUncheckedCreateNestedManyWithoutTicketInput
   }
@@ -5955,8 +10894,15 @@ export namespace Prisma {
     description?: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
+    resolvedAt?: Date | string | null
+    closedAt?: Date | string | null
+    responseDueAt?: Date | string | null
+    resolutionDueAt?: Date | string | null
+    department: DepartmentCreateNestedOneWithoutTicketsInput
     messages?: MessageCreateNestedManyWithoutTicketInput
     requester: UserCreateNestedOneWithoutOpenedTicketsInput
+    slaPolicy?: SlaPolicyCreateNestedOneWithoutTicketsInput
   }
 
   export type TicketUncheckedCreateWithoutAgentInput = {
@@ -5967,9 +10913,16 @@ export namespace Prisma {
     priority?: $Enums.TicketPriority
     category?: string
     description?: string
+    departmentId: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
+    resolvedAt?: Date | string | null
+    closedAt?: Date | string | null
     requesterId: string
+    slaPolicyId?: string | null
+    responseDueAt?: Date | string | null
+    resolutionDueAt?: Date | string | null
     messages?: MessageUncheckedCreateNestedManyWithoutTicketInput
   }
 
@@ -6007,6 +10960,52 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type DepartmentUpsertWithoutUsersInput = {
+    update: XOR<DepartmentUpdateWithoutUsersInput, DepartmentUncheckedUpdateWithoutUsersInput>
+    create: XOR<DepartmentCreateWithoutUsersInput, DepartmentUncheckedCreateWithoutUsersInput>
+    where?: DepartmentWhereInput
+  }
+
+  export type DepartmentUpdateToOneWithWhereWithoutUsersInput = {
+    where?: DepartmentWhereInput
+    data: XOR<DepartmentUpdateWithoutUsersInput, DepartmentUncheckedUpdateWithoutUsersInput>
+  }
+
+  export type DepartmentUpdateWithoutUsersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    tickets?: TicketUpdateManyWithoutDepartmentNestedInput
+  }
+
+  export type DepartmentUncheckedUpdateWithoutUsersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    tickets?: TicketUncheckedUpdateManyWithoutDepartmentNestedInput
+  }
+
+  export type OfficeUpsertWithoutUsersInput = {
+    update: XOR<OfficeUpdateWithoutUsersInput, OfficeUncheckedUpdateWithoutUsersInput>
+    create: XOR<OfficeCreateWithoutUsersInput, OfficeUncheckedCreateWithoutUsersInput>
+    where?: OfficeWhereInput
+  }
+
+  export type OfficeUpdateToOneWithWhereWithoutUsersInput = {
+    where?: OfficeWhereInput
+    data: XOR<OfficeUpdateWithoutUsersInput, OfficeUncheckedUpdateWithoutUsersInput>
+  }
+
+  export type OfficeUpdateWithoutUsersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    timeZone?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type OfficeUncheckedUpdateWithoutUsersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    timeZone?: StringFieldUpdateOperationsInput | string
+  }
+
   export type TicketUpsertWithWhereUniqueWithoutRequesterInput = {
     where: TicketWhereUniqueInput
     update: XOR<TicketUpdateWithoutRequesterInput, TicketUncheckedUpdateWithoutRequesterInput>
@@ -6034,9 +11033,16 @@ export namespace Prisma {
     priority?: EnumTicketPriorityFilter<"Ticket"> | $Enums.TicketPriority
     category?: StringFilter<"Ticket"> | string
     description?: StringFilter<"Ticket"> | string
+    departmentId?: StringFilter<"Ticket"> | string
     createdAt?: DateTimeFilter<"Ticket"> | Date | string
     updatedAt?: DateTimeFilter<"Ticket"> | Date | string
+    deletedAt?: DateTimeNullableFilter<"Ticket"> | Date | string | null
+    resolvedAt?: DateTimeNullableFilter<"Ticket"> | Date | string | null
+    closedAt?: DateTimeNullableFilter<"Ticket"> | Date | string | null
     requesterId?: StringFilter<"Ticket"> | string
+    slaPolicyId?: StringNullableFilter<"Ticket"> | string | null
+    responseDueAt?: DateTimeNullableFilter<"Ticket"> | Date | string | null
+    resolutionDueAt?: DateTimeNullableFilter<"Ticket"> | Date | string | null
     agentId?: StringNullableFilter<"Ticket"> | string | null
   }
 
@@ -6083,6 +11089,95 @@ export namespace Prisma {
     userId?: StringFilter<"Message"> | string
   }
 
+  export type UserCreateWithoutOfficeInput = {
+    id?: string
+    name: string
+    email: string
+    password: string
+    phone: string
+    avatarUrl?: string | null
+    role?: $Enums.UserRole
+    position?: string
+    department?: DepartmentCreateNestedOneWithoutUsersInput
+    openedTickets?: TicketCreateNestedManyWithoutRequesterInput
+    assignedTickets?: TicketCreateNestedManyWithoutAgentInput
+    messages?: MessageCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutOfficeInput = {
+    id?: string
+    name: string
+    email: string
+    password: string
+    phone: string
+    avatarUrl?: string | null
+    role?: $Enums.UserRole
+    position?: string
+    departmentId?: string | null
+    openedTickets?: TicketUncheckedCreateNestedManyWithoutRequesterInput
+    assignedTickets?: TicketUncheckedCreateNestedManyWithoutAgentInput
+    messages?: MessageUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutOfficeInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutOfficeInput, UserUncheckedCreateWithoutOfficeInput>
+  }
+
+  export type UserCreateManyOfficeInputEnvelope = {
+    data: UserCreateManyOfficeInput | UserCreateManyOfficeInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type UserUpsertWithWhereUniqueWithoutOfficeInput = {
+    where: UserWhereUniqueInput
+    update: XOR<UserUpdateWithoutOfficeInput, UserUncheckedUpdateWithoutOfficeInput>
+    create: XOR<UserCreateWithoutOfficeInput, UserUncheckedCreateWithoutOfficeInput>
+  }
+
+  export type UserUpdateWithWhereUniqueWithoutOfficeInput = {
+    where: UserWhereUniqueInput
+    data: XOR<UserUpdateWithoutOfficeInput, UserUncheckedUpdateWithoutOfficeInput>
+  }
+
+  export type UserUpdateManyWithWhereWithoutOfficeInput = {
+    where: UserScalarWhereInput
+    data: XOR<UserUpdateManyMutationInput, UserUncheckedUpdateManyWithoutOfficeInput>
+  }
+
+  export type UserScalarWhereInput = {
+    AND?: UserScalarWhereInput | UserScalarWhereInput[]
+    OR?: UserScalarWhereInput[]
+    NOT?: UserScalarWhereInput | UserScalarWhereInput[]
+    id?: StringFilter<"User"> | string
+    name?: StringFilter<"User"> | string
+    email?: StringFilter<"User"> | string
+    password?: StringFilter<"User"> | string
+    phone?: StringFilter<"User"> | string
+    avatarUrl?: StringNullableFilter<"User"> | string | null
+    role?: EnumUserRoleFilter<"User"> | $Enums.UserRole
+    position?: StringFilter<"User"> | string
+    departmentId?: StringNullableFilter<"User"> | string | null
+    officeId?: StringNullableFilter<"User"> | string | null
+  }
+
+  export type DepartmentCreateWithoutTicketsInput = {
+    id?: string
+    name: string
+    users?: UserCreateNestedManyWithoutDepartmentInput
+  }
+
+  export type DepartmentUncheckedCreateWithoutTicketsInput = {
+    id?: string
+    name: string
+    users?: UserUncheckedCreateNestedManyWithoutDepartmentInput
+  }
+
+  export type DepartmentCreateOrConnectWithoutTicketsInput = {
+    where: DepartmentWhereUniqueInput
+    create: XOR<DepartmentCreateWithoutTicketsInput, DepartmentUncheckedCreateWithoutTicketsInput>
+  }
+
   export type MessageCreateWithoutTicketInput = {
     id?: string
     content: string
@@ -6112,7 +11207,12 @@ export namespace Prisma {
     name: string
     email: string
     password: string
-    role?: string
+    phone: string
+    avatarUrl?: string | null
+    role?: $Enums.UserRole
+    position?: string
+    department?: DepartmentCreateNestedOneWithoutUsersInput
+    office?: OfficeCreateNestedOneWithoutUsersInput
     assignedTickets?: TicketCreateNestedManyWithoutAgentInput
     messages?: MessageCreateNestedManyWithoutUserInput
   }
@@ -6122,7 +11222,12 @@ export namespace Prisma {
     name: string
     email: string
     password: string
-    role?: string
+    phone: string
+    avatarUrl?: string | null
+    role?: $Enums.UserRole
+    position?: string
+    departmentId?: string | null
+    officeId?: string | null
     assignedTickets?: TicketUncheckedCreateNestedManyWithoutAgentInput
     messages?: MessageUncheckedCreateNestedManyWithoutUserInput
   }
@@ -6132,12 +11237,40 @@ export namespace Prisma {
     create: XOR<UserCreateWithoutOpenedTicketsInput, UserUncheckedCreateWithoutOpenedTicketsInput>
   }
 
+  export type SlaPolicyCreateWithoutTicketsInput = {
+    id?: string
+    name: string
+    priority: $Enums.TicketPriority
+    responseTimeMin: number
+    resolutionTimeMin: number
+    is24x7?: boolean
+  }
+
+  export type SlaPolicyUncheckedCreateWithoutTicketsInput = {
+    id?: string
+    name: string
+    priority: $Enums.TicketPriority
+    responseTimeMin: number
+    resolutionTimeMin: number
+    is24x7?: boolean
+  }
+
+  export type SlaPolicyCreateOrConnectWithoutTicketsInput = {
+    where: SlaPolicyWhereUniqueInput
+    create: XOR<SlaPolicyCreateWithoutTicketsInput, SlaPolicyUncheckedCreateWithoutTicketsInput>
+  }
+
   export type UserCreateWithoutAssignedTicketsInput = {
     id?: string
     name: string
     email: string
     password: string
-    role?: string
+    phone: string
+    avatarUrl?: string | null
+    role?: $Enums.UserRole
+    position?: string
+    department?: DepartmentCreateNestedOneWithoutUsersInput
+    office?: OfficeCreateNestedOneWithoutUsersInput
     openedTickets?: TicketCreateNestedManyWithoutRequesterInput
     messages?: MessageCreateNestedManyWithoutUserInput
   }
@@ -6147,7 +11280,12 @@ export namespace Prisma {
     name: string
     email: string
     password: string
-    role?: string
+    phone: string
+    avatarUrl?: string | null
+    role?: $Enums.UserRole
+    position?: string
+    departmentId?: string | null
+    officeId?: string | null
     openedTickets?: TicketUncheckedCreateNestedManyWithoutRequesterInput
     messages?: MessageUncheckedCreateNestedManyWithoutUserInput
   }
@@ -6155,6 +11293,29 @@ export namespace Prisma {
   export type UserCreateOrConnectWithoutAssignedTicketsInput = {
     where: UserWhereUniqueInput
     create: XOR<UserCreateWithoutAssignedTicketsInput, UserUncheckedCreateWithoutAssignedTicketsInput>
+  }
+
+  export type DepartmentUpsertWithoutTicketsInput = {
+    update: XOR<DepartmentUpdateWithoutTicketsInput, DepartmentUncheckedUpdateWithoutTicketsInput>
+    create: XOR<DepartmentCreateWithoutTicketsInput, DepartmentUncheckedCreateWithoutTicketsInput>
+    where?: DepartmentWhereInput
+  }
+
+  export type DepartmentUpdateToOneWithWhereWithoutTicketsInput = {
+    where?: DepartmentWhereInput
+    data: XOR<DepartmentUpdateWithoutTicketsInput, DepartmentUncheckedUpdateWithoutTicketsInput>
+  }
+
+  export type DepartmentUpdateWithoutTicketsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    users?: UserUpdateManyWithoutDepartmentNestedInput
+  }
+
+  export type DepartmentUncheckedUpdateWithoutTicketsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    users?: UserUncheckedUpdateManyWithoutDepartmentNestedInput
   }
 
   export type MessageUpsertWithWhereUniqueWithoutTicketInput = {
@@ -6189,7 +11350,12 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
-    role?: StringFieldUpdateOperationsInput | string
+    phone?: StringFieldUpdateOperationsInput | string
+    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    position?: StringFieldUpdateOperationsInput | string
+    department?: DepartmentUpdateOneWithoutUsersNestedInput
+    office?: OfficeUpdateOneWithoutUsersNestedInput
     assignedTickets?: TicketUpdateManyWithoutAgentNestedInput
     messages?: MessageUpdateManyWithoutUserNestedInput
   }
@@ -6199,9 +11365,43 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
-    role?: StringFieldUpdateOperationsInput | string
+    phone?: StringFieldUpdateOperationsInput | string
+    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    position?: StringFieldUpdateOperationsInput | string
+    departmentId?: NullableStringFieldUpdateOperationsInput | string | null
+    officeId?: NullableStringFieldUpdateOperationsInput | string | null
     assignedTickets?: TicketUncheckedUpdateManyWithoutAgentNestedInput
     messages?: MessageUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type SlaPolicyUpsertWithoutTicketsInput = {
+    update: XOR<SlaPolicyUpdateWithoutTicketsInput, SlaPolicyUncheckedUpdateWithoutTicketsInput>
+    create: XOR<SlaPolicyCreateWithoutTicketsInput, SlaPolicyUncheckedCreateWithoutTicketsInput>
+    where?: SlaPolicyWhereInput
+  }
+
+  export type SlaPolicyUpdateToOneWithWhereWithoutTicketsInput = {
+    where?: SlaPolicyWhereInput
+    data: XOR<SlaPolicyUpdateWithoutTicketsInput, SlaPolicyUncheckedUpdateWithoutTicketsInput>
+  }
+
+  export type SlaPolicyUpdateWithoutTicketsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    priority?: EnumTicketPriorityFieldUpdateOperationsInput | $Enums.TicketPriority
+    responseTimeMin?: IntFieldUpdateOperationsInput | number
+    resolutionTimeMin?: IntFieldUpdateOperationsInput | number
+    is24x7?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type SlaPolicyUncheckedUpdateWithoutTicketsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    priority?: EnumTicketPriorityFieldUpdateOperationsInput | $Enums.TicketPriority
+    responseTimeMin?: IntFieldUpdateOperationsInput | number
+    resolutionTimeMin?: IntFieldUpdateOperationsInput | number
+    is24x7?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type UserUpsertWithoutAssignedTicketsInput = {
@@ -6220,7 +11420,12 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
-    role?: StringFieldUpdateOperationsInput | string
+    phone?: StringFieldUpdateOperationsInput | string
+    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    position?: StringFieldUpdateOperationsInput | string
+    department?: DepartmentUpdateOneWithoutUsersNestedInput
+    office?: OfficeUpdateOneWithoutUsersNestedInput
     openedTickets?: TicketUpdateManyWithoutRequesterNestedInput
     messages?: MessageUpdateManyWithoutUserNestedInput
   }
@@ -6230,9 +11435,138 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
-    role?: StringFieldUpdateOperationsInput | string
+    phone?: StringFieldUpdateOperationsInput | string
+    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    position?: StringFieldUpdateOperationsInput | string
+    departmentId?: NullableStringFieldUpdateOperationsInput | string | null
+    officeId?: NullableStringFieldUpdateOperationsInput | string | null
     openedTickets?: TicketUncheckedUpdateManyWithoutRequesterNestedInput
     messages?: MessageUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserCreateWithoutDepartmentInput = {
+    id?: string
+    name: string
+    email: string
+    password: string
+    phone: string
+    avatarUrl?: string | null
+    role?: $Enums.UserRole
+    position?: string
+    office?: OfficeCreateNestedOneWithoutUsersInput
+    openedTickets?: TicketCreateNestedManyWithoutRequesterInput
+    assignedTickets?: TicketCreateNestedManyWithoutAgentInput
+    messages?: MessageCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutDepartmentInput = {
+    id?: string
+    name: string
+    email: string
+    password: string
+    phone: string
+    avatarUrl?: string | null
+    role?: $Enums.UserRole
+    position?: string
+    officeId?: string | null
+    openedTickets?: TicketUncheckedCreateNestedManyWithoutRequesterInput
+    assignedTickets?: TicketUncheckedCreateNestedManyWithoutAgentInput
+    messages?: MessageUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutDepartmentInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutDepartmentInput, UserUncheckedCreateWithoutDepartmentInput>
+  }
+
+  export type UserCreateManyDepartmentInputEnvelope = {
+    data: UserCreateManyDepartmentInput | UserCreateManyDepartmentInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type TicketCreateWithoutDepartmentInput = {
+    id?: string
+    ticketNum?: number
+    subject: string
+    status?: $Enums.TicketStatus
+    priority?: $Enums.TicketPriority
+    category?: string
+    description?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    deletedAt?: Date | string | null
+    resolvedAt?: Date | string | null
+    closedAt?: Date | string | null
+    responseDueAt?: Date | string | null
+    resolutionDueAt?: Date | string | null
+    messages?: MessageCreateNestedManyWithoutTicketInput
+    requester: UserCreateNestedOneWithoutOpenedTicketsInput
+    slaPolicy?: SlaPolicyCreateNestedOneWithoutTicketsInput
+    agent?: UserCreateNestedOneWithoutAssignedTicketsInput
+  }
+
+  export type TicketUncheckedCreateWithoutDepartmentInput = {
+    id?: string
+    ticketNum?: number
+    subject: string
+    status?: $Enums.TicketStatus
+    priority?: $Enums.TicketPriority
+    category?: string
+    description?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    deletedAt?: Date | string | null
+    resolvedAt?: Date | string | null
+    closedAt?: Date | string | null
+    requesterId: string
+    slaPolicyId?: string | null
+    responseDueAt?: Date | string | null
+    resolutionDueAt?: Date | string | null
+    agentId?: string | null
+    messages?: MessageUncheckedCreateNestedManyWithoutTicketInput
+  }
+
+  export type TicketCreateOrConnectWithoutDepartmentInput = {
+    where: TicketWhereUniqueInput
+    create: XOR<TicketCreateWithoutDepartmentInput, TicketUncheckedCreateWithoutDepartmentInput>
+  }
+
+  export type TicketCreateManyDepartmentInputEnvelope = {
+    data: TicketCreateManyDepartmentInput | TicketCreateManyDepartmentInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type UserUpsertWithWhereUniqueWithoutDepartmentInput = {
+    where: UserWhereUniqueInput
+    update: XOR<UserUpdateWithoutDepartmentInput, UserUncheckedUpdateWithoutDepartmentInput>
+    create: XOR<UserCreateWithoutDepartmentInput, UserUncheckedCreateWithoutDepartmentInput>
+  }
+
+  export type UserUpdateWithWhereUniqueWithoutDepartmentInput = {
+    where: UserWhereUniqueInput
+    data: XOR<UserUpdateWithoutDepartmentInput, UserUncheckedUpdateWithoutDepartmentInput>
+  }
+
+  export type UserUpdateManyWithWhereWithoutDepartmentInput = {
+    where: UserScalarWhereInput
+    data: XOR<UserUpdateManyMutationInput, UserUncheckedUpdateManyWithoutDepartmentInput>
+  }
+
+  export type TicketUpsertWithWhereUniqueWithoutDepartmentInput = {
+    where: TicketWhereUniqueInput
+    update: XOR<TicketUpdateWithoutDepartmentInput, TicketUncheckedUpdateWithoutDepartmentInput>
+    create: XOR<TicketCreateWithoutDepartmentInput, TicketUncheckedCreateWithoutDepartmentInput>
+  }
+
+  export type TicketUpdateWithWhereUniqueWithoutDepartmentInput = {
+    where: TicketWhereUniqueInput
+    data: XOR<TicketUpdateWithoutDepartmentInput, TicketUncheckedUpdateWithoutDepartmentInput>
+  }
+
+  export type TicketUpdateManyWithWhereWithoutDepartmentInput = {
+    where: TicketScalarWhereInput
+    data: XOR<TicketUpdateManyMutationInput, TicketUncheckedUpdateManyWithoutDepartmentInput>
   }
 
   export type TicketCreateWithoutMessagesInput = {
@@ -6245,7 +11579,14 @@ export namespace Prisma {
     description?: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
+    resolvedAt?: Date | string | null
+    closedAt?: Date | string | null
+    responseDueAt?: Date | string | null
+    resolutionDueAt?: Date | string | null
+    department: DepartmentCreateNestedOneWithoutTicketsInput
     requester: UserCreateNestedOneWithoutOpenedTicketsInput
+    slaPolicy?: SlaPolicyCreateNestedOneWithoutTicketsInput
     agent?: UserCreateNestedOneWithoutAssignedTicketsInput
   }
 
@@ -6257,9 +11598,16 @@ export namespace Prisma {
     priority?: $Enums.TicketPriority
     category?: string
     description?: string
+    departmentId: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
+    resolvedAt?: Date | string | null
+    closedAt?: Date | string | null
     requesterId: string
+    slaPolicyId?: string | null
+    responseDueAt?: Date | string | null
+    resolutionDueAt?: Date | string | null
     agentId?: string | null
   }
 
@@ -6273,7 +11621,12 @@ export namespace Prisma {
     name: string
     email: string
     password: string
-    role?: string
+    phone: string
+    avatarUrl?: string | null
+    role?: $Enums.UserRole
+    position?: string
+    department?: DepartmentCreateNestedOneWithoutUsersInput
+    office?: OfficeCreateNestedOneWithoutUsersInput
     openedTickets?: TicketCreateNestedManyWithoutRequesterInput
     assignedTickets?: TicketCreateNestedManyWithoutAgentInput
   }
@@ -6283,7 +11636,12 @@ export namespace Prisma {
     name: string
     email: string
     password: string
-    role?: string
+    phone: string
+    avatarUrl?: string | null
+    role?: $Enums.UserRole
+    position?: string
+    departmentId?: string | null
+    officeId?: string | null
     openedTickets?: TicketUncheckedCreateNestedManyWithoutRequesterInput
     assignedTickets?: TicketUncheckedCreateNestedManyWithoutAgentInput
   }
@@ -6313,7 +11671,14 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    resolvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    responseDueAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    resolutionDueAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    department?: DepartmentUpdateOneRequiredWithoutTicketsNestedInput
     requester?: UserUpdateOneRequiredWithoutOpenedTicketsNestedInput
+    slaPolicy?: SlaPolicyUpdateOneWithoutTicketsNestedInput
     agent?: UserUpdateOneWithoutAssignedTicketsNestedInput
   }
 
@@ -6325,9 +11690,16 @@ export namespace Prisma {
     priority?: EnumTicketPriorityFieldUpdateOperationsInput | $Enums.TicketPriority
     category?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
+    departmentId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    resolvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     requesterId?: StringFieldUpdateOperationsInput | string
+    slaPolicyId?: NullableStringFieldUpdateOperationsInput | string | null
+    responseDueAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    resolutionDueAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     agentId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
@@ -6347,7 +11719,12 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
-    role?: StringFieldUpdateOperationsInput | string
+    phone?: StringFieldUpdateOperationsInput | string
+    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    position?: StringFieldUpdateOperationsInput | string
+    department?: DepartmentUpdateOneWithoutUsersNestedInput
+    office?: OfficeUpdateOneWithoutUsersNestedInput
     openedTickets?: TicketUpdateManyWithoutRequesterNestedInput
     assignedTickets?: TicketUpdateManyWithoutAgentNestedInput
   }
@@ -6357,9 +11734,82 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
-    role?: StringFieldUpdateOperationsInput | string
+    phone?: StringFieldUpdateOperationsInput | string
+    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    position?: StringFieldUpdateOperationsInput | string
+    departmentId?: NullableStringFieldUpdateOperationsInput | string | null
+    officeId?: NullableStringFieldUpdateOperationsInput | string | null
     openedTickets?: TicketUncheckedUpdateManyWithoutRequesterNestedInput
     assignedTickets?: TicketUncheckedUpdateManyWithoutAgentNestedInput
+  }
+
+  export type TicketCreateWithoutSlaPolicyInput = {
+    id?: string
+    ticketNum?: number
+    subject: string
+    status?: $Enums.TicketStatus
+    priority?: $Enums.TicketPriority
+    category?: string
+    description?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    deletedAt?: Date | string | null
+    resolvedAt?: Date | string | null
+    closedAt?: Date | string | null
+    responseDueAt?: Date | string | null
+    resolutionDueAt?: Date | string | null
+    department: DepartmentCreateNestedOneWithoutTicketsInput
+    messages?: MessageCreateNestedManyWithoutTicketInput
+    requester: UserCreateNestedOneWithoutOpenedTicketsInput
+    agent?: UserCreateNestedOneWithoutAssignedTicketsInput
+  }
+
+  export type TicketUncheckedCreateWithoutSlaPolicyInput = {
+    id?: string
+    ticketNum?: number
+    subject: string
+    status?: $Enums.TicketStatus
+    priority?: $Enums.TicketPriority
+    category?: string
+    description?: string
+    departmentId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    deletedAt?: Date | string | null
+    resolvedAt?: Date | string | null
+    closedAt?: Date | string | null
+    requesterId: string
+    responseDueAt?: Date | string | null
+    resolutionDueAt?: Date | string | null
+    agentId?: string | null
+    messages?: MessageUncheckedCreateNestedManyWithoutTicketInput
+  }
+
+  export type TicketCreateOrConnectWithoutSlaPolicyInput = {
+    where: TicketWhereUniqueInput
+    create: XOR<TicketCreateWithoutSlaPolicyInput, TicketUncheckedCreateWithoutSlaPolicyInput>
+  }
+
+  export type TicketCreateManySlaPolicyInputEnvelope = {
+    data: TicketCreateManySlaPolicyInput | TicketCreateManySlaPolicyInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type TicketUpsertWithWhereUniqueWithoutSlaPolicyInput = {
+    where: TicketWhereUniqueInput
+    update: XOR<TicketUpdateWithoutSlaPolicyInput, TicketUncheckedUpdateWithoutSlaPolicyInput>
+    create: XOR<TicketCreateWithoutSlaPolicyInput, TicketUncheckedCreateWithoutSlaPolicyInput>
+  }
+
+  export type TicketUpdateWithWhereUniqueWithoutSlaPolicyInput = {
+    where: TicketWhereUniqueInput
+    data: XOR<TicketUpdateWithoutSlaPolicyInput, TicketUncheckedUpdateWithoutSlaPolicyInput>
+  }
+
+  export type TicketUpdateManyWithWhereWithoutSlaPolicyInput = {
+    where: TicketScalarWhereInput
+    data: XOR<TicketUpdateManyMutationInput, TicketUncheckedUpdateManyWithoutSlaPolicyInput>
   }
 
   export type TicketCreateManyRequesterInput = {
@@ -6370,8 +11820,15 @@ export namespace Prisma {
     priority?: $Enums.TicketPriority
     category?: string
     description?: string
+    departmentId: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
+    resolvedAt?: Date | string | null
+    closedAt?: Date | string | null
+    slaPolicyId?: string | null
+    responseDueAt?: Date | string | null
+    resolutionDueAt?: Date | string | null
     agentId?: string | null
   }
 
@@ -6383,9 +11840,16 @@ export namespace Prisma {
     priority?: $Enums.TicketPriority
     category?: string
     description?: string
+    departmentId: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
+    resolvedAt?: Date | string | null
+    closedAt?: Date | string | null
     requesterId: string
+    slaPolicyId?: string | null
+    responseDueAt?: Date | string | null
+    resolutionDueAt?: Date | string | null
   }
 
   export type MessageCreateManyUserInput = {
@@ -6404,7 +11868,14 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    resolvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    responseDueAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    resolutionDueAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    department?: DepartmentUpdateOneRequiredWithoutTicketsNestedInput
     messages?: MessageUpdateManyWithoutTicketNestedInput
+    slaPolicy?: SlaPolicyUpdateOneWithoutTicketsNestedInput
     agent?: UserUpdateOneWithoutAssignedTicketsNestedInput
   }
 
@@ -6416,8 +11887,15 @@ export namespace Prisma {
     priority?: EnumTicketPriorityFieldUpdateOperationsInput | $Enums.TicketPriority
     category?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
+    departmentId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    resolvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    slaPolicyId?: NullableStringFieldUpdateOperationsInput | string | null
+    responseDueAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    resolutionDueAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     agentId?: NullableStringFieldUpdateOperationsInput | string | null
     messages?: MessageUncheckedUpdateManyWithoutTicketNestedInput
   }
@@ -6430,8 +11908,15 @@ export namespace Prisma {
     priority?: EnumTicketPriorityFieldUpdateOperationsInput | $Enums.TicketPriority
     category?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
+    departmentId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    resolvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    slaPolicyId?: NullableStringFieldUpdateOperationsInput | string | null
+    responseDueAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    resolutionDueAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     agentId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
@@ -6444,8 +11929,15 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    resolvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    responseDueAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    resolutionDueAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    department?: DepartmentUpdateOneRequiredWithoutTicketsNestedInput
     messages?: MessageUpdateManyWithoutTicketNestedInput
     requester?: UserUpdateOneRequiredWithoutOpenedTicketsNestedInput
+    slaPolicy?: SlaPolicyUpdateOneWithoutTicketsNestedInput
   }
 
   export type TicketUncheckedUpdateWithoutAgentInput = {
@@ -6456,9 +11948,16 @@ export namespace Prisma {
     priority?: EnumTicketPriorityFieldUpdateOperationsInput | $Enums.TicketPriority
     category?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
+    departmentId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    resolvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     requesterId?: StringFieldUpdateOperationsInput | string
+    slaPolicyId?: NullableStringFieldUpdateOperationsInput | string | null
+    responseDueAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    resolutionDueAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     messages?: MessageUncheckedUpdateManyWithoutTicketNestedInput
   }
 
@@ -6470,9 +11969,16 @@ export namespace Prisma {
     priority?: EnumTicketPriorityFieldUpdateOperationsInput | $Enums.TicketPriority
     category?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
+    departmentId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    resolvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     requesterId?: StringFieldUpdateOperationsInput | string
+    slaPolicyId?: NullableStringFieldUpdateOperationsInput | string | null
+    responseDueAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    resolutionDueAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type MessageUpdateWithoutUserInput = {
@@ -6494,6 +12000,60 @@ export namespace Prisma {
     content?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ticketId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type UserCreateManyOfficeInput = {
+    id?: string
+    name: string
+    email: string
+    password: string
+    phone: string
+    avatarUrl?: string | null
+    role?: $Enums.UserRole
+    position?: string
+    departmentId?: string | null
+  }
+
+  export type UserUpdateWithoutOfficeInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    phone?: StringFieldUpdateOperationsInput | string
+    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    position?: StringFieldUpdateOperationsInput | string
+    department?: DepartmentUpdateOneWithoutUsersNestedInput
+    openedTickets?: TicketUpdateManyWithoutRequesterNestedInput
+    assignedTickets?: TicketUpdateManyWithoutAgentNestedInput
+    messages?: MessageUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutOfficeInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    phone?: StringFieldUpdateOperationsInput | string
+    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    position?: StringFieldUpdateOperationsInput | string
+    departmentId?: NullableStringFieldUpdateOperationsInput | string | null
+    openedTickets?: TicketUncheckedUpdateManyWithoutRequesterNestedInput
+    assignedTickets?: TicketUncheckedUpdateManyWithoutAgentNestedInput
+    messages?: MessageUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateManyWithoutOfficeInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    phone?: StringFieldUpdateOperationsInput | string
+    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    position?: StringFieldUpdateOperationsInput | string
+    departmentId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type MessageCreateManyTicketInput = {
@@ -6522,6 +12082,222 @@ export namespace Prisma {
     content?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     userId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type UserCreateManyDepartmentInput = {
+    id?: string
+    name: string
+    email: string
+    password: string
+    phone: string
+    avatarUrl?: string | null
+    role?: $Enums.UserRole
+    position?: string
+    officeId?: string | null
+  }
+
+  export type TicketCreateManyDepartmentInput = {
+    id?: string
+    ticketNum?: number
+    subject: string
+    status?: $Enums.TicketStatus
+    priority?: $Enums.TicketPriority
+    category?: string
+    description?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    deletedAt?: Date | string | null
+    resolvedAt?: Date | string | null
+    closedAt?: Date | string | null
+    requesterId: string
+    slaPolicyId?: string | null
+    responseDueAt?: Date | string | null
+    resolutionDueAt?: Date | string | null
+    agentId?: string | null
+  }
+
+  export type UserUpdateWithoutDepartmentInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    phone?: StringFieldUpdateOperationsInput | string
+    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    position?: StringFieldUpdateOperationsInput | string
+    office?: OfficeUpdateOneWithoutUsersNestedInput
+    openedTickets?: TicketUpdateManyWithoutRequesterNestedInput
+    assignedTickets?: TicketUpdateManyWithoutAgentNestedInput
+    messages?: MessageUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutDepartmentInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    phone?: StringFieldUpdateOperationsInput | string
+    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    position?: StringFieldUpdateOperationsInput | string
+    officeId?: NullableStringFieldUpdateOperationsInput | string | null
+    openedTickets?: TicketUncheckedUpdateManyWithoutRequesterNestedInput
+    assignedTickets?: TicketUncheckedUpdateManyWithoutAgentNestedInput
+    messages?: MessageUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateManyWithoutDepartmentInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    phone?: StringFieldUpdateOperationsInput | string
+    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    position?: StringFieldUpdateOperationsInput | string
+    officeId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type TicketUpdateWithoutDepartmentInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    subject?: StringFieldUpdateOperationsInput | string
+    status?: EnumTicketStatusFieldUpdateOperationsInput | $Enums.TicketStatus
+    priority?: EnumTicketPriorityFieldUpdateOperationsInput | $Enums.TicketPriority
+    category?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    resolvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    responseDueAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    resolutionDueAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    messages?: MessageUpdateManyWithoutTicketNestedInput
+    requester?: UserUpdateOneRequiredWithoutOpenedTicketsNestedInput
+    slaPolicy?: SlaPolicyUpdateOneWithoutTicketsNestedInput
+    agent?: UserUpdateOneWithoutAssignedTicketsNestedInput
+  }
+
+  export type TicketUncheckedUpdateWithoutDepartmentInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    ticketNum?: IntFieldUpdateOperationsInput | number
+    subject?: StringFieldUpdateOperationsInput | string
+    status?: EnumTicketStatusFieldUpdateOperationsInput | $Enums.TicketStatus
+    priority?: EnumTicketPriorityFieldUpdateOperationsInput | $Enums.TicketPriority
+    category?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    resolvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    requesterId?: StringFieldUpdateOperationsInput | string
+    slaPolicyId?: NullableStringFieldUpdateOperationsInput | string | null
+    responseDueAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    resolutionDueAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    agentId?: NullableStringFieldUpdateOperationsInput | string | null
+    messages?: MessageUncheckedUpdateManyWithoutTicketNestedInput
+  }
+
+  export type TicketUncheckedUpdateManyWithoutDepartmentInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    ticketNum?: IntFieldUpdateOperationsInput | number
+    subject?: StringFieldUpdateOperationsInput | string
+    status?: EnumTicketStatusFieldUpdateOperationsInput | $Enums.TicketStatus
+    priority?: EnumTicketPriorityFieldUpdateOperationsInput | $Enums.TicketPriority
+    category?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    resolvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    requesterId?: StringFieldUpdateOperationsInput | string
+    slaPolicyId?: NullableStringFieldUpdateOperationsInput | string | null
+    responseDueAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    resolutionDueAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    agentId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type TicketCreateManySlaPolicyInput = {
+    id?: string
+    ticketNum?: number
+    subject: string
+    status?: $Enums.TicketStatus
+    priority?: $Enums.TicketPriority
+    category?: string
+    description?: string
+    departmentId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    deletedAt?: Date | string | null
+    resolvedAt?: Date | string | null
+    closedAt?: Date | string | null
+    requesterId: string
+    responseDueAt?: Date | string | null
+    resolutionDueAt?: Date | string | null
+    agentId?: string | null
+  }
+
+  export type TicketUpdateWithoutSlaPolicyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    subject?: StringFieldUpdateOperationsInput | string
+    status?: EnumTicketStatusFieldUpdateOperationsInput | $Enums.TicketStatus
+    priority?: EnumTicketPriorityFieldUpdateOperationsInput | $Enums.TicketPriority
+    category?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    resolvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    responseDueAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    resolutionDueAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    department?: DepartmentUpdateOneRequiredWithoutTicketsNestedInput
+    messages?: MessageUpdateManyWithoutTicketNestedInput
+    requester?: UserUpdateOneRequiredWithoutOpenedTicketsNestedInput
+    agent?: UserUpdateOneWithoutAssignedTicketsNestedInput
+  }
+
+  export type TicketUncheckedUpdateWithoutSlaPolicyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    ticketNum?: IntFieldUpdateOperationsInput | number
+    subject?: StringFieldUpdateOperationsInput | string
+    status?: EnumTicketStatusFieldUpdateOperationsInput | $Enums.TicketStatus
+    priority?: EnumTicketPriorityFieldUpdateOperationsInput | $Enums.TicketPriority
+    category?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    departmentId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    resolvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    requesterId?: StringFieldUpdateOperationsInput | string
+    responseDueAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    resolutionDueAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    agentId?: NullableStringFieldUpdateOperationsInput | string | null
+    messages?: MessageUncheckedUpdateManyWithoutTicketNestedInput
+  }
+
+  export type TicketUncheckedUpdateManyWithoutSlaPolicyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    ticketNum?: IntFieldUpdateOperationsInput | number
+    subject?: StringFieldUpdateOperationsInput | string
+    status?: EnumTicketStatusFieldUpdateOperationsInput | $Enums.TicketStatus
+    priority?: EnumTicketPriorityFieldUpdateOperationsInput | $Enums.TicketPriority
+    category?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    departmentId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    resolvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    requesterId?: StringFieldUpdateOperationsInput | string
+    responseDueAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    resolutionDueAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    agentId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
 

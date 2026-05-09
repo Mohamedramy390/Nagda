@@ -10,6 +10,22 @@ export class RegisterDto {
   email: string;
 
   @IsString()
+  @IsNotEmpty()
+  phone: string;
+
+  @IsString()
+  @IsNotEmpty()
+  position: string;
+
+  @IsString()
+  @IsNotEmpty()
+  departmentId: string;
+
+  @IsString()
+  @IsNotEmpty()
+  officeId: string;
+
+  @IsString()
   @MinLength(6, { message: 'Password must be at least 6 characters long' })
   password: string;
 }

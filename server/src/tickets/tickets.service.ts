@@ -11,18 +11,49 @@ export class TicketsService {
 
   async createTicket(createTicketDto: CreateTicketDto) {
     this.logger.log("Creating ticket with data: ", createTicketDto)
-    return await this.prisma.ticket.create({ data: createTicketDto });
+
+    const user = await this.prisma.user.findUnique({where: {id: createTicketDto.requesterId}})
+    if(!user || !user.departmentId){
+      throw new NotFoundException("User or department not found")
+    }
+
+    const slaPolicy = await this.prisma.slaPolicy.findFirst({
+      where: {
+        priority: createTicketDto.priority,
+      }
+    })
+
+    if(!slaPolicy){
+      throw new NotFoundException("SLA Policy not found")
+    }
+
+    const responseDueAt = new Date();
+    responseDueAt.setMinutes(responseDueAt.getMinutes() + slaPolicy.responseTimeMin);
+
+    const resolutionDueAt = new Date();
+    resolutionDueAt.setMinutes(resolutionDueAt.getMinutes() + slaPolicy.resolutionTimeMin);
+
+    const newTicket = await this.prisma.ticket.create({ data: { ...createTicketDto, departmentId: user.departmentId, responseDueAt, resolutionDueAt } });
+    return newTicket;
   }
 
   async getTicketDetails(id: string) {
     const ticket = await this.prisma.ticket.findUnique({
       where: { id },
       include: {
-        requester: {select: {id: true, name: true, email: true}},
-        agent: {select: {id: true, name: true, email: true}},
-        messages: true,
+        requester: {select: {id: true, name: true, email: true, phone: true, position: true, office: true,}},
+        agent: {select: {id: true, name: true, email: true, phone: true, position: true, office: true}},
+        messages: {
+          include: {
+            user: {select: {id: true, name: true}},
+          },
+          orderBy: {createdAt: 'asc'},
+        },
+        department: {select: {name: true}},
+        slaPolicy: true,
       },
     });
+
     if(!ticket){
       throw new NotFoundException("Ticket not found")
     }

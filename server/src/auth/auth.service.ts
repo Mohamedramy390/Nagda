@@ -3,7 +3,7 @@ import { BadRequestException, ConflictException, Injectable } from '@nestjs/comm
 import { Prisma } from '../../generated/client';
 import { UsersService } from 'src/users/users.service';
 import * as bcrypt from 'bcrypt';
-import { LoginDto } from './register.dto';
+import { LoginDto } from './dto/register.dto';
 import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
@@ -11,7 +11,7 @@ export class AuthService {
   constructor(
     private readonly userService: UsersService,
     private readonly jwtService: JwtService,
-  ) {}
+  ) { }
 
   async register(userData: Prisma.UserCreateInput) {
     const existing = await this.userService.findUserByEmail(userData.email);

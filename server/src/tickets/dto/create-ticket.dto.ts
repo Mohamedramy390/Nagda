@@ -11,6 +11,7 @@ export class CreateTicketDto {
   @IsString()
   description: string;
 
+
   @IsOptional()
   @IsEnum(TicketStatus)
   status?: TicketStatus;

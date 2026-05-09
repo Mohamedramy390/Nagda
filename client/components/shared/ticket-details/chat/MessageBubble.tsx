@@ -25,6 +25,7 @@ export default function MessageBubble({ message }: {message: MessageData}) {
 
   if(!user) return null;
 
+
   return (
     <div className={containerClass}>
       {/* Avatar (Left side only for Customer) */}
@@ -40,7 +41,7 @@ export default function MessageBubble({ message }: {message: MessageData}) {
         {/* Header (Name & Time) */}
         <div className={`flex items-center gap-2 ${isMe ? 'ml-1' : 'mr-1'}`}>
           <span className={`text-sm font-semibold ${isMe ? 'text-slate-700 dark:text-slate-300' : 'text-slate-700 dark:text-slate-300'}`}>
-            {user?.name}
+            {message.user.name}
           </span>
           <span className="text-slate-400 text-xs">{message.timestamp}</span>
         </div>

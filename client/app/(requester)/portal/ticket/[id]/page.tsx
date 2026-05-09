@@ -14,6 +14,8 @@ const TicketDetailPage = async ({params} : PageProps) => {
 
 
   const ticketDetails = await getTicket(id);
+
+  console.log(ticketDetails)
   
   if(!ticketDetails) return 'Loading...';
 

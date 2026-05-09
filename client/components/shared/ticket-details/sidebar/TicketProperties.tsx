@@ -24,7 +24,22 @@ export default function TicketProperties({ ticket }: any) {
           </div>
         </div>
 
-        {/* ... Category and Department similar to above ... */}
+        <div className="space-y-1">
+          <label className="text-xs text-slate-500">Category</label>
+          <div className="flex items-center gap-1.5 font-medium text-slate-900 dark:text-slate-100 text-sm">
+            <span className="material-symbols-outlined text-red-500 text-[18px]">category</span>
+            {ticket.category}
+          </div>
+        </div>
+
+        <div className="space-y-1">
+          <label className="text-xs text-slate-500">Department</label>
+          <div className="flex items-center gap-1.5 font-medium text-slate-900 dark:text-slate-100 text-sm">
+            <span className="material-symbols-outlined text-red-500 text-[18px]">apartment</span>
+            {ticket.department.name}
+          </div>
+        </div>
+
       </div>
 
       <div className="pt-2">

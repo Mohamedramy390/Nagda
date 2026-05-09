@@ -125,7 +125,18 @@ exports.Prisma.UserScalarFieldEnum = {
   name: 'name',
   email: 'email',
   password: 'password',
-  role: 'role'
+  phone: 'phone',
+  avatarUrl: 'avatarUrl',
+  role: 'role',
+  position: 'position',
+  departmentId: 'departmentId',
+  officeId: 'officeId'
+};
+
+exports.Prisma.OfficeScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  timeZone: 'timeZone'
 };
 
 exports.Prisma.TicketScalarFieldEnum = {
@@ -136,10 +147,22 @@ exports.Prisma.TicketScalarFieldEnum = {
   priority: 'priority',
   category: 'category',
   description: 'description',
+  departmentId: 'departmentId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt',
+  resolvedAt: 'resolvedAt',
+  closedAt: 'closedAt',
   requesterId: 'requesterId',
+  slaPolicyId: 'slaPolicyId',
+  responseDueAt: 'responseDueAt',
+  resolutionDueAt: 'resolutionDueAt',
   agentId: 'agentId'
+};
+
+exports.Prisma.DepartmentScalarFieldEnum = {
+  id: 'id',
+  name: 'name'
 };
 
 exports.Prisma.MessageScalarFieldEnum = {
@@ -148,6 +171,15 @@ exports.Prisma.MessageScalarFieldEnum = {
   createdAt: 'createdAt',
   ticketId: 'ticketId',
   userId: 'userId'
+};
+
+exports.Prisma.SlaPolicyScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  priority: 'priority',
+  responseTimeMin: 'responseTimeMin',
+  resolutionTimeMin: 'resolutionTimeMin',
+  is24x7: 'is24x7'
 };
 
 exports.Prisma.SortOrder = {
@@ -164,6 +196,13 @@ exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
 };
+exports.UserRole = exports.$Enums.UserRole = {
+  CUSTOMER: 'CUSTOMER',
+  AGENT: 'AGENT',
+  ADMIN: 'ADMIN',
+  EMPLOYEE: 'EMPLOYEE'
+};
+
 exports.TicketStatus = exports.$Enums.TicketStatus = {
   OPEN: 'OPEN',
   IN_PROGRESS: 'IN_PROGRESS',
@@ -178,8 +217,11 @@ exports.TicketPriority = exports.$Enums.TicketPriority = {
 
 exports.Prisma.ModelName = {
   User: 'User',
+  Office: 'Office',
   Ticket: 'Ticket',
-  Message: 'Message'
+  Department: 'Department',
+  Message: 'Message',
+  SlaPolicy: 'SlaPolicy'
 };
 
 /**
